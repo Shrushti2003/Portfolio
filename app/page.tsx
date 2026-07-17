@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Portfolio } from "@/components/portfolio";
 
 export const metadata: Metadata = {
-  title: "Full Stack Developer and AI Application Developer",
+  title: "Full Stack MERN Developer and AI Application Developer",
   description:
-    "Explore Shrushti Swarnakar's AI platforms, full-stack projects, achievements, experience timeline, and technical toolkit.",
+    "Explore Shrushti Swarnakar's AI platforms, MERN projects, case studies, education, certifications, skills, services, and technical toolkit.",
 };
 
 export default function Home() {

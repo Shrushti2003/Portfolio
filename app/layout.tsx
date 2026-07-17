@@ -15,14 +15,15 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://shrushti-swarnakar.dev"),
   title: {
-    default: "Shrushti Swarnakar | Full Stack Developer",
+    default: "Shrushti Swarnakar | Full Stack MERN Developer",
     template: "%s | Shrushti Swarnakar",
   },
   description:
-    "Premium portfolio for Shrushti Swarnakar, a Full Stack Developer and AI Application Developer building polished Gen AI platforms, dashboards, and cloud applications.",
+    "Premium portfolio for Shrushti Swarnakar, a Full Stack MERN Developer and AI Application Developer building AI platforms, MERN products, dashboards, cloud storage, maps, and commerce experiences.",
   keywords: [
     "Shrushti Swarnakar",
     "Full Stack Developer",
+    "MERN Stack Developer",
     "AI Application Developer",
     "Next.js Developer",
     "Gen AI Platform",
@@ -30,9 +31,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Shrushti Swarnakar" }],
   creator: "Shrushti Swarnakar",
   openGraph: {
-    title: "Shrushti Swarnakar | Full Stack Developer",
+    title: "Shrushti Swarnakar | Full Stack MERN Developer",
     description:
-      "Full Stack Developer and AI Application Developer crafting premium AI products, dashboards, and web platforms.",
+      "Full Stack MERN Developer and AI Application Developer crafting production-minded AI products, dashboards, APIs, and web platforms.",
     type: "website",
     images: [
       {
@@ -45,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shrushti Swarnakar | Full Stack Developer",
+    title: "Shrushti Swarnakar | Full Stack MERN Developer",
     description:
-      "Premium portfolio for a Full Stack Developer and AI Application Developer.",
+      "Premium portfolio for a Full Stack MERN Developer and AI Application Developer.",
     images: ["/og.png"],
   },
   icons: {

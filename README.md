@@ -1,14 +1,15 @@
 # Shrushti Swarnakar Portfolio
 
-A premium dark portfolio for Shrushti Swarnakar, Full Stack Developer and AI Application Developer. The site is built with Next.js App Router, TypeScript, Tailwind CSS, Framer Motion, GSAP, React Three Fiber, Three.js, Lenis, shadcn-style UI primitives, and Lucide icons.
+A premium dark portfolio for Shrushti Swarnakar, Full Stack MERN Developer and AI Application Developer. The site is built with Next.js App Router, TypeScript, Tailwind CSS, Framer Motion, GSAP, React Three Fiber, Three.js, Lenis, shadcn-style UI primitives, and Lucide icons.
 
 ## Highlights
 
 - Loading-style hero reveal with GSAP and Framer Motion.
 - Smooth scrolling with Lenis.
-- Interactive mouse glow and 3D particle field with React Three Fiber.
-- Featured project showcase ordered around Strategy Hub as the flagship build.
-- About, tech stack, achievements, timeline, contact, and footer sections.
+- Interactive mouse glow, custom cursor, command palette, and 3D particle field with React Three Fiber.
+- Case-study project showcase built from the provided ZIP source projects.
+- Strategy Hub, Zylora, CloudNest Drive, Netflix Clone, LumiBooks, and Java Student Manager.
+- About, education, certifications, services, testimonials, FAQ, statistics, tech stack, timeline, contact, and footer sections.
 - Responsive dark glassmorphism interface with purple gradients and electric blue accents.
 - SEO metadata and Open Graph preview wiring.
 
