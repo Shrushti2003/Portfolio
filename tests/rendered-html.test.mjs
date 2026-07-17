@@ -42,6 +42,9 @@ test("server-renders the finished portfolio shell", async () => {
   assert.match(html, /Java Student Manager/);
   assert.match(html, /Bachelor of Computer Applications/);
   assert.match(html, /Full Stack MERN Development/);
+  assert.match(html, /Achievements/);
+  assert.match(html, /MongoDB/);
+  assert.match(html, /Postman/);
   assert.match(html, /Services/);
   assert.match(html, /FAQ/);
   assert.match(html, /Experience timeline/);

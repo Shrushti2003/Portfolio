@@ -28,6 +28,7 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  Trophy,
   Zap,
 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
@@ -308,9 +309,24 @@ const stackGroups = [
     items: ["Node.js", "Express.js", "REST APIs", "JWT", "Authentication", "Authorization"],
   },
   {
-    title: "AI and Cloud",
+    title: "Database",
+    icon: Database,
+    items: ["MongoDB", "Mongoose", "Schema Design", "Indexes", "Owner-Scoped Data"],
+  },
+  {
+    title: "AI",
     icon: BrainCircuit,
-    items: ["Google Gemini API", "Prompt Engineering", "ATS Analysis", "Firebase", "Cloudinary", "Docker"],
+    items: ["Google Gemini API", "Prompt Engineering", "AI Workflows", "ATS Resume Analysis", "AI Recommendations"],
+  },
+  {
+    title: "Cloud",
+    icon: Cloud,
+    items: ["Firebase", "Cloudinary", "Docker", "Vercel", "Render"],
+  },
+  {
+    title: "Tools",
+    icon: BriefcaseBusiness,
+    items: ["Git", "GitHub", "VS Code", "Postman", "Deployment Docs"],
   },
 ];
 
@@ -319,6 +335,13 @@ const stats = [
   ["3", "AI-enabled products"],
   ["20+", "backend and API workflows"],
   ["2025", "BCA completed"],
+];
+
+const achievements = [
+  "Architected Strategy Hub as a production-style AI SaaS with Gemini orchestration, ATS resume workflows, saved reports, and export pipelines.",
+  "Engineered Zylora as a multi-service circular economy platform with Firebase identity, MongoDB resources, maps, messaging, and AI-assisted pricing.",
+  "Built CloudNest Drive with secure sessions, Google OAuth, Cloudinary storage, folder management, share links, trash recovery, and subscription-aware quotas.",
+  "Developed recruiter-facing case studies that explain problem, solution, architecture, technical challenges, features, technologies, and results for every major project.",
 ];
 
 const services = [
@@ -663,12 +686,26 @@ export function Portfolio() {
         </motion.div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8" id="achievements">
         <div className="grid gap-4 md:grid-cols-4">
           {stats.map(([value, label], index) => (
             <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={label}>
               <p className="text-5xl font-semibold text-white">{value}</p>
               <p className="mt-3 text-sm leading-6 text-white/58">{label}</p>
+            </FadeIn>
+          ))}
+        </div>
+        <FadeIn className="mt-10">
+          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Achievements</p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
+            Evidence that the portfolio is built around product ownership.
+          </h2>
+        </FadeIn>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {achievements.map((achievement, index) => (
+            <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={achievement}>
+              <Trophy aria-hidden="true" className="h-5 w-5 text-violet-300" />
+              <p className="mt-5 leading-7 text-white/64">{achievement}</p>
             </FadeIn>
           ))}
         </div>
