@@ -23,6 +23,7 @@ import {
   Send,
   ShieldCheck,
   Sparkles,
+  Trophy,
   X,
   Zap,
 } from "lucide-react";
@@ -243,6 +244,19 @@ const projects: Project[] = [
   },
 ];
 
+const socialLinks = {
+  github: "https://github.com/Shrushti2003",
+  linkedin: "https://www.linkedin.com/in/shrushti-swarnakar/",
+  leetcode: "https://leetcode.com/u/Shrushti2003/",
+  resume: "/shrushti-swarnakar-resume.txt",
+};
+
+const rotatingRoles = [
+  "Full Stack Developer",
+  "MERN Stack Developer",
+  "Frontend Engineer",
+];
+
 const stackGroups = [
   {
     title: "Languages",
@@ -282,10 +296,12 @@ const stackGroups = [
 ];
 
 const stats = [
-  ["5+", "Projects Built"],
-  ["20+", "Technologies Used"],
+  ["5+", "Production Projects"],
+  ["400+", "LeetCode Problems"],
+  ["20+", "Technologies"],
+  ["7.50", "CGPA"],
   ["2025", "BCA Graduate"],
-  ["Open", "For Jobs & Internships"],
+  ["Open", "For Opportunities"],
 ];
 
 const timeline = [
@@ -390,12 +406,11 @@ function CommandPalette({
 
 function DeveloperCard() {
   const previewLines = [
-    "const developer = {",
-    "  name: 'Shrushti',",
-    "  status: 'BCA Graduate 2025',",
-    "  focus: ['MERN', 'AI UX', 'Frontend'],",
-    "  openTo: ['Full-Time', 'Internship']",
-    "};",
+    "npm run build-products",
+    "✓ auth, APIs, dashboards",
+    "✓ AI reports and UX flows",
+    "✓ cloud storage and maps",
+    "✓ clean UI, motion, polish",
   ];
 
   return (
@@ -408,7 +423,7 @@ function DeveloperCard() {
             <span className="h-3 w-3 rounded-full bg-emerald-300" />
           </div>
           <span className="rounded-full border border-cyan-200/20 bg-cyan-200/10 px-3 py-1 text-xs text-cyan-100">
-            building real projects
+            live project console
           </span>
         </div>
         <div className="rounded-3xl border border-white/10 bg-black/45 p-5 font-mono text-sm leading-7 text-white/76">
@@ -426,6 +441,26 @@ function DeveloperCard() {
             </motion.p>
           ))}
         </div>
+        <a
+          className="leetcode-card mt-4 flex items-center justify-between rounded-3xl border border-amber-300/22 bg-amber-300/[0.07] p-4 text-white"
+          data-cursor="project"
+          href={socialLinks.leetcode}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <div>
+            <p className="text-xs uppercase tracking-[0.18em] text-amber-200/80">LeetCode</p>
+            <p className="mt-1 text-3xl font-semibold">400+</p>
+            <p className="text-sm text-white/56">Problems Solved - 2023-2026</p>
+          </div>
+          <motion.span
+            animate={{ rotate: [0, -8, 8, 0], scale: [1, 1.08, 1] }}
+            className="grid h-12 w-12 place-items-center rounded-full bg-amber-300/15 text-amber-200"
+            transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 1.2 }}
+          >
+            <Trophy aria-hidden="true" className="h-6 w-6" />
+          </motion.span>
+        </a>
         <div className="mt-5 grid grid-cols-2 gap-3">
           {projects.slice(0, 4).map((project, index) => (
             <motion.a
@@ -569,12 +604,17 @@ export function Portfolio() {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [roleIndex, setRoleIndex] = useState(0);
 
   const featuredProjectNames = useMemo(() => projects.map((project) => project.name).join(" / "), []);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setLoading(false), 900);
-    const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+    const timeout = window.setTimeout(() => setLoading(false), 1650);
+    const roleTimer = window.setInterval(
+      () => setRoleIndex((value) => (value + 1) % rotatingRoles.length),
+      2200,
+    );
+    const lenis = new Lenis({ lerp: 0.075, smoothWheel: true });
     let frame = 0;
 
     const raf = (time: number) => {
@@ -610,6 +650,7 @@ export function Portfolio() {
 
     return () => {
       window.clearTimeout(timeout);
+      window.clearInterval(roleTimer);
       window.removeEventListener("keydown", handleKey);
       cancelAnimationFrame(frame);
       lenis.destroy();
@@ -619,22 +660,23 @@ export function Portfolio() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(139,92,246,0.16),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(45,212,255,0.18),transparent_30%),linear-gradient(180deg,#070B14_0%,#0E1726_46%,#070B14_100%)]"
+      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(129,140,248,0.16),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(34,211,238,0.16),transparent_30%),linear-gradient(180deg,#050814_0%,#0B1020_46%,#111827_100%)]"
       id="top"
     >
       <AnimatePresence>
         {loading ? (
           <motion.div
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-[90] grid place-items-center bg-[#070B14]"
+            className="fixed inset-0 z-[90] grid place-items-center bg-[#050814]"
             exit={{ opacity: 0 }}
             initial={{ opacity: 1 }}
           >
             <div className="text-center">
-              <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full border border-cyan-200/30 bg-cyan-200/10 text-lg font-semibold text-cyan-100 shadow-[0_0_80px_rgba(45,212,255,0.4)]">
-                SS
+              <div className="loader-grid mx-auto mb-5 grid h-20 w-20 place-items-center rounded-3xl border border-cyan-200/30 bg-cyan-200/10 text-lg font-semibold text-cyan-100 shadow-[0_0_80px_rgba(45,212,255,0.38)]">
+                <span>SS</span>
               </div>
-              <p className="text-sm uppercase tracking-[0.35em] text-cyan-100/70">Preparing portfolio</p>
+              <p className="text-sm uppercase tracking-[0.35em] text-cyan-100/70">Compiling Portfolio</p>
+              <p className="mt-3 text-xs text-white/38">Loading Projects - Wiring Motion - Building UI</p>
             </div>
           </motion.div>
         ) : null}
@@ -646,6 +688,7 @@ export function Portfolio() {
       <MouseGlow />
       <Navbar />
       <div aria-hidden="true" className="aurora-field fixed inset-0 z-0" />
+      <div aria-hidden="true" className="star-field fixed inset-0 z-0" />
       <div aria-hidden="true" className="noise-layer fixed inset-0 z-0" />
       <motion.div
         aria-hidden="true"
@@ -662,23 +705,36 @@ export function Portfolio() {
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-sm text-cyan-100 shadow-xl shadow-violet-950/20 backdrop-blur-xl">
               <Zap aria-hidden="true" className="h-4 w-4 text-cyan-300" />
-              Open to Full-Time Roles and Internship Opportunities
+              Open to Full-Time - Internship - Graduate Programs
             </div>
-            <p className="hero-word text-xl text-white/70">Hi, I&apos;m Shrushti.</p>
+            <p className="hero-word text-xl text-white/70">Hi, I&apos;m</p>
             <h1 className="mt-3 max-w-5xl text-balance text-5xl font-semibold tracking-normal text-white sm:text-7xl lg:text-8xl">
-              <span className="hero-word inline-block">Full Stack</span>{" "}
-              <span className="hero-word inline-block text-cyan-100">Developer</span>
+              <span className="hero-word inline-block">Shrushti</span>{" "}
+              <span className="hero-word inline-block text-cyan-100">Swarnakar</span>
             </h1>
+            <div className="mt-5 h-12 overflow-hidden text-2xl font-semibold text-cyan-100 sm:text-4xl">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -18, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
+                  key={rotatingRoles[roleIndex]}
+                  transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {rotatingRoles[roleIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-              I build scalable web applications, AI-powered experiences, and modern user interfaces with the MERN stack, Next.js, TypeScript, and thoughtful UI/UX design.
+              Building production-quality web applications through real-world projects, continuous learning, strong engineering fundamentals, and modern development practices.
             </p>
             <p className="mt-4 max-w-2xl leading-7 text-white/56">
-              BCA Graduate 2025. No company experience yet, just production-quality personal projects, clean code, curiosity, and a lot of practice turning ideas into usable software.
+              BCA Graduate (2025) passionate about scalable MERN applications, intuitive user experiences, secure backend systems, and AI-powered products.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-sm text-white/58">
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Fresher Full Stack Developer</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">BCA 2025 - CGPA 7.50</span>
               <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">MERN Stack Developer</span>
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Frontend Developer</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">400+ LeetCode Problems</span>
             </div>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button asChild className="magnetic-field" size="lg">
@@ -688,7 +744,7 @@ export function Portfolio() {
                 </a>
               </Button>
               <Button asChild className="magnetic-field" size="lg" variant="ghost">
-                <a href="#contact">
+                <a download href={socialLinks.resume}>
                   <FileText aria-hidden="true" className="h-4 w-4" />
                   Resume
                 </a>
@@ -700,15 +756,21 @@ export function Portfolio() {
                 </a>
               </Button>
               <Button asChild className="magnetic-field" size="lg" variant="ghost">
-                <a href="#contact">
+                <a href={socialLinks.github} rel="noreferrer" target="_blank">
                   <Code2 aria-hidden="true" className="h-4 w-4" />
                   GitHub
                 </a>
               </Button>
               <Button asChild className="magnetic-field" size="lg" variant="ghost">
-                <a href="#contact">
+                <a href={socialLinks.linkedin} rel="noreferrer" target="_blank">
                   <ExternalLink aria-hidden="true" className="h-4 w-4" />
                   LinkedIn
+                </a>
+              </Button>
+              <Button asChild className="magnetic-field leetcode-button" size="lg" variant="ghost">
+                <a href={socialLinks.leetcode} rel="noreferrer" target="_blank">
+                  <Trophy aria-hidden="true" className="h-4 w-4" />
+                  LeetCode 400+
                 </a>
               </Button>
             </div>
@@ -719,10 +781,18 @@ export function Portfolio() {
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8" id="about">
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {stats.map(([value, label], index) => (
             <Reveal className="counter-tile rounded-3xl border border-white/10 bg-[#161F36]/54 p-6" delay={index * 0.05} key={label}>
-              <p className="text-5xl font-semibold text-white">{value}</p>
+              <motion.p
+                className="text-4xl font-semibold text-white xl:text-5xl"
+                initial={{ opacity: 0, scale: 0.82 }}
+                transition={{ delay: index * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true }}
+                whileInView={{ opacity: 1, scale: 1 }}
+              >
+                {value}
+              </motion.p>
               <p className="mt-3 text-sm leading-6 text-white/58">{label}</p>
             </Reveal>
           ))}
@@ -787,7 +857,7 @@ export function Portfolio() {
                         </a>
                       </Button>
                       <Button asChild className="magnetic-field" variant="ghost">
-                        <a href="#contact">
+                        <a href={socialLinks.github} rel="noreferrer" target="_blank">
                           GitHub
                           <Code2 aria-hidden="true" className="h-4 w-4" />
                         </a>
@@ -934,9 +1004,10 @@ export function Portfolio() {
               <div className="grid gap-4">
                 {[
                   [Mail, "Email", "swarnakarshrushti@gmail.com"],
-                  [Code2, "GitHub", "Available on request"],
-                  [ExternalLink, "LinkedIn", "Available on request"],
-                  [FileText, "Resume", "Available on request"],
+                  [Code2, "GitHub", "github.com/Shrushti2003"],
+                  [ExternalLink, "LinkedIn", "linkedin.com/in/shrushti-swarnakar"],
+                  [Trophy, "LeetCode", "400+ problems solved - 2023-2026"],
+                  [FileText, "Resume", "Download from the hero button"],
                   [ShieldCheck, "Availability", "Open for Full-Time Roles, Internships, and Graduate Programs"],
                 ].map(([Icon, label, value]) => (
                   <div className="rounded-3xl border border-white/10 bg-black/22 p-5" key={String(label)}>

@@ -1,0 +1,32 @@
+Shrushti Swarnakar
+Full Stack Developer | MERN Stack Developer | Frontend Engineer
+
+Status
+BCA Graduate (2025)
+CGPA: 7.50
+
+Current Goal
+Open to Full-Time Software Engineer roles, Full Stack Developer roles, MERN Stack Developer roles, Frontend Developer roles, Software Development Internship opportunities, and Graduate Programs.
+
+Technical Focus
+Frontend: React, Next.js, TypeScript, TailwindCSS, Framer Motion, GSAP, Three.js
+Backend: Node.js, Express.js, REST APIs, JWT
+Database: MongoDB, Mongoose, Prisma
+Cloud and Tools: Git, GitHub, Docker, Cloudinary, Firebase, Vercel, Render, Postman
+AI: Gemini API, prompt engineering, AI report generation, AI-powered product workflows
+
+Projects
+Strategy Hub - AI interview preparation and ATS resume platform.
+Zylora - circular economy platform with maps, auth, listings, and AI-assisted pricing ideas.
+CloudNest Drive - cloud storage dashboard with uploads, previews, folders, sharing, and quotas.
+BookNest - responsive online bookstore with search, wishlist, and product-focused UI.
+Netflix Clone - streaming UI clone focused on frontend layout, responsive design, and interaction polish.
+
+Coding Practice
+LeetCode: 400+ problems solved, 2023-2026
+Profile: https://leetcode.com/u/Shrushti2003/
+
+Links
+GitHub: https://github.com/Shrushti2003
+LinkedIn: https://www.linkedin.com/in/shrushti-swarnakar/
+Email: swarnakarshrushti@gmail.com

@@ -19,13 +19,15 @@ export const metadata: Metadata = {
     template: "%s | Shrushti Swarnakar",
   },
   description:
-    "Recruiter-focused portfolio for Shrushti Swarnakar, a BCA 2025 graduate and fresher Full Stack Developer building MERN, AI, cloud storage, commerce, and frontend projects.",
+    "Recruiter-focused portfolio for Shrushti Swarnakar, a BCA 2025 graduate with 7.50 CGPA, 400+ LeetCode problems, and production-quality MERN, AI, cloud storage, commerce, and frontend projects.",
   keywords: [
     "Shrushti Swarnakar",
     "Full Stack Developer",
     "Fresher Full Stack Developer",
     "MERN Stack Developer",
     "Frontend Developer",
+    "Frontend Engineer",
+    "LeetCode 400 problems",
     "Next.js Developer",
     "BCA Graduate 2025",
   ],
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shrushti Swarnakar | Full Stack Developer",
     description:
-      "BCA 2025 graduate and fresher Full Stack Developer open to full-time software engineering and internship opportunities.",
+      "BCA 2025 graduate with 7.50 CGPA, 400+ LeetCode problems, and production-quality full-stack projects.",
     type: "website",
     images: [
       {
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Shrushti Swarnakar | Full Stack Developer",
     description:
-      "Recruiter-focused portfolio for a fresher Full Stack Developer and MERN Stack Developer.",
+      "Recruiter-focused portfolio for a Full Stack Developer, MERN Stack Developer, and Frontend Engineer.",
     images: ["/og.png"],
   },
   icons: {

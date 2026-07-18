@@ -32,10 +32,13 @@ test("server-renders the finished portfolio shell", async () => {
 
   const html = await response.text();
   assert.match(html, /Shrushti Swarnakar/);
-  assert.match(html, /Fresher Full Stack Developer/);
   assert.match(html, /Full Stack Developer/);
   assert.match(html, /MERN Stack Developer/);
-  assert.match(html, /Frontend Developer/);
+  assert.match(html, /Frontend Engineer/);
+  assert.match(html, /400\+ LeetCode Problems|LeetCode 400\+/);
+  assert.match(html, /7\.50/);
+  assert.match(html, /Shrushti2003/);
+  assert.match(html, /linkedin\.com\/in\/shrushti-swarnakar/);
   assert.doesNotMatch(html, /ARES AI/);
   assert.match(html, /Strategy Hub/);
   assert.match(html, /Zylora/);
@@ -45,12 +48,13 @@ test("server-renders the finished portfolio shell", async () => {
   assert.match(html, /Bachelor of Computer Applications/);
   assert.match(html, /Full Stack Development/);
   assert.match(html, /Data Structures &amp; Algorithms/);
-  assert.match(html, /Projects Built/);
+  assert.match(html, /Production Projects/);
   assert.match(html, /MongoDB/);
   assert.match(html, /Send message/);
   assert.doesNotMatch(html, /Services/);
   assert.doesNotMatch(html, /FAQ/);
   assert.doesNotMatch(html, /Technical Recruiter|Senior Full Stack Engineer|Startup Founder/);
+  assert.doesNotMatch(html, /No company|No experience|Still learning|Aspiring Developer|Entry level developer|Junior programmer/i);
   assert.match(html, /Journey/);
   assert.match(html, /Certificates/);
   assert.match(html, /Contact/);
