@@ -32,19 +32,21 @@ test("server-renders the finished portfolio shell", async () => {
 
   const html = await response.text();
   assert.match(html, /Shrushti Swarnakar/);
-  assert.match(html, /Full Stack MERN Developer/);
-  assert.match(html, /AI Application Developer/);
+  assert.match(html, /Full Stack Developer/);
+  assert.match(html, /MERN Stack Developer/);
+  assert.match(html, /Frontend Engineer/);
+  assert.match(html, /ARES AI/);
   assert.match(html, /Strategy Hub/);
   assert.match(html, /Zylora/);
   assert.match(html, /CloudNest Drive/);
-  assert.match(html, /Netflix Clone/);
-  assert.match(html, /LumiBooks/);
-  assert.match(html, /Java Student Manager/);
+  assert.match(html, /BookNest/);
   assert.match(html, /Bachelor of Computer Applications/);
-  assert.match(html, /Full Stack MERN Development/);
+  assert.match(html, /Full Stack Development/);
+  assert.match(html, /C\+\+ with DSA/);
   assert.match(html, /Achievements/);
   assert.match(html, /MongoDB/);
   assert.match(html, /Postman/);
+  assert.match(html, /Send message/);
   assert.match(html, /Services/);
   assert.match(html, /FAQ/);
   assert.match(html, /Experience timeline/);
@@ -60,7 +62,7 @@ test("removes starter-only preview code and keeps portfolio metadata", async () 
   ]);
 
   assert.match(page, /<Portfolio \/>/);
-  assert.match(layout, /Shrushti Swarnakar \| Full Stack MERN Developer/);
+  assert.match(layout, /Shrushti Swarnakar \| Full Stack Developer/);
   assert.match(layout, /\/og\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
   assert.doesNotMatch(page + layout, /codex-preview|_sites-preview|Starter Project/);

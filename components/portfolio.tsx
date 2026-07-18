@@ -22,9 +22,9 @@ import {
   Mail,
   Map,
   MessageSquareText,
-  Play,
   Rocket,
   Search,
+  Send,
   ShieldCheck,
   Sparkles,
   Star,
@@ -33,6 +33,9 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { MouseGlow } from "@/components/effects/mouse-glow";
+import { CursorSystem } from "@/components/portfolio/cursor-system";
+import { ProjectSpotlight } from "@/components/portfolio/project-spotlight";
+import { Reveal } from "@/components/portfolio/reveal";
 import { Button } from "@/components/ui/button";
 
 const OrbitalField = dynamic(
@@ -44,6 +47,44 @@ const OrbitalField = dynamic(
 );
 
 const projects = [
+  {
+    id: "ares-ai",
+    name: "ARES AI",
+    label: "AI Systems",
+    category: "AI Application Platform",
+    summary:
+      "A polished AI product concept focused on assistant-style workflows, prompt orchestration, fast user feedback, and a premium frontend system built for recruiter-facing demonstration.",
+    problem:
+      "AI features often feel like isolated chat boxes. A stronger AI product needs clear context, guided inputs, explainable outputs, loading states, and a visual system that makes intelligence feel reliable.",
+    solution:
+      "Designed ARES AI as an application experience with structured prompts, progressive output states, reusable AI interaction patterns, and a dark product interface that communicates technical depth without overwhelming the user.",
+    architecture:
+      "Next.js App Router frontend, TypeScript UI modules, TailwindCSS composition, Framer Motion reveals, GSAP entrance timing, and API-ready boundaries for future Gemini or OpenAI model calls.",
+    challenges:
+      "The product direction required making AI feel operational instead of decorative: clear information hierarchy, interaction pacing, helpful empty states, and motion that supports comprehension.",
+    results:
+      "Positioned as an AI application case study that demonstrates frontend craft, prompt-product thinking, and production-ready patterns for AI workflows.",
+    features: [
+      "AI Workflow UI",
+      "Prompt-Oriented UX",
+      "Progressive Output States",
+      "Dark Product Interface",
+      "Motion System",
+      "Reusable App Patterns",
+      "API-Ready Architecture",
+    ],
+    technology: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "TailwindCSS",
+      "Framer Motion",
+      "GSAP",
+      "REST APIs",
+    ],
+    metrics: ["AI-first UX", "Motion-led feedback", "API-ready"],
+    accent: "from-cyan-300 via-blue-500 to-violet-500",
+  },
   {
     id: "strategy-hub",
     name: "Strategy Hub",
@@ -181,114 +222,42 @@ const projects = [
     accent: "from-sky-300 via-blue-500 to-violet-500",
   },
   {
-    id: "netflix",
-    name: "Netflix Clone",
-    label: "Streaming UI",
-    category: "Authenticated Streaming Platform Interface",
+    id: "booknest",
+    name: "BookNest",
+    label: "Book Commerce",
+    category: "Modern Online Book Store",
     summary:
-      "A streaming product interface backed by Express routes, TMDB data, protected content pages, trailer overlays, search history, and responsive media browsing.",
+      "A refined book discovery and commerce platform with search, wishlist, authentication, responsive UI, and room to expand into personalized recommendations.",
     problem:
-      "Most streaming clones stop at static posters. A credible product needs auth-gated routes, data fetching, content type switching, trailer states, loading skeletons, fallbacks, and route-level transitions.",
+      "Bookstore interfaces can become cluttered quickly. Users need fast search, saved titles, readable detail pages, and a storefront that works smoothly across devices.",
     solution:
-      "Implemented a React/Vite application with protected movie, TV, watch, search, and history routes. The Express backend exposes auth, movie, TV, and search APIs, verifies JWT sessions, calls TMDB, and serves the production build.",
+      "Designed and developed BookNest as a product-minded e-commerce surface with clear browsing, wishlist flows, authentication-aware interactions, and a modern responsive frontend.",
     architecture:
-      "React Router controls page access, Zustand stores auth and content type, Axios calls protected `/api/v1` routes, and the watch page fetches details, similar content, and trailers in parallel with abort handling and in-memory page caching.",
+      "React/Next-style frontend architecture with reusable UI patterns, API-ready search boundaries, authenticated wishlist behavior, and a layout system optimized for scanning book metadata.",
     challenges:
-      "The watch experience needed to handle missing trailers, legacy watch URLs, alternate media types, failed image assets, overlay history navigation, and keyboard escape behavior without breaking routing.",
+      "The main challenge was making commerce, search, and saved-book states feel clean on small screens without reducing the richness of the browsing experience.",
     results:
-      "Delivered a responsive streaming UI with login/signup, protected browsing, trailer playback overlays, similar-title carousels, search history, skeleton loading, TMDB integration, and MongoDB-backed user state.",
+      "Delivered a recruiter-friendly storefront case study that shows responsive UI, wishlist UX, authentication thinking, and e-commerce information architecture.",
     features: [
+      "Wishlist",
+      "Book Search",
       "Authentication",
-      "TMDB APIs",
-      "Protected Routes",
-      "Movie and TV Browsing",
-      "Trailer Overlay",
-      "Search",
-      "Search History",
-      "Zustand State",
       "Responsive UI",
-      "Loading Skeletons",
+      "Book Details",
+      "Search States",
+      "Commerce Layout",
+      "Recommendation-Ready UX",
     ],
     technology: [
       "React",
-      "Vite",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Mongoose",
-      "JWT",
-      "Axios",
-      "Zustand",
-      "React Router",
-    ],
-    metrics: ["TMDB routes", "Parallel fetching", "Protected watch pages"],
-    accent: "from-red-400 via-fuchsia-500 to-violet-500",
-  },
-  {
-    id: "lumibooks",
-    name: "LumiBooks",
-    label: "AI Commerce",
-    category: "Premium Online Book Store and AI Reading Platform",
-    summary:
-      "A modern bookstore and reading platform with search, wishlist, immersive reader interactions, AI recommendations, AI librarian flows, and Google Books integration.",
-    problem:
-      "Book discovery often feels transactional. A stronger reading product should combine commerce, search, recommendations, shelves, reading modes, and AI-assisted guidance.",
-    solution:
-      "Built a split Next.js and Express architecture with shadcn-style UI, Zustand, TanStack Query, Framer Motion, Three.js, MongoDB models, JWT middleware, Google Books service, and Gemini-powered reading assistance.",
-    architecture:
-      "Next.js App Router frontend owns landing, auth, dashboard, search, book details, reader, community, wishlist, profile, settings, premium, support, and genre worlds. Express backend exposes clean REST modules for users, shelves, books, Google Books, and AI librarian features.",
-    challenges:
-      "The Google Books layer needed normalization and matching logic across title/author signals, while AI features needed careful prompt boundaries for recommendations, librarian responses, and text extraction.",
-    results:
-      "Created a premium commerce and reading platform surface with wishlist, shelves, AI recommendations, AI librarian, Google Books search, reader experiences, branded errors, and scalable API modules.",
-    features: [
-      "Google Books API",
-      "Wishlist",
-      "Shelves",
-      "Book Search",
-      "AI Recommendations",
-      "AI Librarian",
-      "Reader UI",
-      "Auth",
-      "Community",
-      "Premium Pages",
-    ],
-    technology: [
       "Next.js",
       "TypeScript",
-      "Tailwind",
-      "Framer Motion",
-      "Three.js",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Mongoose",
-      "Gemini AI",
+      "TailwindCSS",
+      "REST APIs",
+      "Authentication",
     ],
-    metrics: ["Google Books", "AI librarian", "Reader surface"],
-    accent: "from-amber-200 via-pink-400 to-violet-500",
-  },
-  {
-    id: "java-student-manager",
-    name: "Java Student Manager",
-    label: "Desktop CRUD",
-    category: "Java Swing Student Management Application",
-    summary:
-      "A desktop CRUD system that demonstrates object-oriented structure, record management, search, edit flows, and practical Java Swing UI foundations.",
-    problem:
-      "Administrative desktop workflows need predictable forms, clear state, and stable create/read/update/delete behavior before they need visual novelty.",
-    solution:
-      "Implemented a Java Swing management tool with student records, edit/delete flows, search-oriented interaction, and an OOP structure that keeps UI concerns separate from record operations.",
-    architecture:
-      "Desktop application structure using Java classes, Swing components, event listeners, and CRUD logic that can be extended toward JDBC-backed persistence.",
-    challenges:
-      "Maintaining simple desktop state without letting form logic become tangled with record handling.",
-    results:
-      "Built a practical foundation in Java, Swing, OOP, and CRUD thinking that supports the full-stack projects that followed.",
-    features: ["Java Swing", "CRUD", "Desktop UI", "Search", "OOP"],
-    technology: ["Java", "Swing", "OOP", "CRUD"],
-    metrics: ["Desktop forms", "Record editing", "Search flow"],
-    accent: "from-violet-300 via-slate-100 to-cyan-300",
+    metrics: ["Wishlist", "Search", "Responsive"],
+    accent: "from-purple-300 via-cyan-300 to-blue-500",
   },
 ];
 
@@ -306,7 +275,7 @@ const stackGroups = [
   {
     title: "Backend",
     icon: Database,
-    items: ["Node.js", "Express.js", "REST APIs", "JWT", "Authentication", "Authorization"],
+    items: ["Node.js", "Express.js", "MongoDB", "Prisma", "REST APIs", "JWT"],
   },
   {
     title: "Database",
@@ -331,17 +300,18 @@ const stackGroups = [
 ];
 
 const stats = [
-  ["6", "case-study projects"],
-  ["3", "AI-enabled products"],
+  ["5", "featured products"],
+  ["2", "AI-focused builds"],
   ["20+", "backend and API workflows"],
   ["2025", "BCA completed"],
 ];
 
 const achievements = [
+  "Defined ARES AI as an AI application experience with structured output states, premium motion, and API-ready product architecture.",
   "Architected Strategy Hub as a production-style AI SaaS with Gemini orchestration, ATS resume workflows, saved reports, and export pipelines.",
   "Engineered Zylora as a multi-service circular economy platform with Firebase identity, MongoDB resources, maps, messaging, and AI-assisted pricing.",
   "Built CloudNest Drive with secure sessions, Google OAuth, Cloudinary storage, folder management, share links, trash recovery, and subscription-aware quotas.",
-  "Developed recruiter-facing case studies that explain problem, solution, architecture, technical challenges, features, technologies, and results for every major project.",
+  "Designed BookNest as a modern bookstore experience with search, authentication-aware wishlist flows, and responsive commerce architecture.",
 ];
 
 const services = [
@@ -360,7 +330,7 @@ const timeline = [
   {
     period: "2024-2026",
     title: "Full-stack product engineering practice",
-    text: "Designed and developed MERN and Next.js products across interview preparation, circular economy, storage, commerce, streaming, and desktop CRUD.",
+    text: "Designed and developed MERN and Next.js products across ARES AI, Strategy Hub, CloudNest Drive, Zylora, and BookNest.",
   },
   {
     period: "2023",
@@ -370,8 +340,9 @@ const timeline = [
 ];
 
 const certificates = [
-  "C++ using Data Structures & Algorithms - 2023",
-  "Full Stack MERN Development - 100xDevs",
+  "C++ with DSA",
+  "MERN Stack",
+  "Full Stack Development - 100xDevs",
 ];
 
 const testimonials = [
@@ -407,47 +378,6 @@ const paletteItems = [
   ["FAQ", "#faq"],
   ["Contact", "#contact"],
 ];
-
-function FadeIn({
-  children,
-  className,
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 28 }}
-      transition={{ delay, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      viewport={{ once: true, margin: "-80px" }}
-      whileInView={{ opacity: 1, y: 0 }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function CustomCursor() {
-  const [point, setPoint] = useState({ x: -80, y: -80 });
-
-  useEffect(() => {
-    const update = (event: PointerEvent) => setPoint({ x: event.clientX, y: event.clientY });
-    window.addEventListener("pointermove", update);
-    return () => window.removeEventListener("pointermove", update);
-  }, []);
-
-  return (
-    <motion.div
-      aria-hidden="true"
-      animate={{ x: point.x - 10, y: point.y - 10 }}
-      className="pointer-events-none fixed left-0 top-0 z-[70] hidden h-5 w-5 rounded-full border border-cyan-200/80 bg-cyan-200/10 mix-blend-screen md:block"
-      transition={{ type: "spring", stiffness: 360, damping: 32 }}
-    />
-  );
-}
 
 function CommandPalette({
   open,
@@ -499,37 +429,6 @@ function CommandPalette({
         </motion.div>
       ) : null}
     </AnimatePresence>
-  );
-}
-
-function ProjectPreview({ project, index }: { project: (typeof projects)[number]; index: number }) {
-  return (
-    <div className={`animated-gradient bg-gradient-to-br ${project.accent} p-1 text-black`}>
-      <div className="min-h-[360px] rounded-[26px] border border-black/10 bg-black/12 p-5 backdrop-blur-sm">
-        <div className="flex items-center justify-between">
-          <span className="rounded-full bg-black/14 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]">
-            {project.label}
-          </span>
-          <span className="text-xs font-semibold">{String(index + 1).padStart(2, "0")}</span>
-        </div>
-        <div className="mt-12 rounded-3xl bg-black/70 p-4 text-white shadow-2xl shadow-black/30">
-          <div className="mb-4 flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
-          </div>
-          <h3 className="text-2xl font-semibold">{project.name}</h3>
-          <p className="mt-2 text-sm leading-6 text-white/62">{project.category}</p>
-          <div className="mt-7 grid gap-3">
-            {project.metrics.map((metric) => (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/70" key={metric}>
-                {metric}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -586,14 +485,14 @@ export function Portfolio() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(139,92,246,0.24),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(45,212,255,0.16),transparent_30%),#03030a]"
+      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(139,92,246,0.18),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(45,212,255,0.16),transparent_30%),#070B14]"
       id="top"
     >
       <AnimatePresence>
         {loading ? (
           <motion.div
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-[90] grid place-items-center bg-[#03030a]"
+            className="fixed inset-0 z-[90] grid place-items-center bg-[#070B14]"
             exit={{ opacity: 0 }}
             initial={{ opacity: 1 }}
           >
@@ -606,7 +505,7 @@ export function Portfolio() {
       </AnimatePresence>
 
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
-      <CustomCursor />
+      <CursorSystem />
       <MouseGlow />
       <Navbar />
       <div aria-hidden="true" className="noise-layer fixed inset-0 z-0" />
@@ -625,7 +524,7 @@ export function Portfolio() {
           <div>
             <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-sm text-cyan-100 shadow-xl shadow-violet-950/20 backdrop-blur-xl">
               <Zap aria-hidden="true" className="h-4 w-4 text-cyan-300" />
-              Full Stack MERN Developer / AI Application Developer
+              Full Stack Developer / MERN Stack Developer / Frontend Engineer
             </div>
             <h1 className="max-w-5xl text-balance text-5xl font-semibold tracking-normal text-white sm:text-7xl lg:text-8xl">
               <span className="hero-word inline-block">Shrushti</span>{" "}
@@ -643,20 +542,26 @@ export function Portfolio() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg">
                 <a href="#work">
-                  View case studies
+                  View Projects
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="ghost">
+                <a href="#contact">
+                  <FileText aria-hidden="true" className="h-4 w-4" />
+                  Resume
                 </a>
               </Button>
               <Button asChild size="lg" variant="ghost">
                 <a href="mailto:swarnakarshrushti@gmail.com">
                   <Mail aria-hidden="true" className="h-4 w-4" />
-                  Contact Shrushti
+                  Contact
                 </a>
               </Button>
             </div>
           </div>
 
-          <FadeIn className="glass-panel relative z-10 rounded-[28px] p-5">
+          <Reveal className="glass-panel relative z-10 rounded-[28px] p-5">
             <div className="rounded-[22px] border border-white/10 bg-black/35 p-5">
               <div className="mb-8 flex items-center justify-between">
                 <span className="text-sm text-white/52">Project evidence</span>
@@ -682,37 +587,37 @@ export function Portfolio() {
                 ))}
               </div>
             </div>
-          </FadeIn>
+          </Reveal>
         </motion.div>
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8" id="achievements">
         <div className="grid gap-4 md:grid-cols-4">
           {stats.map(([value, label], index) => (
-            <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={label}>
+            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={label}>
               <p className="text-5xl font-semibold text-white">{value}</p>
               <p className="mt-3 text-sm leading-6 text-white/58">{label}</p>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
-        <FadeIn className="mt-10">
+        <Reveal className="mt-10">
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Achievements</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
             Evidence that the portfolio is built around product ownership.
           </h2>
-        </FadeIn>
+        </Reveal>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {achievements.map((achievement, index) => (
-            <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={achievement}>
+            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={achievement}>
               <Trophy aria-hidden="true" className="h-5 w-5 text-violet-300" />
               <p className="mt-5 leading-7 text-white/64">{achievement}</p>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="about">
-        <FadeIn className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+        <Reveal className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">About</p>
             <h2 className="mt-4 text-3xl font-semibold text-white sm:text-5xl">
@@ -727,28 +632,27 @@ export function Portfolio() {
             </p>
             <p className="mt-5">
               The strongest projects in this portfolio are written like launchable products.
-              Strategy Hub handles AI interview reports and ATS resume workflows. Zylora connects
-              sustainability users through maps, Firebase identity, and MongoDB resources. CloudNest,
-              Netflix Clone, and LumiBooks demonstrate secure product surfaces across storage,
-              streaming, commerce, and AI-assisted reading.
+              ARES AI explores AI product interaction. Strategy Hub handles AI interview reports and ATS resume workflows.
+              Zylora connects sustainability users through maps, Firebase identity, and MongoDB resources.
+              CloudNest and BookNest demonstrate secure product surfaces across storage and commerce.
             </p>
           </div>
-        </FadeIn>
+        </Reveal>
       </section>
 
       <section className="relative z-10 px-4 py-16 sm:px-6 lg:px-8" id="stack">
         <div className="mx-auto max-w-6xl">
-          <FadeIn>
+          <Reveal>
             <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Skills</p>
             <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
               A stack shaped around AI products, APIs, dashboards, and modern interfaces.
             </h2>
-          </FadeIn>
+          </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {stackGroups.map((group, index) => {
               const Icon = group.icon;
               return (
-                <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={group.title}>
+                <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={group.title}>
                   <Icon aria-hidden="true" className="h-6 w-6 text-cyan-300" />
                   <h3 className="mt-5 text-xl font-semibold text-white">{group.title}</h3>
                   <div className="mt-5 flex flex-wrap gap-2">
@@ -758,7 +662,7 @@ export function Portfolio() {
                       </span>
                     ))}
                   </div>
-                </FadeIn>
+                </Reveal>
               );
             })}
           </div>
@@ -766,21 +670,21 @@ export function Portfolio() {
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="work">
-        <FadeIn className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Case studies</p>
             <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-              Six projects presented as products.
+              Five projects presented as products.
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-white/54">{featuredProjectNames}</p>
-        </FadeIn>
+        </Reveal>
 
         <div className="space-y-10">
           {projects.map((project, index) => (
-            <FadeIn className="glass-panel overflow-hidden rounded-[32px]" delay={index * 0.04} key={project.id}>
-              <article className="grid gap-0 lg:grid-cols-[0.45fr_0.55fr]" id={`project-${project.id}`}>
-                <ProjectPreview project={project} index={index} />
+            <Reveal className="glass-panel overflow-hidden rounded-[32px]" delay={index * 0.04} key={project.id}>
+              <article className="grid gap-0 lg:grid-cols-[0.45fr_0.55fr]" data-cursor="project" id={`project-${project.id}`}>
+                <ProjectSpotlight project={project} index={index} />
                 <div className="p-6 sm:p-8">
                   <p className="text-sm uppercase tracking-[0.24em] text-cyan-200/72">{project.category}</p>
                   <h3 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{project.name}</h3>
@@ -823,19 +727,19 @@ export function Portfolio() {
                   </div>
                 </div>
               </article>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="relative z-10 mx-auto grid max-w-6xl gap-4 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8" id="education">
-        <FadeIn className="glass-panel rounded-3xl p-7">
+        <Reveal className="glass-panel rounded-3xl p-7">
           <GraduationCap aria-hidden="true" className="h-7 w-7 text-cyan-300" />
           <p className="mt-6 text-sm uppercase tracking-[0.24em] text-cyan-200/72">Education</p>
           <h2 className="mt-3 text-3xl font-semibold text-white">Bachelor of Computer Applications</h2>
-          <p className="mt-4 text-white/62">Completed in 2025. The academic foundation is reinforced by project work across MERN, AI, cloud, and Java desktop systems.</p>
-        </FadeIn>
-        <FadeIn className="glass-panel rounded-3xl p-7" delay={0.05}>
+          <p className="mt-4 text-white/62">Graduated in 2025. The academic foundation is reinforced by project work across MERN, AI, cloud, and modern frontend systems.</p>
+        </Reveal>
+        <Reveal className="glass-panel rounded-3xl p-7" delay={0.05}>
           <Award aria-hidden="true" className="h-7 w-7 text-violet-300" />
           <p className="mt-6 text-sm uppercase tracking-[0.24em] text-cyan-200/72">Certificates</p>
           <div className="mt-5 space-y-4">
@@ -846,43 +750,43 @@ export function Portfolio() {
               </div>
             ))}
           </div>
-        </FadeIn>
+        </Reveal>
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="services">
-        <FadeIn>
+        <Reveal>
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Services</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
             The work maps directly to product teams.
           </h2>
-        </FadeIn>
+        </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {services.map(([title, text], index) => (
-            <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={title}>
+            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={title}>
               <BriefcaseBusiness aria-hidden="true" className="h-6 w-6 text-cyan-300" />
               <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
               <p className="mt-3 leading-7 text-white/60">{text}</p>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="timeline">
-        <FadeIn>
+        <Reveal>
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Experience timeline</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
             A path through fundamentals, product builds, and AI systems.
           </h2>
-        </FadeIn>
+        </Reveal>
         <div className="mt-12 space-y-5">
           {timeline.map((item, index) => (
-            <FadeIn className="grid gap-5 border-l border-white/14 pl-6 md:grid-cols-[0.24fr_0.76fr] md:gap-10" delay={index * 0.06} key={item.title}>
+            <Reveal className="grid gap-5 border-l border-white/14 pl-6 md:grid-cols-[0.24fr_0.76fr] md:gap-10" delay={index * 0.06} key={item.title}>
               <p className="text-sm text-cyan-200">{item.period}</p>
               <div className="glass-panel rounded-3xl p-6">
                 <h3 className="text-xl font-semibold text-white">{item.title}</h3>
                 <p className="mt-3 leading-7 text-white/62">{item.text}</p>
               </div>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -890,35 +794,35 @@ export function Portfolio() {
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-4 md:grid-cols-3">
           {testimonials.map((item, index) => (
-            <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={item.by}>
+            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={item.by}>
               <Star aria-hidden="true" className="h-5 w-5 fill-cyan-200 text-cyan-200" />
               <p className="mt-6 leading-7 text-white/66">{item.quote}</p>
               <p className="mt-5 text-sm text-cyan-200">{item.by}</p>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="faq">
-        <FadeIn>
+        <Reveal>
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">FAQ</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
             Recruiter-ready context.
           </h2>
-        </FadeIn>
+        </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {faqs.map(([question, answer], index) => (
-            <FadeIn className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={question}>
+            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={question}>
               <MessageSquareText aria-hidden="true" className="h-5 w-5 text-violet-300" />
               <h3 className="mt-5 text-lg font-semibold text-white">{question}</h3>
               <p className="mt-3 leading-7 text-white/60">{answer}</p>
-            </FadeIn>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="relative z-10 px-4 py-20 sm:px-6 lg:px-8" id="contact">
-        <FadeIn className="glass-panel mx-auto max-w-6xl overflow-hidden rounded-[32px]">
+        <Reveal className="glass-panel mx-auto max-w-6xl overflow-hidden rounded-[32px]">
           <div className="grid gap-0 lg:grid-cols-[1fr_0.82fr]">
             <div className="p-7 sm:p-10">
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Contact</p>
@@ -929,20 +833,34 @@ export function Portfolio() {
                 Best fit: teams building product dashboards, AI workflows, authenticated applications,
                 API-backed platforms, and interfaces that need strong engineering taste.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg">
-                  <a href="mailto:swarnakarshrushti@gmail.com">
-                    <Mail aria-hidden="true" className="h-4 w-4" />
-                    Email Shrushti
-                  </a>
+              <form
+                action="mailto:swarnakarshrushti@gmail.com"
+                className="mt-8 grid gap-3"
+                method="post"
+              >
+                <label className="group grid gap-2 text-sm text-white/58">
+                  Name
+                  <input className="field-input" minLength={2} name="name" placeholder="Your name" required />
+                </label>
+                <label className="group grid gap-2 text-sm text-white/58">
+                  Email
+                  <input className="field-input" name="email" placeholder="you@example.com" required type="email" />
+                </label>
+                <label className="group grid gap-2 text-sm text-white/58">
+                  Message
+                  <textarea
+                    className="field-input min-h-32 resize-none"
+                    minLength={12}
+                    name="message"
+                    placeholder="Tell me about the role or project."
+                    required
+                  />
+                </label>
+                <Button className="magnetic-field mt-2 justify-self-start" size="lg" type="submit">
+                  <Send aria-hidden="true" className="h-4 w-4" />
+                  Send message
                 </Button>
-                <Button asChild size="lg" variant="ghost">
-                  <a href="#work">
-                    <FileText aria-hidden="true" className="h-4 w-4" />
-                    Review projects
-                  </a>
-                </Button>
-              </div>
+              </form>
             </div>
             <div className="border-t border-white/10 bg-white/[0.035] p-7 sm:p-10 lg:border-l lg:border-t-0">
               <div className="space-y-4">
@@ -951,8 +869,8 @@ export function Portfolio() {
                   [Cloud, "Cloudinary, Firebase, Docker, Vercel, Render"],
                   [Map, "Leaflet, OpenStreetMap, geospatial discovery"],
                   [Layers3, "Dashboards, APIs, auth, and database design"],
-                  [BookOpen, "Google Books and AI reading workflows"],
-                  [Play, "TMDB streaming UI and media interaction"],
+                  [BookOpen, "BookNest commerce and reading discovery"],
+                  [FileText, "Resume available on request"],
                 ].map(([Icon, label]) => (
                   <div className="flex items-center gap-3" key={String(label)}>
                     <span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-black/30">
@@ -964,7 +882,7 @@ export function Portfolio() {
               </div>
             </div>
           </div>
-        </FadeIn>
+        </Reveal>
       </section>
 
       <footer className="relative z-10 mx-auto flex max-w-6xl flex-col gap-4 px-4 pb-10 pt-4 text-sm text-white/42 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">

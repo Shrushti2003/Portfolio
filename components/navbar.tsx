@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,11 +8,32 @@ import { Button } from "@/components/ui/button";
 const navItems = [
   ["Work", "#work"],
   ["Stack", "#stack"],
-  ["Timeline", "#timeline"],
+  ["Journey", "#timeline"],
   ["Contact", "#contact"],
 ];
 
 export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("#work");
+
+  useEffect(() => {
+    const sections = navItems.map(([, href]) => document.querySelector(href));
+    const onScroll = () => {
+      setScrolled(window.scrollY > 28);
+      let current: Element | null | undefined;
+      for (const section of sections) {
+        if (section && section.getBoundingClientRect().top < 180) {
+          current = section;
+        }
+      }
+      if (current?.id) setActiveSection(`#${current.id}`);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <motion.header
       animate={{ opacity: 1, y: 0 }}
@@ -19,7 +41,14 @@ export function Navbar() {
       initial={{ opacity: 0, y: -18 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-full border border-white/10 bg-black/45 px-3 py-2 shadow-2xl shadow-black/20 backdrop-blur-2xl">
+      <motion.nav
+        animate={{
+          maxWidth: scrolled ? 980 : 1152,
+          paddingTop: scrolled ? 6 : 8,
+          paddingBottom: scrolled ? 6 : 8,
+        }}
+        className="mx-auto flex items-center justify-between rounded-full border border-white/10 bg-[#070B14]/70 px-3 shadow-2xl shadow-black/20 backdrop-blur-2xl"
+      >
         <a
           aria-label="Go to top"
           className="flex items-center gap-3 rounded-full px-2"
@@ -36,7 +65,11 @@ export function Navbar() {
         <div className="hidden items-center gap-1 md:flex">
           {navItems.map(([label, href]) => (
             <a
-              className="rounded-full px-4 py-2 text-sm text-white/62 transition hover:bg-white/8 hover:text-white"
+              className={`rounded-full px-4 py-2 text-sm transition ${
+                activeSection === href
+                  ? "bg-cyan-300/12 text-cyan-100 shadow-[inset_0_0_0_1px_rgba(103,232,249,0.18)]"
+                  : "text-white/62 hover:bg-white/8 hover:text-white"
+              }`}
               href={href}
               key={href}
             >
@@ -51,7 +84,7 @@ export function Navbar() {
             <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
           </a>
         </Button>
-      </nav>
+      </motion.nav>
     </motion.header>
   );
 }

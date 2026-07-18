@@ -15,25 +15,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://shrushti-swarnakar.dev"),
   title: {
-    default: "Shrushti Swarnakar | Full Stack MERN Developer",
+    default: "Shrushti Swarnakar | Full Stack Developer",
     template: "%s | Shrushti Swarnakar",
   },
   description:
-    "Premium portfolio for Shrushti Swarnakar, a Full Stack MERN Developer and AI Application Developer building AI platforms, MERN products, dashboards, cloud storage, maps, and commerce experiences.",
+    "Premium portfolio for Shrushti Swarnakar, a Full Stack Developer, MERN Stack Developer, and Frontend Engineer building AI products, dashboards, storage platforms, maps, and commerce experiences.",
   keywords: [
     "Shrushti Swarnakar",
     "Full Stack Developer",
     "MERN Stack Developer",
-    "AI Application Developer",
+    "Frontend Engineer",
+    "Frontend Engineer",
     "Next.js Developer",
     "Gen AI Platform",
   ],
   authors: [{ name: "Shrushti Swarnakar" }],
   creator: "Shrushti Swarnakar",
   openGraph: {
-    title: "Shrushti Swarnakar | Full Stack MERN Developer",
+    title: "Shrushti Swarnakar | Full Stack Developer",
     description:
-      "Full Stack MERN Developer and AI Application Developer crafting production-minded AI products, dashboards, APIs, and web platforms.",
+      "Full Stack Developer, MERN Stack Developer, and Frontend Engineer crafting production-minded AI products, dashboards, APIs, and web platforms.",
     type: "website",
     images: [
       {
@@ -46,9 +47,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shrushti Swarnakar | Full Stack MERN Developer",
+    title: "Shrushti Swarnakar | Full Stack Developer",
     description:
-      "Premium portfolio for a Full Stack MERN Developer and AI Application Developer.",
+    "Premium portfolio for a Full Stack Developer, MERN Stack Developer, and Frontend Engineer.",
     images: ["/og.png"],
   },
   icons: {

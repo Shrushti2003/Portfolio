@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #03030a;
+  --background: #070b14;
   --foreground: #f7f7ff;
   --muted: #a5a6bd;
-  --panel: rgba(14, 16, 35, 0.66);
-  --panel-strong: rgba(23, 25, 51, 0.82);
+  --panel: rgba(14, 23, 38, 0.68);
+  --panel-strong: rgba(22, 31, 54, 0.84);
   --line: rgba(255, 255, 255, 0.12);
   --violet: #8b5cf6;
   --blue: #2dd4ff;
@@ -61,6 +61,27 @@ a {
   border: 1px solid var(--line);
   box-shadow: 0 24px 90px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(22px);
+}
+
+.magnetic-field {
+  transform: translateZ(0);
+}
+
+.field-input {
+  width: 100%;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1rem 1rem 0.8rem;
+  color: white;
+  outline: none;
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.field-input:focus {
+  border-color: rgba(103, 232, 249, 0.55);
+  background: rgba(255, 255, 255, 0.065);
+  box-shadow: 0 0 0 4px rgba(45, 212, 255, 0.09);
 }
 
 .text-balance {
