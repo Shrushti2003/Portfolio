@@ -18,6 +18,7 @@ import {
   GraduationCap,
   Layers3,
   Mail,
+  MapPin,
   Rocket,
   Search,
   Send,
@@ -451,6 +452,45 @@ const githubHighlights = [
   ["Latest Activity", "Continuously improving portfolio projects and learning repos"],
 ];
 
+const contactCards = [
+  {
+    label: "Email",
+    value: "swarnakarshrushti@gmail.com",
+    href: "mailto:swarnakarshrushti@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "GitHub",
+    value: "github.com/Shrushti2003",
+    href: socialLinks.github,
+    icon: Code2,
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/shrushti-swarnakar",
+    href: socialLinks.linkedin,
+    icon: ExternalLink,
+  },
+  {
+    label: "LeetCode",
+    value: "400+ problems solved",
+    href: socialLinks.leetcode,
+    icon: Trophy,
+  },
+  {
+    label: "Resume",
+    value: "Download resume",
+    href: socialLinks.resume,
+    icon: FileText,
+  },
+  {
+    label: "Current Location",
+    value: "India",
+    href: "#contact",
+    icon: MapPin,
+  },
+];
+
 const paletteItems = [
   ["Home", "#top"],
   ["Projects", "#work"],
@@ -733,6 +773,7 @@ export function Portfolio() {
   const [activeProjectFilter, setActiveProjectFilter] = useState("All");
 
   const featuredProjectNames = useMemo(() => projects.map((project) => project.name).join(" / "), []);
+  const currentYear = new Date().getFullYear();
   const filteredProjects = useMemo(
     () =>
       activeProjectFilter === "All"
@@ -1318,78 +1359,123 @@ export function Portfolio() {
         </Reveal>
       </section>
 
-      <section className="relative z-10 px-4 py-20 sm:px-6 lg:px-8" id="contact">
-        <Reveal className="contact-panel mx-auto max-w-6xl overflow-hidden rounded-[34px] border border-white/12 bg-[#0E1726]/78">
-          <div className="grid gap-0 lg:grid-cols-[1fr_0.78fr]">
-            <div className="p-7 sm:p-10">
+      <section className="relative z-10 overflow-hidden px-4 py-24 sm:px-6 lg:px-8" id="contact">
+        <div aria-hidden="true" className="contact-orbit absolute inset-0" />
+        <Reveal className="contact-panel relative mx-auto max-w-7xl overflow-hidden rounded-[38px] border border-white/12 bg-[#050814]/86">
+          <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/70 to-transparent" />
+          <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
+            <div>
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Contact</p>
-              <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
+              <h2 className="mt-5 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-6xl">
                 Let&apos;s Build Something Amazing Together.
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-white/64">
-                I&apos;m looking for a team where I can learn fast, contribute carefully, and keep building better full-stack products.
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
+                I&apos;m currently looking for Full-Time Software Engineering and Internship opportunities. If you&apos;re building products that solve real problems, I&apos;d love to connect.
               </p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {["Full-Time Roles", "Software Development Internship", "Graduate Programs"].map((item) => (
+                  <div className="rounded-2xl border border-emerald-300/18 bg-emerald-300/[0.055] px-4 py-3 text-sm text-emerald-50" key={item}>
+                    <span className="mr-2 inline-block h-2 w-2 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(110,231,183,0.7)]" />
+                    {item}
+                  </div>
+                ))}
+              </div>
               <form
                 action="mailto:swarnakarshrushti@gmail.com"
-                className="mt-8 grid gap-3"
+                className="mt-8 grid gap-3 rounded-[28px] border border-white/10 bg-white/[0.035] p-4"
                 method="post"
               >
-                <label className="group grid gap-2 text-sm text-white/58">
-                  Name
-                  <input className="field-input" minLength={2} name="name" placeholder="Your name" required />
-                </label>
-                <label className="group grid gap-2 text-sm text-white/58">
-                  Email
-                  <input className="field-input" name="email" placeholder="you@example.com" required type="email" />
-                </label>
+                <p className="text-sm font-medium text-white">Send a quick message</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="group grid gap-2 text-sm text-white/58">
+                    Name
+                    <input className="field-input" minLength={2} name="name" placeholder="Your name" required />
+                  </label>
+                  <label className="group grid gap-2 text-sm text-white/58">
+                    Email
+                    <input className="field-input" name="email" placeholder="you@example.com" required type="email" />
+                  </label>
+                </div>
                 <label className="group grid gap-2 text-sm text-white/58">
                   Message
                   <textarea
-                    className="field-input min-h-32 resize-none"
+                    className="field-input min-h-28 resize-none"
                     minLength={12}
                     name="message"
-                    placeholder="Tell me about the role, internship, or opportunity."
+                    placeholder="Tell me about the role or opportunity."
                     required
                   />
                 </label>
-                <Button className="magnetic-field mt-2 justify-self-start" size="lg" type="submit">
+                <Button className="magnetic-field mt-1 justify-self-start" size="lg" type="submit">
                   <Send aria-hidden="true" className="h-4 w-4" />
                   Send message
                 </Button>
               </form>
             </div>
-            <div className="border-t border-white/10 bg-white/[0.035] p-7 sm:p-10 lg:border-l lg:border-t-0">
-              <div className="grid gap-4">
-                {[
-                  [Mail, "Email", "swarnakarshrushti@gmail.com"],
-                  [Code2, "GitHub", "github.com/Shrushti2003"],
-                  [ExternalLink, "LinkedIn", "linkedin.com/in/shrushti-swarnakar"],
-                  [Trophy, "LeetCode", "400+ problems solved - 2023-2026"],
-                  [FileText, "Resume", "Download from the hero button"],
-                  [ShieldCheck, "Availability", "Open for Full-Time Roles, Internships, and Graduate Programs"],
-                ].map(([Icon, label, value]) => (
-                  <div className="rounded-3xl border border-white/10 bg-black/22 p-5" key={String(label)}>
-                    <Icon aria-hidden="true" className="h-5 w-5 text-cyan-200" />
-                    <p className="mt-4 text-sm text-cyan-100">{label as string}</p>
-                    <p className="mt-1 text-sm leading-6 text-white/62">{value as string}</p>
-                  </div>
-                ))}
+            <div className="grid content-start gap-4 sm:grid-cols-2">
+              {contactCards.map((card, index) => {
+                const Icon = card.icon;
+                const isInternal = card.href.startsWith("#");
+                const isDownload = card.href === socialLinks.resume;
+
+                return (
+                  <motion.a
+                    aria-label={`${card.label}: ${card.value}`}
+                    className="contact-card group rounded-[28px] border border-white/10 bg-white/[0.045] p-5"
+                    data-cursor="project"
+                    download={isDownload ? true : undefined}
+                    href={card.href}
+                    initial={{ opacity: 0, y: 18 }}
+                    key={card.label}
+                    rel={!isInternal && !isDownload ? "noreferrer" : undefined}
+                    target={!isInternal && !isDownload ? "_blank" : undefined}
+                    transition={{ delay: index * 0.045, duration: 0.42 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -6, rotateX: 1.5 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                  >
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-cyan-200/18 bg-cyan-200/10 text-cyan-100 transition group-hover:border-cyan-200/45 group-hover:bg-cyan-200/16">
+                      <Icon aria-hidden="true" className="h-5 w-5" />
+                    </span>
+                    <p className="mt-5 text-sm uppercase tracking-[0.18em] text-cyan-100/72">{card.label}</p>
+                    <p className="mt-2 break-words text-base font-medium text-white">{card.value}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm text-white/48 transition group-hover:text-cyan-100">
+                      Open
+                      <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                    </span>
+                  </motion.a>
+                );
+              })}
+              <div className="contact-card rounded-[28px] border border-white/10 bg-white/[0.045] p-5 sm:col-span-2">
+                <ShieldCheck aria-hidden="true" className="h-6 w-6 text-emerald-300" />
+                <p className="mt-5 text-sm uppercase tracking-[0.18em] text-emerald-100/72">Availability</p>
+                <p className="mt-2 text-base font-medium text-white">Open for Full-Time Roles, Software Development Internship, and Graduate Programs.</p>
+                <p className="mt-3 text-sm leading-6 text-white/52">Current location: India.</p>
               </div>
             </div>
           </div>
         </Reveal>
       </section>
 
-      <footer className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-4 text-sm text-white/42 sm:px-6 lg:px-8">
-        <div className="mb-6 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent" />
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p>
-            Designed & Developed by <span className="text-white/74">Shrushti Swarnakar</span>
-          </p>
-          <p>Built using Next.js, React, TypeScript, TailwindCSS, Framer Motion, and GSAP.</p>
-          <a className="inline-flex items-center gap-2 hover:text-white" href="#top">
+      <footer className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-4 text-sm text-white/48 sm:px-6 lg:px-8">
+        <div className="mb-8 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent" />
+        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className="text-white/72">
+              Designed & Developed by <span className="font-medium text-white">Shrushti Swarnakar</span>
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {["Next.js", "React", "TypeScript", "TailwindCSS", "GSAP", "Framer Motion", "Node.js", "Express"].map((tech) => (
+                <span className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-xs text-white/54" key={tech}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <p className="mt-5 text-white/36">Copyright {currentYear} Shrushti Swarnakar. All rights reserved.</p>
+          </div>
+          <a className="magnetic-field inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-white/70 transition hover:border-cyan-200/40 hover:text-white" href="#top">
             <Rocket aria-hidden="true" className="h-4 w-4" />
-            Back to top
+            Back To Top
           </a>
         </div>
       </footer>

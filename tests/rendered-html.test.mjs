@@ -39,6 +39,9 @@ test("server-renders the finished portfolio shell", async () => {
   assert.match(html, /7\.50/);
   assert.match(html, /Shrushti2003/);
   assert.match(html, /linkedin\.com\/in\/shrushti-swarnakar/);
+  assert.match(html, /Current Location/);
+  assert.match(html, /India/);
+  assert.match(html, /Software Development Internship/);
   assert.doesNotMatch(html, /ARES AI/);
   assert.match(html, /Strategy Hub/);
   assert.match(html, /Zylora/);
@@ -58,6 +61,9 @@ test("server-renders the finished portfolio shell", async () => {
   assert.match(html, /Journey/);
   assert.match(html, /Certificates/);
   assert.match(html, /Contact/);
+  assert.match(html, /Back To Top/);
+  assert.match(html, /Node\.js/);
+  assert.match(html, /Express/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/i);
 });
 
