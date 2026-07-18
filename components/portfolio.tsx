@@ -58,34 +58,44 @@ type Project = {
   gallery: string[];
   metrics: string[];
   accent: string;
+  duration: string;
+  status: "Completed" | "Production Ready";
+  role: "Solo Developer";
+  platform: string;
+  difficulty: string;
+  filters: string[];
 };
 
 const projects: Project[] = [
   {
     id: "strategy-hub",
     name: "Strategy Hub",
-    label: "Flagship",
-    category: "AI Interview Preparation Platform",
+    label: "Flagship Project",
+    category: "AI SaaS Platform",
     overview:
-      "A full-stack career preparation workspace that analyzes resumes and job descriptions, then generates interview reports, ATS guidance, roadmaps, and saved preparation material.",
+      "An AI-powered interview preparation platform that helps users improve resumes, prepare for interviews, identify skill gaps, generate learning roadmaps, and practice with personalized AI-generated interview questions.",
     problem:
-      "Interview preparation is usually scattered across resumes, notes, job descriptions, and generic question banks.",
+      "Many candidates prepare using multiple disconnected tools for resumes, interview questions, ATS checks, skill gaps, and learning plans.",
     solution:
-      "Built a protected dashboard where users upload resumes, add target-role context, and receive structured AI reports with match scores, skill gaps, questions, and exportable preparation assets.",
+      "Created a centralized AI platform combining resume analysis, interview preparation, ATS optimization, saved reports, and personalized learning guidance.",
     architecture:
-      "Next.js frontend, Express API, MongoDB/Mongoose persistence, JWT HTTP-only cookie auth, file upload parsing, Gemini orchestration, SMTP reset flow, and PDF export.",
+      "Next.js, React, TypeScript, TailwindCSS, Node.js, Express, MongoDB, Gemini AI, JWT Authentication, Puppeteer, Cloudinary, and reusable report-generation pipelines.",
     challenges:
-      "Normalizing resume files, keeping AI output structured, handling timeout/quota states, and making report data easy to revisit.",
+      "Handling AI response consistency, resume parsing, long-running AI operations, authentication, and reusable report generation.",
     learning:
-      "Improved my understanding of full-stack product flow, secure auth, file handling, AI prompt design, and dashboard information architecture.",
+      "Prompt engineering, authentication, backend APIs, AI integration, state management, and dashboard architecture.",
     features: [
       "Gemini AI Reports",
       "ATS Resume Guidance",
       "PDF/DOCX/TXT Parsing",
       "Saved Reports",
       "Roadmap Generation",
-      "AI Career Chat",
+      "Interview Questions",
+      "Behavioral Questions",
+      "Technical Questions",
       "PDF Export",
+      "Authentication",
+      "Responsive Dashboard",
     ],
     technology: [
       "Next.js",
@@ -97,9 +107,15 @@ const projects: Project[] = [
       "JWT",
       "Gemini AI",
     ],
-    gallery: ["Resume upload", "AI report", "Roadmap", "Saved dashboard"],
-    metrics: ["AI reports", "JWT auth", "PDF export"],
+    gallery: ["Dashboard", "Resume Parsing", "AI Report", "Roadmap Generator", "Saved Reports", "PDF Export"],
+    metrics: ["Gemini AI", "ATS Builder", "Saved Reports"],
     accent: "from-cyan-300 via-violet-400 to-fuchsia-500",
+    duration: "Flagship build",
+    status: "Production Ready",
+    role: "Solo Developer",
+    platform: "Web App",
+    difficulty: "Advanced",
+    filters: ["AI", "Full Stack", "Backend"],
   },
   {
     id: "zylora",
@@ -107,17 +123,17 @@ const projects: Project[] = [
     label: "Sustainability",
     category: "Circular Economy Platform",
     overview:
-      "A hyperlocal reuse and donation platform with resource listings, maps, authentication, saved items, messaging, and AI-assisted pricing ideas.",
+      "A sustainability platform connecting users through donations, resale, nearby resources, NGOs, maps, messaging, and AI-assisted pricing.",
     problem:
-      "People often want to donate, reuse, or resell items, but discovery, trust, and local coordination are hard to manage.",
+      "People struggle to find trustworthy nearby donation and reuse opportunities.",
     solution:
-      "Created a map-first product experience with Firebase identity, MongoDB resources, role-aware routes, nearby discovery, and clean empty/error states.",
+      "Created an intelligent platform that simplifies resource discovery and promotes sustainable communities.",
     architecture:
-      "React/Vite TypeScript client, Redux Toolkit, TanStack Query, Firebase Auth, Express TypeScript API, MongoDB/Mongoose, Leaflet maps, and a FastAPI AI service.",
+      "React, TypeScript, Redux, Node.js, Express, MongoDB, Firebase, Leaflet, OpenStreetMap, and FastAPI AI.",
     challenges:
-      "Making maps, auth, resource ownership, saved resources, and pricing intelligence feel like one connected product.",
+      "Authentication, map integration, nearby search, role management, and connected product flows.",
     learning:
-      "Strengthened my skills in protected routes, Firebase token handling, geospatial UX, API validation, and multi-service project structure.",
+      "API design, database modeling, authentication, geolocation, and multi-service architecture.",
     features: [
       "Google Sign-In",
       "Leaflet Maps",
@@ -138,9 +154,15 @@ const projects: Project[] = [
       "Leaflet",
       "Docker",
     ],
-    gallery: ["Map discovery", "Listing page", "Saved resources", "Profile flow"],
+    gallery: ["Desktop Map", "Resource Cards", "Mobile Search", "Messaging", "Authentication", "AI Pricing"],
     metrics: ["Geo search", "Firebase auth", "Docker setup"],
     accent: "from-emerald-300 via-cyan-300 to-violet-400",
+    duration: "Full-stack build",
+    status: "Completed",
+    role: "Solo Developer",
+    platform: "Web Platform",
+    difficulty: "Advanced",
+    filters: ["Full Stack", "Backend", "AI"],
   },
   {
     id: "cloudnest",
@@ -148,17 +170,17 @@ const projects: Project[] = [
     label: "Storage",
     category: "Cloud Storage Dashboard",
     overview:
-      "A Google Drive-inspired storage product with uploads, folders, previews, sharing, trash recovery, storage quotas, and Cloudinary-backed assets.",
+      "A Google Drive inspired cloud storage application with authentication, folders, sharing, storage management, and secure uploads.",
     problem:
-      "A useful storage app needs clear folder flows, account sessions, preview states, sharing, restore behavior, and quota feedback.",
+      "Managing cloud storage requires secure authentication, organized folders, and intuitive file management.",
     solution:
-      "Built a dashboard-style client with an Express API, JWT sessions, Google OAuth, folder/file actions, public share links, and cloud upload handling.",
+      "Built a cloud storage platform with user authentication, folder organization, media previews, sharing, and cloud integration.",
     architecture:
-      "React/Vite frontend, Express backend, MongoDB models, JWT access tokens, HTTP-only refresh cookies, Cloudinary, Google OAuth, Stripe checkout, and Render deployment notes.",
+      "React, Node.js, Express, MongoDB, Cloudinary, JWT, Google OAuth, and cloud upload pipelines.",
     challenges:
-      "Balancing production cloud uploads with local fallback behavior, file validations, preview states, and secure session handling.",
+      "Secure uploads, folder hierarchy, cloud storage, authentication, and quota-aware dashboard states.",
     learning:
-      "Learned more about cloud asset pipelines, refresh sessions, upload middleware, and product-grade dashboard states.",
+      "Cloud integration, backend APIs, authentication, upload middleware, and storage management.",
     features: [
       "File Uploads",
       "Folders",
@@ -178,9 +200,15 @@ const projects: Project[] = [
       "Stripe",
       "JWT",
     ],
-    gallery: ["Drive dashboard", "Preview panel", "Trash recovery", "Quota card"],
+    gallery: ["Desktop Dashboard", "Folder System", "Media Preview", "Share Modal", "Quota Card", "Mobile Files"],
     metrics: ["Cloudinary", "Refresh cookies", "Quota tracking"],
     accent: "from-sky-300 via-blue-500 to-violet-500",
+    duration: "Cloud product build",
+    status: "Completed",
+    role: "Solo Developer",
+    platform: "Web App",
+    difficulty: "Advanced",
+    filters: ["Full Stack", "Cloud", "Backend"],
   },
   {
     id: "booknest",
@@ -188,17 +216,17 @@ const projects: Project[] = [
     label: "Commerce",
     category: "Online Book Store",
     overview:
-      "A responsive bookstore experience focused on browsing, search, wishlist behavior, clean product detail pages, and authentication-aware interactions.",
+      "A modern bookstore interface focused on responsive browsing, search, wishlist functionality, and clean UI.",
     problem:
-      "Bookstore UIs can become cluttered quickly, especially when search, wishlists, and detail pages compete for attention.",
+      "Online bookstores often become cluttered and difficult to navigate.",
     solution:
-      "Designed a calmer commerce flow with readable metadata, clear cards, saved-book states, and responsive layouts for scanning.",
+      "Designed a clean and modern interface prioritizing user experience, search clarity, wishlist behavior, and responsive browsing.",
     architecture:
-      "Reusable React/Next-style components, API-ready search boundaries, authenticated wishlist thinking, and a layout system tuned for product browsing.",
+      "Next.js, React, TypeScript, REST APIs, reusable frontend architecture, responsive cards, and state-driven wishlist flows.",
     challenges:
-      "Keeping browsing rich on desktop while making the same flows compact and readable on mobile.",
+      "Responsive UI, search experience, wishlist management, and clean product detail layout.",
     learning:
-      "Practiced e-commerce information architecture, responsive card systems, form states, and cleaner frontend composition.",
+      "Frontend architecture, responsive design, state management, and commerce-focused information hierarchy.",
     features: [
       "Book Search",
       "Wishlist",
@@ -208,9 +236,15 @@ const projects: Project[] = [
       "Search States",
     ],
     technology: ["React", "Next.js", "TypeScript", "TailwindCSS", "REST APIs"],
-    gallery: ["Storefront", "Book details", "Wishlist", "Search results"],
+    gallery: ["Storefront", "Book Details", "Wishlist", "Search Results", "Tablet View", "Mobile View"],
     metrics: ["Wishlist", "Search", "Responsive"],
     accent: "from-purple-300 via-cyan-300 to-blue-500",
+    duration: "Frontend product build",
+    status: "Completed",
+    role: "Solo Developer",
+    platform: "Responsive Web",
+    difficulty: "Intermediate",
+    filters: ["Frontend"],
   },
   {
     id: "netflix-clone",
@@ -241,8 +275,16 @@ const projects: Project[] = [
     gallery: ["Hero row", "Movie grid", "Hover card", "Mobile layout"],
     metrics: ["Frontend UI", "Responsive", "Hover states"],
     accent: "from-red-400 via-fuchsia-400 to-violet-500",
+    duration: "Frontend practice build",
+    status: "Completed",
+    role: "Solo Developer",
+    platform: "Responsive Web",
+    difficulty: "Intermediate",
+    filters: ["Frontend"],
   },
 ];
+
+const projectFilters = ["All", "AI", "Full Stack", "Frontend", "Backend", "Cloud"];
 
 const socialLinks = {
   github: "https://github.com/Shrushti2003",
@@ -611,6 +653,21 @@ function ProjectModal({
             </div>
             <div className="grid gap-5 p-5 sm:p-7 lg:grid-cols-[0.78fr_0.42fr]">
               <div className="space-y-4">
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    ["Role", project.role],
+                    ["Status", project.status],
+                    ["Duration", project.duration],
+                    ["Platform", project.platform],
+                    ["Difficulty", project.difficulty],
+                    ["Technologies", `${project.technology.length}+`],
+                  ].map(([label, value]) => (
+                    <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={label}>
+                      <p className="text-xs uppercase tracking-[0.18em] text-white/38">{label}</p>
+                      <p className="mt-2 text-sm font-medium text-white/76">{value}</p>
+                    </div>
+                  ))}
+                </div>
                 {[
                   ["Overview", project.overview],
                   ["Problem", project.problem],
@@ -637,7 +694,7 @@ function ProjectModal({
                   </div>
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-black/24 p-5">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Features</h3>
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Key Features</h3>
                   <div className="mt-4 grid gap-2">
                     {project.features.map((feature) => (
                       <div className="flex items-center gap-2 text-sm text-white/68" key={feature}>
@@ -673,8 +730,16 @@ export function Portfolio() {
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [roleIndex, setRoleIndex] = useState(0);
+  const [activeProjectFilter, setActiveProjectFilter] = useState("All");
 
   const featuredProjectNames = useMemo(() => projects.map((project) => project.name).join(" / "), []);
+  const filteredProjects = useMemo(
+    () =>
+      activeProjectFilter === "All"
+        ? projects
+        : projects.filter((project) => project.filters.includes(activeProjectFilter)),
+    [activeProjectFilter],
+  );
 
   useEffect(() => {
     const timeout = window.setTimeout(() => setLoading(false), 1650);
@@ -936,29 +1001,97 @@ export function Portfolio() {
             <div>
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Projects</p>
               <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-                Five personal projects, built to practice real product engineering.
+                Featured Projects
               </h2>
+              <p className="mt-5 max-w-2xl leading-7 text-white/58">
+                Product-style builds with authentication, APIs, dashboards, AI workflows, storage, maps, commerce, and responsive interfaces.
+              </p>
             </div>
             <p className="max-w-sm text-sm leading-6 text-white/54">{featuredProjectNames}</p>
           </Reveal>
 
+          <Reveal className="mb-8 flex flex-wrap gap-2">
+            {projectFilters.map((filter) => (
+              <button
+                className={`rounded-full border px-4 py-2 text-sm transition ${
+                  activeProjectFilter === filter
+                    ? "border-cyan-200/45 bg-cyan-200/12 text-cyan-50 shadow-[0_0_34px_rgba(34,211,238,0.12)]"
+                    : "border-white/10 bg-white/[0.035] text-white/56 hover:border-cyan-200/30 hover:text-white"
+                }`}
+                key={filter}
+                onClick={() => setActiveProjectFilter(filter)}
+                type="button"
+              >
+                {filter}
+              </button>
+            ))}
+          </Reveal>
+
           <div className="grid gap-8">
-            {projects.map((project, index) => (
-              <Reveal className="project-shell overflow-hidden rounded-[32px] border border-white/12 bg-[#0E1726]/66" delay={index * 0.04} key={project.id}>
-                <article className="grid gap-0 lg:grid-cols-[0.48fr_0.52fr]" data-cursor="project" id={`project-${project.id}`}>
-                  <ProjectSpotlight project={project} index={index} />
-                  <div className="p-6 sm:p-8">
+            {filteredProjects.map((project, index) => {
+              const isReversed = index % 2 === 1;
+              const isFlagship = project.id === "strategy-hub";
+
+              return (
+                <Reveal
+                  className={`project-shell group overflow-hidden rounded-[32px] border border-white/12 bg-[#0E1726]/66 ${
+                    isFlagship ? "shadow-[0_32px_110px_rgba(45,212,255,0.12)]" : ""
+                  }`}
+                  delay={index * 0.04}
+                  key={project.id}
+                >
+                  <article
+                    className={`grid gap-0 lg:grid-cols-[0.48fr_0.52fr] ${isReversed ? "lg:[&>*:first-child]:order-2" : ""}`}
+                    data-cursor="project"
+                    id={`project-${project.id}`}
+                  >
+                    <div className="project-visual-wrap relative">
+                      {isFlagship ? (
+                        <div className="absolute left-5 top-5 z-10 rounded-full border border-cyan-200/35 bg-black/45 px-3 py-1 text-xs uppercase tracking-[0.18em] text-cyan-100 backdrop-blur">
+                          Most proud of
+                        </div>
+                      ) : null}
+                      <ProjectSpotlight project={project} index={projects.findIndex((item) => item.id === project.id)} />
+                    </div>
+                    <div className="p-6 sm:p-8">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="rounded-full border border-cyan-200/20 bg-cyan-200/10 px-3 py-1.5 text-xs text-cyan-100">{project.status}</span>
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/58">{project.role}</span>
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/58">{project.duration}</span>
+                      </div>
                     <p className="text-sm uppercase tracking-[0.24em] text-cyan-200/72">{project.category}</p>
                     <h3 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{project.name}</h3>
-                    <p className="mt-5 text-base leading-7 text-white/68">{project.overview}</p>
-                    <div className="mt-6 flex flex-wrap gap-2">
+                    <p className="mt-5 max-w-2xl text-base leading-7 text-white/68">{project.overview}</p>
+                    <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                      {[
+                        ["Platform", project.platform],
+                        ["Difficulty", project.difficulty],
+                        ["Tech", `${project.technology.length}+ tools`],
+                      ].map(([label, value]) => (
+                        <div className="rounded-2xl border border-white/10 bg-black/18 p-4" key={label}>
+                          <p className="text-xs uppercase tracking-[0.16em] text-white/36">{label}</p>
+                          <p className="mt-2 text-sm text-white/70">{value}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-6 flex flex-wrap gap-2" aria-label={`${project.name} feature highlights`}>
                       {project.features.slice(0, 5).map((feature) => (
-                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/64" key={feature}>
+                        <motion.span
+                          className="tech-chip rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/64"
+                          key={feature}
+                          whileHover={{ y: -2 }}
+                        >
                           {feature}
+                        </motion.span>
+                      ))}
+                    </div>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.technology.slice(0, 8).map((tech) => (
+                        <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-white/56" key={tech}>
+                          {tech}
                         </span>
                       ))}
                     </div>
-                    <p className="mt-5 text-sm leading-7 text-white/54">{project.technology.join(" / ")}</p>
                     <div className="mt-7 flex flex-wrap gap-3">
                       <Button asChild className="magnetic-field" variant="ghost">
                         <a href="#contact">
@@ -985,8 +1118,18 @@ export function Portfolio() {
                   </div>
                 </article>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
+          <Reveal className="mt-14 rounded-[32px] border border-white/10 bg-gradient-to-r from-cyan-300/10 via-violet-400/10 to-transparent p-7">
+            <p className="text-sm uppercase tracking-[0.24em] text-cyan-100/72">Next step</p>
+            <h3 className="mt-3 max-w-2xl text-2xl font-semibold text-white">
+              Want to discuss how these projects were built?
+            </h3>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/56">
+              The full project stories are available through the case-study modals, and the contact section is ready for role, internship, or project conversations.
+            </p>
+          </Reveal>
         </div>
       </section>
 
