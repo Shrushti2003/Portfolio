@@ -261,22 +261,22 @@ const stackGroups = [
   {
     title: "Languages",
     icon: Code2,
-    items: ["JavaScript", "TypeScript", "C++", "HTML5", "CSS3"],
+    items: ["JavaScript", "TypeScript", "C++", "HTML", "CSS"],
   },
   {
     title: "Frontend",
     icon: Sparkles,
-    items: ["React", "Next.js", "TailwindCSS", "Framer Motion", "GSAP", "Three.js"],
+    items: ["React", "Next.js", "Tailwind CSS", "Redux", "Framer Motion"],
   },
   {
     title: "Backend",
     icon: Layers3,
-    items: ["Node.js", "Express.js", "REST APIs", "JWT", "API Validation"],
+    items: ["Node.js", "Express.js", "REST APIs", "JWT"],
   },
   {
     title: "Database",
     icon: Database,
-    items: ["MongoDB", "Mongoose", "Prisma", "Indexes", "Schema Design"],
+    items: ["MongoDB", "Mongoose", "Prisma"],
   },
   {
     title: "Cloud",
@@ -286,12 +286,12 @@ const stackGroups = [
   {
     title: "AI",
     icon: BrainCircuit,
-    items: ["Gemini API", "Prompt Engineering", "AI Reports", "AI UX", "Automation Ideas"],
+    items: ["Google Gemini", "Prompt Engineering", "AI Workflows", "ATS Resume Analysis"],
   },
   {
     title: "Tools",
     icon: Code2,
-    items: ["Git", "GitHub", "VS Code", "Postman", "Debugging"],
+    items: ["Git", "GitHub", "VS Code", "Postman"],
   },
 ];
 
@@ -306,39 +306,107 @@ const stats = [
 
 const timeline = [
   {
-    period: "2023",
-    title: "Completed C++ using DSA",
-    points: ["Built problem-solving fundamentals", "Practiced data structures and implementation discipline"],
+    period: "2022 - 2025",
+    title: "Bachelor of Computer Applications",
+    icon: GraduationCap,
+    meta: "CGPA 7.50",
+    text: "Built academic foundations across programming, data structures, operating systems, database management, computer networks, and software engineering.",
+    points: ["Programming Fundamentals", "Data Structures", "Database Management", "Computer Networks"],
   },
   {
-    period: "2024",
-    title: "Started MERN Stack journey",
-    points: ["Built multiple full-stack projects", "Focused on APIs, authentication, databases, and UI polish"],
+    period: "2023 - 2024",
+    title: "C++ using Data Structures & Algorithms",
+    icon: Code2,
+    meta: "Coding Ninjas",
+    text: "Built a strong programming foundation through C++ and DSA while pursuing BCA.",
+    points: ["Trading Application", "Encryption & Decryption System", "Gym Management System", "Quiz Application"],
   },
   {
     period: "2025",
-    title: "Completed BCA and shipped stronger projects",
-    points: [
-      "Completed MERN + Full Stack Development through 100xDevs",
-      "Built Strategy Hub, Zylora, CloudNest Drive, BookNest, and Netflix Clone",
-    ],
+    title: "Bachelor of Computer Applications Completed",
+    icon: Award,
+    meta: "CGPA 7.50",
+    text: "Successfully completed BCA while continuously improving practical development skills through independent learning and project development.",
+    points: ["Graduated 2025", "Practical project building", "Clean code habits", "Product thinking"],
+  },
+  {
+    period: "2025 - 2026",
+    title: "MERN Stack & Full Stack Development",
+    icon: Layers3,
+    meta: "100xDevs",
+    text: "Focused on modern full-stack development using the MERN stack and built production-oriented projects covering auth, REST APIs, JWT, Cloudinary, MongoDB, Express, React, Next.js, TypeScript, deployment, responsive UI, and AI integrations.",
+    points: ["Strategy Hub", "Zylora", "CloudNest Drive", "BookNest"],
   },
   {
     period: "Current",
-    title: "Learning and applying advanced concepts",
+    title: "Open to Opportunities",
+    icon: ShieldCheck,
+    meta: "Available now",
+    text: "Preparing for full-time software engineering and internship opportunities while improving backend architecture, AI integrations, Docker, cloud deployment, and system design knowledge.",
     points: [
-      "Studying backend architecture, Docker, AI integrations, and system design",
-      "Searching for full-time software engineering and internship opportunities",
+      "Advanced Backend Development",
+      "System Design",
+      "Docker",
+      "Cloud Deployment",
     ],
   },
 ];
 
 const certificates = [
-  "C++",
-  "Data Structures & Algorithms",
-  "MERN Stack",
-  "Full Stack Development",
-  "100xDevs",
+  {
+    issuer: "Coding Ninjas",
+    title: "C++",
+    focus: "Data Structures & Algorithms",
+    completed: "Completed 2023",
+  },
+  {
+    issuer: "100xDevs",
+    title: "MERN Stack",
+    focus: "Full Stack Development",
+    completed: "Completed 2026",
+  },
+  {
+    issuer: "LeetCode",
+    title: "400+ Problems Solved",
+    focus: "Algorithms & Data Structures",
+    completed: "2023 - 2026",
+  },
+];
+
+const engineeringPrinciples = [
+  "Build before optimizing",
+  "Clean code over clever code",
+  "Performance matters",
+  "Responsive by default",
+  "Accessibility is important",
+  "Reusable components",
+  "Security first",
+  "User experience always matters",
+];
+
+const currentFocus = [
+  "Advanced Backend Development",
+  "System Design",
+  "Docker",
+  "Cloud Deployment",
+  "Performance Optimization",
+  "AI Integration",
+  "Scalable APIs",
+  "Authentication",
+  "Database Design",
+];
+
+const leetcodeDifficulty = [
+  ["Easy", "Foundation and pattern recognition"],
+  ["Medium", "Problem solving depth"],
+  ["Hard", "Stretch practice"],
+];
+
+const githubHighlights = [
+  ["Profile", "github.com/Shrushti2003"],
+  ["Pinned Repositories", "Strategy Hub, Zylora, CloudNest Drive, BookNest"],
+  ["Code Focus", "Full-stack products, AI workflows, dashboards, storage, commerce"],
+  ["Latest Activity", "Continuously improving portfolio projects and learning repos"],
 ];
 
 const paletteItems = [
@@ -797,25 +865,67 @@ export function Portfolio() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-12 grid gap-8 lg:grid-cols-[0.68fr_1.32fr]">
+        <Reveal className="mt-12 grid gap-8 lg:grid-cols-[0.66fr_1.34fr]">
           <div>
-            <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">About</p>
+            <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Developer Story</p>
             <h2 className="mt-4 text-3xl font-semibold text-white sm:text-5xl">
-              I like building projects that feel complete.
+              Building Software with Purpose.
             </h2>
+            <div className="philosophy-card mt-8 rounded-[30px] border border-cyan-200/16 bg-cyan-200/[0.045] p-6">
+              <Sparkles aria-hidden="true" className="h-6 w-6 text-cyan-200" />
+              <h3 className="mt-5 text-xl font-semibold text-white">My Development Philosophy</h3>
+              <p className="mt-4 text-sm leading-7 text-white/64">
+                I believe great software is more than working code. It should solve a real problem, remain easy to maintain, perform well, and provide an enjoyable user experience.
+              </p>
+              <p className="mt-4 text-sm leading-7 text-white/58">
+                Every project I build is an opportunity to improve architecture, frontend craftsmanship, backend engineering, and problem-solving skills.
+              </p>
+            </div>
           </div>
-          <div className="grid gap-4 text-white/66 sm:grid-cols-2">
-            {[
-              ["Curiosity", "I enjoy understanding why a feature works, not just how to make it appear on screen."],
-              ["Product Thinking", "I care about user flow, empty states, errors, speed, and the small details that make software easier to use."],
-              ["Backend Logic", "I practice auth, APIs, databases, file handling, validation, and deployment-minded structure."],
-              ["AI Integration", "I am learning how to turn AI features into useful product workflows instead of decorative chat boxes."],
-            ].map(([title, text]) => (
-              <div className="rounded-3xl border border-white/10 bg-white/[0.035] p-5" key={title}>
-                <h3 className="text-lg font-semibold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-6">{text}</p>
+          <div>
+            <div className="story-panel rounded-[30px] border border-white/10 bg-white/[0.035] p-6 sm:p-8">
+              <p className="text-lg leading-8 text-white/72">
+                I&apos;m a BCA graduate who enjoys building complete software products, from intuitive frontend interfaces to secure backend systems and database architecture.
+              </p>
+              <p className="mt-5 leading-7 text-white/58">
+                My learning journey started with C++ and Data Structures & Algorithms before expanding into modern full-stack development using the MERN stack. Since then, I&apos;ve focused on projects that solve real problems while improving my understanding of clean architecture, scalable applications, and thoughtful engineering decisions.
+              </p>
+              <p className="mt-5 leading-7 text-white/58">
+                I enjoy turning ideas into polished products with attention to performance, usability, maintainability, and user experience.
+              </p>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {engineeringPrinciples.map((principle, index) => (
+                <motion.div
+                  className="principle-card rounded-2xl border border-white/10 bg-[#111827]/58 px-4 py-3 text-sm text-white/68"
+                  initial={{ opacity: 0, y: 14 }}
+                  key={principle}
+                  transition={{ delay: index * 0.04, duration: 0.42 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 6, borderColor: "rgba(103,232,249,0.38)" }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                >
+                  {principle}
+                </motion.div>
+              ))}
+            </div>
+            <div className="mt-6 rounded-[28px] border border-white/10 bg-black/20 p-5">
+              <h3 className="text-lg font-semibold text-white">Currently Learning</h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {currentFocus.map((item, index) => (
+                  <motion.span
+                    className="tech-chip rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/66"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    key={item}
+                    transition={{ delay: index * 0.035, duration: 0.32 }}
+                    viewport={{ once: true }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                  >
+                    {item}
+                  </motion.span>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </Reveal>
       </section>
@@ -885,10 +995,11 @@ export function Portfolio() {
           <Reveal>
             <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Skills</p>
             <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-              A technology constellation I keep expanding through projects.
+              Interactive technology constellation.
             </h2>
           </Reveal>
-          <div className="tech-galaxy mt-12 grid gap-4 md:grid-cols-7">
+          <div className="tech-galaxy relative mt-12 grid gap-4 md:grid-cols-7">
+            <div aria-hidden="true" className="constellation-line absolute left-1/2 top-8 hidden h-[calc(100%-4rem)] w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-cyan-200/25 to-transparent md:block" />
             {stackGroups.map((group, index) => {
               const Icon = group.icon;
 
@@ -913,6 +1024,81 @@ export function Portfolio() {
         </div>
       </section>
 
+      <section className="relative z-10 mx-auto grid max-w-6xl gap-5 px-4 py-20 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-8" id="leetcode">
+        <Reveal className="leetcode-card rounded-[32px] border border-amber-300/18 bg-amber-300/[0.06] p-7">
+          <Trophy aria-hidden="true" className="h-8 w-8 text-amber-200" />
+          <p className="mt-6 text-sm uppercase tracking-[0.28em] text-amber-100/80">Problem Solving</p>
+          <h2 className="mt-4 text-4xl font-semibold text-white sm:text-6xl">400+</h2>
+          <p className="mt-3 text-lg text-white/70">Problems Solved</p>
+          <p className="mt-5 leading-7 text-white/58">
+            Consistent problem solving has helped strengthen my understanding of data structures, algorithms, debugging, and writing efficient code.
+          </p>
+          <Button asChild className="magnetic-field mt-7" variant="ghost">
+            <a href={socialLinks.leetcode} rel="noreferrer" target="_blank">
+              View LeetCode Profile
+              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </a>
+          </Button>
+        </Reveal>
+        <Reveal className="rounded-[32px] border border-white/10 bg-[#0E1726]/70 p-7" delay={0.05}>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {leetcodeDifficulty.map(([label, text], index) => (
+              <motion.div
+                className="rounded-3xl border border-white/10 bg-black/22 p-5"
+                initial={{ opacity: 0, y: 16 }}
+                key={label}
+                transition={{ delay: index * 0.08, duration: 0.45 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <p className="text-lg font-semibold text-white">{label}</p>
+                <p className="mt-3 text-sm leading-6 text-white/56">{text}</p>
+              </motion.div>
+            ))}
+          </div>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {["2023 - 2026", "C++", "JavaScript", "Animated Counter"].map((item) => (
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/64" key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="github">
+        <Reveal className="grid gap-6 rounded-[34px] border border-white/10 bg-[#111827]/64 p-7 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <Code2 aria-hidden="true" className="h-8 w-8 text-cyan-200" />
+            <p className="mt-6 text-sm uppercase tracking-[0.28em] text-cyan-200/80">Open Source & Code</p>
+            <h2 className="mt-4 text-3xl font-semibold text-white sm:text-5xl">Code that shows the work.</h2>
+            <Button asChild className="magnetic-field mt-7" variant="ghost">
+              <a href={socialLinks.github} rel="noreferrer" target="_blank">
+                Visit GitHub
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {githubHighlights.map(([label, value], index) => (
+              <motion.div
+                className="rounded-3xl border border-white/10 bg-black/22 p-5"
+                initial={{ opacity: 0, y: 16 }}
+                key={label}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                viewport={{ once: true }}
+                whileHover={{ borderColor: "rgba(103,232,249,0.35)", y: -4 }}
+                whileInView={{ opacity: 1, y: 0 }}
+              >
+                <p className="text-sm text-cyan-100">{label}</p>
+                <p className="mt-2 text-sm leading-6 text-white/62">{value}</p>
+              </motion.div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
       <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="timeline">
         <Reveal>
           <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Journey</p>
@@ -920,43 +1106,72 @@ export function Portfolio() {
             Learning through fundamentals, projects, and sharper product decisions.
           </h2>
         </Reveal>
-        <div className="mt-12 space-y-5">
-          {timeline.map((item, index) => (
-            <Reveal className="timeline-row grid gap-5 border-l border-cyan-200/18 pl-6 md:grid-cols-[0.22fr_0.78fr] md:gap-10" delay={index * 0.06} key={item.title}>
-              <p className="text-sm font-semibold text-cyan-200">{item.period}</p>
-              <div className="rounded-3xl border border-white/10 bg-[#161F36]/50 p-6">
-                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {item.points.map((point) => (
-                    <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/64" key={point}>
-                      {point}
+        <div className="timeline-track mt-12 space-y-5">
+          {timeline.map((item, index) => {
+            const Icon = item.icon;
+
+            return (
+              <Reveal className="timeline-row group grid gap-5 border-l border-cyan-200/18 pl-6 md:grid-cols-[0.22fr_0.78fr] md:gap-10" delay={index * 0.06} key={item.title}>
+                <p className="text-sm font-semibold text-cyan-200">{item.period}</p>
+                <div className="timeline-card rounded-3xl border border-white/10 bg-[#161F36]/50 p-6 transition group-hover:border-cyan-200/35 group-hover:bg-[#161F36]/76">
+                  <div className="flex items-start gap-4">
+                    <span className="grid h-11 w-11 flex-none place-items-center rounded-2xl border border-cyan-200/18 bg-cyan-200/10 text-cyan-100">
+                      <Icon aria-hidden="true" className="h-5 w-5" />
                     </span>
-                  ))}
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.2em] text-white/40">{item.meta}</p>
+                      <h3 className="mt-2 text-xl font-semibold text-white">{item.title}</h3>
+                      <p className="mt-3 max-h-0 overflow-hidden text-sm leading-6 text-white/58 transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100 md:opacity-0">
+                        {item.text}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {item.points.map((point) => (
+                      point === "Strategy Hub" || point === "Zylora" || point === "CloudNest Drive" || point === "BookNest" ? (
+                        <a className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/64 transition hover:border-cyan-200/40 hover:text-white" href={`#project-${point === "CloudNest Drive" ? "cloudnest" : point.toLowerCase().replace(" ", "-")}`} key={point}>
+                          {point}
+                        </a>
+                      ) : (
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/64" key={point}>
+                          {point}
+                        </span>
+                      )
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-4 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8" id="certificates">
-        <Reveal className="rounded-3xl border border-white/10 bg-[#0E1726]/70 p-7">
+      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="certificates">
+        <Reveal>
+          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Certificates</p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
+            Learning milestones with practical project output.
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+          {certificates.map((certificate, index) => (
+            <Reveal className="certificate-card rounded-3xl border border-white/10 bg-[#0E1726]/70 p-7" delay={index * 0.06} key={certificate.title}>
+              <Award aria-hidden="true" className="h-7 w-7 text-violet-300" />
+              <p className="mt-6 text-sm uppercase tracking-[0.22em] text-cyan-200/72">{certificate.issuer}</p>
+              <h3 className="mt-3 text-2xl font-semibold text-white">{certificate.title}</h3>
+              <p className="mt-2 text-white/62">{certificate.focus}</p>
+              <p className="mt-6 text-sm text-white/42">{certificate.completed}</p>
+              <Button asChild className="magnetic-field mt-6" variant="ghost">
+                <a href="#contact">View Credential</a>
+              </Button>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal className="mt-5 rounded-3xl border border-white/10 bg-[#0E1726]/70 p-7">
           <GraduationCap aria-hidden="true" className="h-7 w-7 text-cyan-300" />
           <p className="mt-6 text-sm uppercase tracking-[0.24em] text-cyan-200/72">Education</p>
           <h2 className="mt-3 text-3xl font-semibold text-white">Bachelor of Computer Applications</h2>
-          <p className="mt-4 text-white/62">BCA Graduate, 2025.</p>
-        </Reveal>
-        <Reveal className="rounded-3xl border border-white/10 bg-[#0E1726]/70 p-7" delay={0.05}>
-          <Award aria-hidden="true" className="h-7 w-7 text-violet-300" />
-          <p className="mt-6 text-sm uppercase tracking-[0.24em] text-cyan-200/72">Certificates</p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {certificates.map((certificate) => (
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-white/68" key={certificate}>
-                <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-cyan-300" />
-                {certificate}
-              </span>
-            ))}
-          </div>
+          <p className="mt-4 text-white/62">BCA Graduate, 2025. CGPA 7.50.</p>
         </Reveal>
       </section>
 
