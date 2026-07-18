@@ -34,15 +34,19 @@ export function ProjectSpotlight({
           </span>
           <span className="text-xs font-semibold">{String(index + 1).padStart(2, "0")}</span>
         </div>
-        <div className="mt-12 rounded-3xl bg-black/70 p-4 text-white shadow-2xl shadow-black/30">
+        <div className="mt-10 rounded-[28px] bg-black/70 p-3 text-white shadow-2xl shadow-black/30">
           <div className="mb-4 flex gap-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
             <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
           </div>
-          <h3 className="text-2xl font-semibold">{project.name}</h3>
-          <p className="mt-2 text-sm leading-6 text-white/62">{project.category}</p>
-          <div className="mt-7 grid gap-3">
+          <div className="rounded-2xl border border-white/10 bg-[#0E1726] p-4">
+            <div className={`animated-gradient mb-5 h-28 rounded-2xl bg-gradient-to-br ${project.accent} opacity-95 shadow-inner`} />
+            <h3 className="text-2xl font-semibold">{project.name}</h3>
+            <p className="mt-2 text-sm leading-6 text-white/62">{project.category}</p>
+          </div>
+          <div className="mx-auto h-3 w-[82%] rounded-b-2xl bg-white/20" />
+          <div className="mt-5 grid gap-3">
             {project.metrics.map((metric) => (
               <div
                 className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/70"

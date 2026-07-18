@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Portfolio } from "@/components/portfolio";
 
 export const metadata: Metadata = {
-  title: "Full Stack Developer, MERN Stack Developer, and Frontend Engineer",
+  title: "Fresher Full Stack Developer and MERN Stack Developer",
   description:
-    "Explore Shrushti Swarnakar's ARES AI, Strategy Hub, CloudNest Drive, Zylora, and BookNest case studies, plus education, certifications, skills, services, and technical toolkit.",
+    "Explore Shrushti Swarnakar's Strategy Hub, Zylora, CloudNest Drive, BookNest, and Netflix Clone projects, plus skills, journey, certificates, and contact details.",
 };
 
 export default function Home() {
@@ -12,7 +12,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Shrushti Swarnakar",
-    jobTitle: ["Full Stack Developer", "MERN Stack Developer", "Frontend Engineer"],
+    jobTitle: ["Fresher Full Stack Developer", "MERN Stack Developer", "Frontend Developer"],
+    alumniOf: "Bachelor of Computer Applications, 2025",
     knowsAbout: [
       "React",
       "Next.js",
@@ -20,8 +21,8 @@ export default function Home() {
       "Node.js",
       "Express.js",
       "MongoDB",
-      "AI Applications",
-      "Frontend Engineering",
+      "AI Integrations",
+      "Frontend Development",
     ],
     url: "https://shrushti-swarnakar.dev",
   };

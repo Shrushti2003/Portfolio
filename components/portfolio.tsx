@@ -8,27 +8,22 @@ import Lenis from "lenis";
 import {
   ArrowUpRight,
   Award,
-  BookOpen,
   BrainCircuit,
-  BriefcaseBusiness,
   CheckCircle2,
   Cloud,
   Code2,
-  Command,
   Database,
+  ExternalLink,
   FileText,
   GraduationCap,
   Layers3,
   Mail,
-  Map,
-  MessageSquareText,
   Rocket,
   Search,
   Send,
   ShieldCheck,
   Sparkles,
-  Star,
-  Trophy,
+  X,
   Zap,
 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
@@ -46,166 +41,131 @@ const OrbitalField = dynamic(
   { ssr: false },
 );
 
-const projects = [
-  {
-    id: "ares-ai",
-    name: "ARES AI",
-    label: "AI Systems",
-    category: "AI Application Platform",
-    summary:
-      "A polished AI product concept focused on assistant-style workflows, prompt orchestration, fast user feedback, and a premium frontend system built for recruiter-facing demonstration.",
-    problem:
-      "AI features often feel like isolated chat boxes. A stronger AI product needs clear context, guided inputs, explainable outputs, loading states, and a visual system that makes intelligence feel reliable.",
-    solution:
-      "Designed ARES AI as an application experience with structured prompts, progressive output states, reusable AI interaction patterns, and a dark product interface that communicates technical depth without overwhelming the user.",
-    architecture:
-      "Next.js App Router frontend, TypeScript UI modules, TailwindCSS composition, Framer Motion reveals, GSAP entrance timing, and API-ready boundaries for future Gemini or OpenAI model calls.",
-    challenges:
-      "The product direction required making AI feel operational instead of decorative: clear information hierarchy, interaction pacing, helpful empty states, and motion that supports comprehension.",
-    results:
-      "Positioned as an AI application case study that demonstrates frontend craft, prompt-product thinking, and production-ready patterns for AI workflows.",
-    features: [
-      "AI Workflow UI",
-      "Prompt-Oriented UX",
-      "Progressive Output States",
-      "Dark Product Interface",
-      "Motion System",
-      "Reusable App Patterns",
-      "API-Ready Architecture",
-    ],
-    technology: [
-      "Next.js",
-      "TypeScript",
-      "React",
-      "TailwindCSS",
-      "Framer Motion",
-      "GSAP",
-      "REST APIs",
-    ],
-    metrics: ["AI-first UX", "Motion-led feedback", "API-ready"],
-    accent: "from-cyan-300 via-blue-500 to-violet-500",
-  },
+type Project = {
+  id: string;
+  name: string;
+  label: string;
+  category: string;
+  overview: string;
+  problem: string;
+  solution: string;
+  architecture: string;
+  challenges: string;
+  learning: string;
+  features: string[];
+  technology: string[];
+  gallery: string[];
+  metrics: string[];
+  accent: string;
+};
+
+const projects: Project[] = [
   {
     id: "strategy-hub",
     name: "Strategy Hub",
-    label: "Flagship SaaS",
-    category: "AI Interview Preparation Platform and ATS Resume Builder",
-    summary:
-      "A full-stack AI career workspace that turns resumes, job descriptions, and candidate context into interview reports, ATS resume guidance, roadmaps, and saved preparation material.",
+    label: "Flagship",
+    category: "AI Interview Preparation Platform",
+    overview:
+      "A full-stack career preparation workspace that analyzes resumes and job descriptions, then generates interview reports, ATS guidance, roadmaps, and saved preparation material.",
     problem:
-      "Job seekers usually manage resumes, interview questions, role research, and preparation plans across disconnected tools. The result is generic preparation that ignores the actual job description and the candidate's own experience.",
+      "Interview preparation is usually scattered across resumes, notes, job descriptions, and generic question banks.",
     solution:
-      "Architected a protected dashboard where users upload PDF, DOCX, or TXT resumes, add target-role context, and receive Gemini-powered reports with match scores, skill gaps, technical questions, behavioral prompts, resume-based questions, STAR guidance, learning roadmaps, and exportable resume assets.",
+      "Built a protected dashboard where users upload resumes, add target-role context, and receive structured AI reports with match scores, skill gaps, questions, and exportable preparation assets.",
     architecture:
-      "Next.js frontend communicates with an Express API through JSON, multipart uploads, blobs, and Server-Sent Events. The backend coordinates JWT HTTP-only cookie auth, multer memory uploads, resume text extraction, Gemini orchestration, MongoDB persistence with Mongoose, SMTP password reset, and Puppeteer PDF export.",
+      "Next.js frontend, Express API, MongoDB/Mongoose persistence, JWT HTTP-only cookie auth, file upload parsing, Gemini orchestration, SMTP reset flow, and PDF export.",
     challenges:
-      "Reliable AI output needed structured prompt stages, quota and timeout handling, model fallback behavior, validation, safe defaults, and report persistence. File parsing also needed to normalize multiple resume formats before feeding Gemini.",
-    results:
-      "Shipped as a production-oriented SaaS case study with owner-scoped saved reports, bookmarked/completed question state, JSON and Markdown exports, resume PDF export, AI strategy chat, and documentation for API, auth, security, testing, and deployment.",
+      "Normalizing resume files, keeping AI output structured, handling timeout/quota states, and making report data easy to revisit.",
+    learning:
+      "Improved my understanding of full-stack product flow, secure auth, file handling, AI prompt design, and dashboard information architecture.",
     features: [
-      "Gemini AI",
-      "ATS Resume Builder",
-      "Resume Analysis",
+      "Gemini AI Reports",
+      "ATS Resume Guidance",
       "PDF/DOCX/TXT Parsing",
-      "Technical Questions",
-      "Behavioral Questions",
-      "Resume-Based Questions",
-      "Roadmap Generation",
-      "Interview Strategy",
       "Saved Reports",
-      "Report Export",
+      "Roadmap Generation",
       "AI Career Chat",
+      "PDF Export",
     ],
     technology: [
-      "Next.js 16",
-      "React 19",
+      "Next.js",
+      "React",
       "Node.js",
-      "Express 5",
+      "Express",
       "MongoDB",
       "Mongoose",
+      "JWT",
       "Gemini AI",
-      "JWT Cookies",
-      "Puppeteer",
-      "Nodemailer",
     ],
-    metrics: ["SSE chat", "7-14 day roadmap", "PDF export"],
+    gallery: ["Resume upload", "AI report", "Roadmap", "Saved dashboard"],
+    metrics: ["AI reports", "JWT auth", "PDF export"],
     accent: "from-cyan-300 via-violet-400 to-fuchsia-500",
   },
   {
     id: "zylora",
     name: "Zylora",
-    label: "Circular Economy",
-    category: "AI Powered Circular Economy Platform",
-    summary:
-      "A hyperlocal sustainability platform for reuse, donation, resale, NGO coordination, interactive maps, messaging, trust pages, and AI-assisted listing intelligence.",
+    label: "Sustainability",
+    category: "Circular Economy Platform",
+    overview:
+      "A hyperlocal reuse and donation platform with resource listings, maps, authentication, saved items, messaging, and AI-assisted pricing ideas.",
     problem:
-      "Donation and reuse flows break down when users cannot discover nearby resources, verify community trust, coordinate with NGOs, or understand fair pricing for listed items.",
+      "People often want to donate, reuse, or resell items, but discovery, trust, and local coordination are hard to manage.",
     solution:
-      "Engineered a multi-service marketplace with Firebase identity, MongoDB-backed resource listings, role-aware protected routes, map-first discovery, saved resources, messages, verification flows, support/legal surfaces, and optional Gemini pricing estimates.",
+      "Created a map-first product experience with Firebase identity, MongoDB resources, role-aware routes, nearby discovery, and clean empty/error states.",
     architecture:
-      "React/Vite TypeScript frontend uses React Router, Redux Toolkit, TanStack Query, Axios, Leaflet, and Firebase client SDK. Express TypeScript API mounts auth, resources, users, and pricing modules with Zod validation, Firebase Admin token checks, Mongoose models, rate limiting, Helmet, CORS, compression, and Morgan logs. A FastAPI AI service handles listing intent extraction.",
+      "React/Vite TypeScript client, Redux Toolkit, TanStack Query, Firebase Auth, Express TypeScript API, MongoDB/Mongoose, Leaflet maps, and a FastAPI AI service.",
     challenges:
-      "The hardest part was making maps, authentication, profile sync, resource ownership, nearby search, and pricing intelligence work as one product flow rather than separate screens.",
-    results:
-      "Documented production architecture with indexed collections, geospatial nearby search, owner-scoped resource deletes, explicit empty/error states, PWA/SEO files, Docker orchestration, and Render/Vercel deployment guidance.",
+      "Making maps, auth, resource ownership, saved resources, and pricing intelligence feel like one connected product.",
+    learning:
+      "Strengthened my skills in protected routes, Firebase token handling, geospatial UX, API validation, and multi-service project structure.",
     features: [
-      "Firebase Auth",
       "Google Sign-In",
-      "OpenStreetMap",
       "Leaflet Maps",
-      "Resource Discovery",
-      "Donation Platform",
-      "NGO Integration",
-      "Saved Resources",
+      "Nearby Search",
+      "Resource Listings",
+      "Saved Items",
       "Messaging",
-      "Pricing Estimates",
-      "Trust and Safety",
-      "Docker Setup",
+      "AI Pricing",
     ],
     technology: [
-      "TypeScript",
       "React",
+      "TypeScript",
       "Vite",
       "Node.js",
       "Express",
       "MongoDB",
-      "Mongoose",
       "Firebase",
       "Leaflet",
-      "FastAPI",
       "Docker",
     ],
-    metrics: ["Geo search", "Firebase tokens", "FastAPI AI service"],
+    gallery: ["Map discovery", "Listing page", "Saved resources", "Profile flow"],
+    metrics: ["Geo search", "Firebase auth", "Docker setup"],
     accent: "from-emerald-300 via-cyan-300 to-violet-400",
   },
   {
     id: "cloudnest",
     name: "CloudNest Drive",
-    label: "Storage Product",
-    category: "Google Drive Inspired Cloud Storage",
-    summary:
-      "A full-stack storage dashboard for uploads, folders, previews, sharing, trash recovery, storage quotas, Cloudinary-backed assets, and subscription-aware limits.",
+    label: "Storage",
+    category: "Cloud Storage Dashboard",
+    overview:
+      "A Google Drive-inspired storage product with uploads, folders, previews, sharing, trash recovery, storage quotas, and Cloudinary-backed assets.",
     problem:
-      "A file platform needs more than an upload button: users expect folders, previews, account sessions, sharing, quota visibility, restore flows, and predictable cloud storage behavior.",
+      "A useful storage app needs clear folder flows, account sessions, preview states, sharing, restore behavior, and quota feedback.",
     solution:
-      "Designed and developed a React/Vite client with an Express API, JWT access tokens, HTTP-only refresh cookies, Google OAuth, protected routes, folder/file operations, public share links, and Cloudinary storage with a local fallback for development.",
+      "Built a dashboard-style client with an Express API, JWT sessions, Google OAuth, folder/file actions, public share links, and cloud upload handling.",
     architecture:
-      "Frontend calls a versioned API for auth and storage actions. Backend handles MongoDB models, upload middleware, Cloudinary integration, refresh sessions, Google OAuth callbacks, Stripe checkout, and Render-ready deployment configuration.",
+      "React/Vite frontend, Express backend, MongoDB models, JWT access tokens, HTTP-only refresh cookies, Cloudinary, Google OAuth, Stripe checkout, and Render deployment notes.",
     challenges:
-      "Balancing production cloud storage with local development required fallback URLs, file type/size validation, clear troubleshooting paths, and strict separation between frontend and backend environment settings.",
-    results:
-      "Built a storage product surface with image/video/PDF/document previews, folder create/search/copy/star/trash/restore/delete operations, storage usage tracking, and subscription upgrade paths.",
+      "Balancing production cloud uploads with local fallback behavior, file validations, preview states, and secure session handling.",
+    learning:
+      "Learned more about cloud asset pipelines, refresh sessions, upload middleware, and product-grade dashboard states.",
     features: [
-      "JWT Auth",
-      "Google OAuth",
-      "File Upload",
-      "Folder Management",
+      "File Uploads",
+      "Folders",
       "Media Preview",
       "Share Links",
       "Trash Restore",
       "Storage Quotas",
-      "Stripe Checkout",
-      "Cloudinary",
+      "Google OAuth",
     ],
     technology: [
       "React",
@@ -216,48 +176,70 @@ const projects = [
       "Cloudinary",
       "Stripe",
       "JWT",
-      "Render",
     ],
-    metrics: ["Refresh cookies", "Cloud fallback", "Quota tracking"],
+    gallery: ["Drive dashboard", "Preview panel", "Trash recovery", "Quota card"],
+    metrics: ["Cloudinary", "Refresh cookies", "Quota tracking"],
     accent: "from-sky-300 via-blue-500 to-violet-500",
   },
   {
     id: "booknest",
     name: "BookNest",
-    label: "Book Commerce",
-    category: "Modern Online Book Store",
-    summary:
-      "A refined book discovery and commerce platform with search, wishlist, authentication, responsive UI, and room to expand into personalized recommendations.",
+    label: "Commerce",
+    category: "Online Book Store",
+    overview:
+      "A responsive bookstore experience focused on browsing, search, wishlist behavior, clean product detail pages, and authentication-aware interactions.",
     problem:
-      "Bookstore interfaces can become cluttered quickly. Users need fast search, saved titles, readable detail pages, and a storefront that works smoothly across devices.",
+      "Bookstore UIs can become cluttered quickly, especially when search, wishlists, and detail pages compete for attention.",
     solution:
-      "Designed and developed BookNest as a product-minded e-commerce surface with clear browsing, wishlist flows, authentication-aware interactions, and a modern responsive frontend.",
+      "Designed a calmer commerce flow with readable metadata, clear cards, saved-book states, and responsive layouts for scanning.",
     architecture:
-      "React/Next-style frontend architecture with reusable UI patterns, API-ready search boundaries, authenticated wishlist behavior, and a layout system optimized for scanning book metadata.",
+      "Reusable React/Next-style components, API-ready search boundaries, authenticated wishlist thinking, and a layout system tuned for product browsing.",
     challenges:
-      "The main challenge was making commerce, search, and saved-book states feel clean on small screens without reducing the richness of the browsing experience.",
-    results:
-      "Delivered a recruiter-friendly storefront case study that shows responsive UI, wishlist UX, authentication thinking, and e-commerce information architecture.",
+      "Keeping browsing rich on desktop while making the same flows compact and readable on mobile.",
+    learning:
+      "Practiced e-commerce information architecture, responsive card systems, form states, and cleaner frontend composition.",
     features: [
-      "Wishlist",
       "Book Search",
-      "Authentication",
-      "Responsive UI",
+      "Wishlist",
+      "Auth-Aware UI",
       "Book Details",
+      "Responsive Storefront",
       "Search States",
-      "Commerce Layout",
-      "Recommendation-Ready UX",
     ],
-    technology: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "TailwindCSS",
-      "REST APIs",
-      "Authentication",
-    ],
+    technology: ["React", "Next.js", "TypeScript", "TailwindCSS", "REST APIs"],
+    gallery: ["Storefront", "Book details", "Wishlist", "Search results"],
     metrics: ["Wishlist", "Search", "Responsive"],
     accent: "from-purple-300 via-cyan-300 to-blue-500",
+  },
+  {
+    id: "netflix-clone",
+    name: "Netflix Clone",
+    label: "Frontend",
+    category: "Streaming UI Clone",
+    overview:
+      "A frontend-focused streaming interface built to practice polished layouts, media browsing patterns, responsive sections, and clean visual hierarchy.",
+    problem:
+      "A media UI needs to handle dense visual content without becoming noisy or hard to scan.",
+    solution:
+      "Built a dark, responsive streaming interface with hero content, category rows, hover states, and recognizable browsing patterns.",
+    architecture:
+      "React-based UI composition with reusable sections, responsive cards, API-ready content lists, and lightweight state for browsing interactions.",
+    challenges:
+      "Creating a familiar streaming feel while keeping layout spacing, hover feedback, and mobile behavior smooth.",
+    learning:
+      "Improved my frontend eye for spacing, dark UI contrast, card rhythm, responsive grids, and interaction polish.",
+    features: [
+      "Hero Banner",
+      "Movie Rows",
+      "Hover Effects",
+      "Responsive Layout",
+      "Media Cards",
+      "Dark UI",
+    ],
+    technology: ["React", "JavaScript", "CSS", "REST APIs", "Responsive Design"],
+    gallery: ["Hero row", "Movie grid", "Hover card", "Mobile layout"],
+    metrics: ["Frontend UI", "Responsive", "Hover states"],
+    accent: "from-red-400 via-fuchsia-400 to-violet-500",
   },
 ];
 
@@ -270,22 +252,17 @@ const stackGroups = [
   {
     title: "Frontend",
     icon: Sparkles,
-    items: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Redux", "Responsive Design"],
+    items: ["React", "Next.js", "TailwindCSS", "Framer Motion", "GSAP", "Three.js"],
   },
   {
     title: "Backend",
-    icon: Database,
-    items: ["Node.js", "Express.js", "MongoDB", "Prisma", "REST APIs", "JWT"],
+    icon: Layers3,
+    items: ["Node.js", "Express.js", "REST APIs", "JWT", "API Validation"],
   },
   {
     title: "Database",
     icon: Database,
-    items: ["MongoDB", "Mongoose", "Schema Design", "Indexes", "Owner-Scoped Data"],
-  },
-  {
-    title: "AI",
-    icon: BrainCircuit,
-    items: ["Google Gemini API", "Prompt Engineering", "AI Workflows", "ATS Resume Analysis", "AI Recommendations"],
+    items: ["MongoDB", "Mongoose", "Prisma", "Indexes", "Schema Design"],
   },
   {
     title: "Cloud",
@@ -293,89 +270,68 @@ const stackGroups = [
     items: ["Firebase", "Cloudinary", "Docker", "Vercel", "Render"],
   },
   {
+    title: "AI",
+    icon: BrainCircuit,
+    items: ["Gemini API", "Prompt Engineering", "AI Reports", "AI UX", "Automation Ideas"],
+  },
+  {
     title: "Tools",
-    icon: BriefcaseBusiness,
-    items: ["Git", "GitHub", "VS Code", "Postman", "Deployment Docs"],
+    icon: Code2,
+    items: ["Git", "GitHub", "VS Code", "Postman", "Debugging"],
   },
 ];
 
 const stats = [
-  ["5", "featured products"],
-  ["2", "AI-focused builds"],
-  ["20+", "backend and API workflows"],
-  ["2025", "BCA completed"],
-];
-
-const achievements = [
-  "Defined ARES AI as an AI application experience with structured output states, premium motion, and API-ready product architecture.",
-  "Architected Strategy Hub as a production-style AI SaaS with Gemini orchestration, ATS resume workflows, saved reports, and export pipelines.",
-  "Engineered Zylora as a multi-service circular economy platform with Firebase identity, MongoDB resources, maps, messaging, and AI-assisted pricing.",
-  "Built CloudNest Drive with secure sessions, Google OAuth, Cloudinary storage, folder management, share links, trash recovery, and subscription-aware quotas.",
-  "Designed BookNest as a modern bookstore experience with search, authentication-aware wishlist flows, and responsive commerce architecture.",
-];
-
-const services = [
-  ["Full-stack product builds", "MERN and Next.js applications with auth, APIs, dashboards, and production deployment paths."],
-  ["AI application development", "Gemini-powered workflows, prompt pipelines, report generation, recommendations, and AI UX surfaces."],
-  ["Frontend systems", "Responsive product interfaces with motion, state management, accessibility, and polished interaction details."],
-  ["Backend architecture", "Express APIs, MongoDB models, validation, protected routes, secure sessions, and integration boundaries."],
+  ["5+", "Projects Built"],
+  ["20+", "Technologies Used"],
+  ["2025", "BCA Graduate"],
+  ["Open", "For Jobs & Internships"],
 ];
 
 const timeline = [
   {
-    period: "2025",
-    title: "Bachelor of Computer Applications completed",
-    text: "Completed BCA while building full-stack projects that go beyond UI practice: authenticated APIs, databases, AI workflows, cloud storage, and deployment documentation.",
-  },
-  {
-    period: "2024-2026",
-    title: "Full-stack product engineering practice",
-    text: "Designed and developed MERN and Next.js products across ARES AI, Strategy Hub, CloudNest Drive, Zylora, and BookNest.",
-  },
-  {
     period: "2023",
-    title: "C++ using Data Structures and Algorithms",
-    text: "Built a programming foundation in problem solving, data structures, and implementation discipline before moving into product-grade JavaScript systems.",
+    title: "Completed C++ using DSA",
+    points: ["Built problem-solving fundamentals", "Practiced data structures and implementation discipline"],
+  },
+  {
+    period: "2024",
+    title: "Started MERN Stack journey",
+    points: ["Built multiple full-stack projects", "Focused on APIs, authentication, databases, and UI polish"],
+  },
+  {
+    period: "2025",
+    title: "Completed BCA and shipped stronger projects",
+    points: [
+      "Completed MERN + Full Stack Development through 100xDevs",
+      "Built Strategy Hub, Zylora, CloudNest Drive, BookNest, and Netflix Clone",
+    ],
+  },
+  {
+    period: "Current",
+    title: "Learning and applying advanced concepts",
+    points: [
+      "Studying backend architecture, Docker, AI integrations, and system design",
+      "Searching for full-time software engineering and internship opportunities",
+    ],
   },
 ];
 
 const certificates = [
-  "C++ with DSA",
+  "C++",
+  "Data Structures & Algorithms",
   "MERN Stack",
-  "Full Stack Development - 100xDevs",
-];
-
-const testimonials = [
-  {
-    quote:
-      "Shrushti's projects read like product systems, not classroom exercises. The architecture, auth, and AI workflows show real engineering intent.",
-    by: "Technical Recruiter",
-  },
-  {
-    quote:
-      "The strongest signal is how each build handles edge cases: sessions, fallbacks, exports, validation, and deployment notes.",
-    by: "Senior Full Stack Engineer",
-  },
-  {
-    quote:
-      "The portfolio communicates product ownership clearly: problem, solution, architecture, tradeoffs, and outcomes.",
-    by: "Startup Founder",
-  },
-];
-
-const faqs = [
-  ["What roles is Shrushti open to?", "Full-Time Software Engineer, Full Stack Developer, MERN Stack Developer, Frontend Developer, Backend Developer, and Software Development Internship roles."],
-  ["What makes the projects different from tutorials?", "Each project includes product scope, authentication, API design, database flows, deployment concerns, and real edge-case handling."],
-  ["What AI work is represented?", "Gemini-powered interview generation, ATS resume analysis, AI career chat, pricing estimates, listing intent extraction, AI reading assistance, and recommendations."],
-  ["What backend experience is shown?", "Express APIs, MongoDB/Mongoose schemas, JWT sessions, HTTP-only cookies, Firebase token verification, file uploads, validation, and cloud integrations."],
+  "Full Stack Development",
+  "100xDevs",
 ];
 
 const paletteItems = [
-  ["Featured work", "#work"],
+  ["Home", "#top"],
+  ["Projects", "#work"],
+  ["About", "#about"],
   ["Skills", "#stack"],
-  ["Education", "#education"],
-  ["Services", "#services"],
-  ["FAQ", "#faq"],
+  ["Journey", "#timeline"],
+  ["Certificates", "#certificates"],
   ["Contact", "#contact"],
 ];
 
@@ -432,16 +388,192 @@ function CommandPalette({
   );
 }
 
+function DeveloperCard() {
+  const previewLines = [
+    "const developer = {",
+    "  name: 'Shrushti',",
+    "  status: 'BCA Graduate 2025',",
+    "  focus: ['MERN', 'AI UX', 'Frontend'],",
+    "  openTo: ['Full-Time', 'Internship']",
+    "};",
+  ];
+
+  return (
+    <Reveal className="relative z-10">
+      <div className="developer-card rounded-[30px] border border-white/12 bg-[#0E1726]/78 p-5 shadow-2xl shadow-cyan-950/30 backdrop-blur-2xl">
+        <div className="mb-5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-red-400" />
+            <span className="h-3 w-3 rounded-full bg-amber-300" />
+            <span className="h-3 w-3 rounded-full bg-emerald-300" />
+          </div>
+          <span className="rounded-full border border-cyan-200/20 bg-cyan-200/10 px-3 py-1 text-xs text-cyan-100">
+            building real projects
+          </span>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-black/45 p-5 font-mono text-sm leading-7 text-white/76">
+          {previewLines.map((line, index) => (
+            <motion.p
+              className="hero-code-line"
+              initial={{ opacity: 0, x: -12 }}
+              key={line}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.08, duration: 0.45 }}
+              viewport={{ once: true }}
+            >
+              <span className="mr-4 text-cyan-300/60">{index + 1}</span>
+              {line}
+            </motion.p>
+          ))}
+        </div>
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          {projects.slice(0, 4).map((project, index) => (
+            <motion.a
+              className="floating-project rounded-2xl border border-white/10 bg-white/[0.045] p-4"
+              data-cursor="project"
+              href={`#project-${project.id}`}
+              key={project.id}
+              style={{ transform: `translateY(${index % 2 === 0 ? 0 : 12}px)` }}
+              whileHover={{ y: -6, scale: 1.03 }}
+            >
+              <p className="text-xs text-cyan-200">{project.label}</p>
+              <p className="mt-2 text-sm font-semibold text-white">{project.name}</p>
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+function ProjectModal({
+  project,
+  onClose,
+}: {
+  project: Project | null;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    if (!project) return;
+
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKey);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [onClose, project]);
+
+  return (
+    <AnimatePresence>
+      {project ? (
+        <motion.div
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-[85] overflow-y-auto bg-[#050812]/86 px-4 py-8 backdrop-blur-2xl"
+          exit={{ opacity: 0 }}
+          initial={{ opacity: 0 }}
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="case-study-title"
+        >
+          <motion.div
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            className="mx-auto max-w-5xl overflow-hidden rounded-[32px] border border-white/12 bg-[#0E1726] shadow-2xl shadow-black/50"
+            exit={{ opacity: 0, scale: 0.96, y: 24 }}
+            initial={{ opacity: 0, scale: 0.96, y: 24 }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className={`animated-gradient h-2 bg-gradient-to-r ${project.accent}`} />
+            <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-7">
+              <div>
+                <p className="text-sm uppercase tracking-[0.22em] text-cyan-200/74">{project.category}</p>
+                <h2 className="mt-3 text-3xl font-semibold text-white" id="case-study-title">
+                  {project.name}
+                </h2>
+              </div>
+              <button
+                aria-label="Close case study"
+                className="grid h-11 w-11 flex-none place-items-center rounded-full border border-white/12 bg-white/[0.05] text-white transition hover:bg-white/10"
+                onClick={onClose}
+                type="button"
+              >
+                <X aria-hidden="true" className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="grid gap-5 p-5 sm:p-7 lg:grid-cols-[0.78fr_0.42fr]">
+              <div className="space-y-4">
+                {[
+                  ["Overview", project.overview],
+                  ["Problem", project.problem],
+                  ["Solution", project.solution],
+                  ["Architecture", project.architecture],
+                  ["Challenges", project.challenges],
+                  ["Learning Outcomes", project.learning],
+                ].map(([title, text]) => (
+                  <section className="rounded-3xl border border-white/10 bg-white/[0.035] p-5" key={title}>
+                    <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">{title}</h3>
+                    <p className="mt-3 leading-7 text-white/66">{text}</p>
+                  </section>
+                ))}
+              </div>
+              <aside className="space-y-4">
+                <div className="rounded-3xl border border-white/10 bg-black/24 p-5">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Tech Stack</h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.technology.map((item) => (
+                      <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs text-white/68" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-black/24 p-5">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Features</h3>
+                  <div className="mt-4 grid gap-2">
+                    {project.features.map((feature) => (
+                      <div className="flex items-center gap-2 text-sm text-white/68" key={feature}>
+                        <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-cyan-300" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-black/24 p-5">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100">Gallery</h3>
+                  <div className="mt-4 grid grid-cols-2 gap-3">
+                    {project.gallery.map((item) => (
+                      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-xs text-white/62" key={item}>
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
 export function Portfolio() {
   const { scrollYProgress } = useScroll();
-  const heroY = useTransform(scrollYProgress, [0, 0.22], [0, -90]);
+  const heroY = useTransform(scrollYProgress, [0, 0.22], [0, -80]);
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const featuredProjectNames = useMemo(() => projects.map((project) => project.name).join(" / "), []);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setLoading(false), 850);
+    const timeout = window.setTimeout(() => setLoading(false), 900);
     const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
     let frame = 0;
 
@@ -463,12 +595,13 @@ export function Portfolio() {
 
     gsap.fromTo(
       ".hero-word",
-      { opacity: 0, y: 42, filter: "blur(14px)" },
+      { opacity: 0, y: 38, clipPath: "inset(0 0 100% 0)", filter: "blur(12px)" },
       {
         opacity: 1,
         y: 0,
+        clipPath: "inset(0 0 0% 0)",
         filter: "blur(0px)",
-        duration: 1.1,
+        duration: 1,
         ease: "power3.out",
         stagger: 0.08,
         delay: 0.35,
@@ -480,12 +613,13 @@ export function Portfolio() {
       window.removeEventListener("keydown", handleKey);
       cancelAnimationFrame(frame);
       lenis.destroy();
+      document.body.style.overflow = "";
     };
   }, []);
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(139,92,246,0.18),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(45,212,255,0.16),transparent_30%),#070B14]"
+      className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(139,92,246,0.16),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(45,212,255,0.18),transparent_30%),linear-gradient(180deg,#070B14_0%,#0E1726_46%,#070B14_100%)]"
       id="top"
     >
       <AnimatePresence>
@@ -497,17 +631,21 @@ export function Portfolio() {
             initial={{ opacity: 1 }}
           >
             <div className="text-center">
-              <div className="mx-auto mb-5 h-16 w-16 rounded-full border border-cyan-200/30 bg-cyan-200/10 shadow-[0_0_80px_rgba(45,212,255,0.4)]" />
-              <p className="text-sm uppercase tracking-[0.35em] text-cyan-100/70">Loading product story</p>
+              <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-full border border-cyan-200/30 bg-cyan-200/10 text-lg font-semibold text-cyan-100 shadow-[0_0_80px_rgba(45,212,255,0.4)]">
+                SS
+              </div>
+              <p className="text-sm uppercase tracking-[0.35em] text-cyan-100/70">Preparing portfolio</p>
             </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
 
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       <CursorSystem />
       <MouseGlow />
       <Navbar />
+      <div aria-hidden="true" className="aurora-field fixed inset-0 z-0" />
       <div aria-hidden="true" className="noise-layer fixed inset-0 z-0" />
       <motion.div
         aria-hidden="true"
@@ -515,149 +653,185 @@ export function Portfolio() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      <section className="relative min-h-screen overflow-hidden px-4 pt-36 sm:px-6 lg:px-8">
+      <section className="relative min-h-screen overflow-hidden px-4 pt-32 sm:px-6 lg:px-8">
         <OrbitalField />
         <motion.div
-          className="relative z-10 mx-auto grid max-w-6xl gap-12 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
+          className="relative z-10 mx-auto grid max-w-6xl gap-12 pb-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center"
           style={{ y: heroY }}
         >
           <div>
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-sm text-cyan-100 shadow-xl shadow-violet-950/20 backdrop-blur-xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-sm text-cyan-100 shadow-xl shadow-violet-950/20 backdrop-blur-xl">
               <Zap aria-hidden="true" className="h-4 w-4 text-cyan-300" />
-              Full Stack Developer / MERN Stack Developer / Frontend Engineer
+              Open to Full-Time Roles and Internship Opportunities
             </div>
-            <h1 className="max-w-5xl text-balance text-5xl font-semibold tracking-normal text-white sm:text-7xl lg:text-8xl">
-              <span className="hero-word inline-block">Shrushti</span>{" "}
-              <span className="hero-word inline-block">Swarnakar</span>
+            <p className="hero-word text-xl text-white/70">Hi, I&apos;m Shrushti.</p>
+            <h1 className="mt-3 max-w-5xl text-balance text-5xl font-semibold tracking-normal text-white sm:text-7xl lg:text-8xl">
+              <span className="hero-word inline-block">Full Stack</span>{" "}
+              <span className="hero-word inline-block text-cyan-100">Developer</span>
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68 sm:text-xl">
-              Software engineer building production-minded applications across AI workflows,
-              MERN systems, secure APIs, dashboards, cloud storage, maps, and polished product interfaces.
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
+              I build scalable web applications, AI-powered experiences, and modern user interfaces with the MERN stack, Next.js, TypeScript, and thoughtful UI/UX design.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3 text-sm text-white/52">
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Open to full-time roles</span>
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">BCA 2025</span>
-              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">MERN / AI / Frontend / Backend</span>
+            <p className="mt-4 max-w-2xl leading-7 text-white/56">
+              BCA Graduate 2025. No company experience yet, just production-quality personal projects, clean code, curiosity, and a lot of practice turning ideas into usable software.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3 text-sm text-white/58">
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Fresher Full Stack Developer</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">MERN Stack Developer</span>
+              <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">Frontend Developer</span>
             </div>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg">
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Button asChild className="magnetic-field" size="lg">
                 <a href="#work">
                   View Projects
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
                 </a>
               </Button>
-              <Button asChild size="lg" variant="ghost">
+              <Button asChild className="magnetic-field" size="lg" variant="ghost">
                 <a href="#contact">
                   <FileText aria-hidden="true" className="h-4 w-4" />
                   Resume
                 </a>
               </Button>
-              <Button asChild size="lg" variant="ghost">
+              <Button asChild className="magnetic-field" size="lg" variant="ghost">
                 <a href="mailto:swarnakarshrushti@gmail.com">
                   <Mail aria-hidden="true" className="h-4 w-4" />
                   Contact
                 </a>
               </Button>
+              <Button asChild className="magnetic-field" size="lg" variant="ghost">
+                <a href="#contact">
+                  <Code2 aria-hidden="true" className="h-4 w-4" />
+                  GitHub
+                </a>
+              </Button>
+              <Button asChild className="magnetic-field" size="lg" variant="ghost">
+                <a href="#contact">
+                  <ExternalLink aria-hidden="true" className="h-4 w-4" />
+                  LinkedIn
+                </a>
+              </Button>
             </div>
           </div>
 
-          <Reveal className="glass-panel relative z-10 rounded-[28px] p-5">
-            <div className="rounded-[22px] border border-white/10 bg-black/35 p-5">
-              <div className="mb-8 flex items-center justify-between">
-                <span className="text-sm text-white/52">Project evidence</span>
-                <button
-                  className="inline-flex items-center gap-2 rounded-full bg-cyan-300/12 px-3 py-1 text-xs text-cyan-200"
-                  onClick={() => setPaletteOpen(true)}
-                  type="button"
-                >
-                  <Command aria-hidden="true" className="h-3.5 w-3.5" />
-                  Palette
-                </button>
-              </div>
-              <div className="space-y-4">
-                {[
-                  ["AI", "Gemini report generation, recommendations, and ATS analysis"],
-                  ["API", "Express routes, protected sessions, validation, and MongoDB"],
-                  ["UX", "Dashboards, maps, reader surfaces, storage, and streaming UI"],
-                ].map(([kicker, label]) => (
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4" key={kicker}>
-                    <p className="text-xs text-cyan-200">{kicker}</p>
-                    <p className="mt-1 text-sm leading-6 text-white/70">{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
+          <DeveloperCard />
         </motion.div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8" id="achievements">
+      <section className="relative z-10 mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8" id="about">
         <div className="grid gap-4 md:grid-cols-4">
           {stats.map(([value, label], index) => (
-            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={label}>
+            <Reveal className="counter-tile rounded-3xl border border-white/10 bg-[#161F36]/54 p-6" delay={index * 0.05} key={label}>
               <p className="text-5xl font-semibold text-white">{value}</p>
               <p className="mt-3 text-sm leading-6 text-white/58">{label}</p>
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-10">
-          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Achievements</p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-            Evidence that the portfolio is built around product ownership.
-          </h2>
-        </Reveal>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {achievements.map((achievement, index) => (
-            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={achievement}>
-              <Trophy aria-hidden="true" className="h-5 w-5 text-violet-300" />
-              <p className="mt-5 leading-7 text-white/64">{achievement}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="about">
-        <Reveal className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+        <Reveal className="mt-12 grid gap-8 lg:grid-cols-[0.68fr_1.32fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">About</p>
             <h2 className="mt-4 text-3xl font-semibold text-white sm:text-5xl">
-              Product engineering, not tutorial assembly.
+              I like building projects that feel complete.
             </h2>
           </div>
-          <div className="text-lg leading-8 text-white/68">
-            <p>
-              Shrushti builds applications as complete systems: authentication, API boundaries,
-              database models, cloud integrations, AI orchestration, edge cases, and interfaces
-              that make complex workflows usable.
-            </p>
-            <p className="mt-5">
-              The strongest projects in this portfolio are written like launchable products.
-              ARES AI explores AI product interaction. Strategy Hub handles AI interview reports and ATS resume workflows.
-              Zylora connects sustainability users through maps, Firebase identity, and MongoDB resources.
-              CloudNest and BookNest demonstrate secure product surfaces across storage and commerce.
-            </p>
+          <div className="grid gap-4 text-white/66 sm:grid-cols-2">
+            {[
+              ["Curiosity", "I enjoy understanding why a feature works, not just how to make it appear on screen."],
+              ["Product Thinking", "I care about user flow, empty states, errors, speed, and the small details that make software easier to use."],
+              ["Backend Logic", "I practice auth, APIs, databases, file handling, validation, and deployment-minded structure."],
+              ["AI Integration", "I am learning how to turn AI features into useful product workflows instead of decorative chat boxes."],
+            ].map(([title, text]) => (
+              <div className="rounded-3xl border border-white/10 bg-white/[0.035] p-5" key={title}>
+                <h3 className="text-lg font-semibold text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-6">{text}</p>
+              </div>
+            ))}
           </div>
         </Reveal>
       </section>
 
-      <section className="relative z-10 px-4 py-16 sm:px-6 lg:px-8" id="stack">
+      <section className="relative z-10 px-4 py-20 sm:px-6 lg:px-8" id="work">
+        <div className="mx-auto max-w-6xl">
+          <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Projects</p>
+              <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
+                Five personal projects, built to practice real product engineering.
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm leading-6 text-white/54">{featuredProjectNames}</p>
+          </Reveal>
+
+          <div className="grid gap-8">
+            {projects.map((project, index) => (
+              <Reveal className="project-shell overflow-hidden rounded-[32px] border border-white/12 bg-[#0E1726]/66" delay={index * 0.04} key={project.id}>
+                <article className="grid gap-0 lg:grid-cols-[0.48fr_0.52fr]" data-cursor="project" id={`project-${project.id}`}>
+                  <ProjectSpotlight project={project} index={index} />
+                  <div className="p-6 sm:p-8">
+                    <p className="text-sm uppercase tracking-[0.24em] text-cyan-200/72">{project.category}</p>
+                    <h3 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{project.name}</h3>
+                    <p className="mt-5 text-base leading-7 text-white/68">{project.overview}</p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.features.slice(0, 5).map((feature) => (
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/64" key={feature}>
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-5 text-sm leading-7 text-white/54">{project.technology.join(" / ")}</p>
+                    <div className="mt-7 flex flex-wrap gap-3">
+                      <Button asChild className="magnetic-field" variant="ghost">
+                        <a href="#contact">
+                          Live Demo
+                          <ExternalLink aria-hidden="true" className="h-4 w-4" />
+                        </a>
+                      </Button>
+                      <Button asChild className="magnetic-field" variant="ghost">
+                        <a href="#contact">
+                          GitHub
+                          <Code2 aria-hidden="true" className="h-4 w-4" />
+                        </a>
+                      </Button>
+                      <Button
+                        className="magnetic-field"
+                        onClick={() => setSelectedProject(project)}
+                        type="button"
+                        variant="ghost"
+                      >
+                        Read Case Study
+                        <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 px-4 py-20 sm:px-6 lg:px-8" id="stack">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Skills</p>
             <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-              A stack shaped around AI products, APIs, dashboards, and modern interfaces.
+              A technology constellation I keep expanding through projects.
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="tech-galaxy mt-12 grid gap-4 md:grid-cols-7">
             {stackGroups.map((group, index) => {
               const Icon = group.icon;
+
               return (
-                <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={group.title}>
-                  <Icon aria-hidden="true" className="h-6 w-6 text-cyan-300" />
+                <Reveal className="tech-cluster rounded-3xl border border-white/10 bg-white/[0.035] p-5 md:col-span-2 odd:md:col-span-3" delay={index * 0.05} key={group.title}>
+                  <div className="flex items-center justify-between">
+                    <Icon aria-hidden="true" className="h-6 w-6 text-cyan-300" />
+                    <span className="text-xs text-white/38">{String(index + 1).padStart(2, "0")}</span>
+                  </div>
                   <h3 className="mt-5 text-xl font-semibold text-white">{group.title}</h3>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {group.items.map((item) => (
-                      <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/70" key={item}>
+                      <span className="tech-chip rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-sm text-white/70" key={item}>
                         {item}
                       </span>
                     ))}
@@ -669,169 +843,63 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="work">
-        <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div>
-            <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Case studies</p>
-            <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-              Five projects presented as products.
-            </h2>
-          </div>
-          <p className="max-w-sm text-sm leading-6 text-white/54">{featuredProjectNames}</p>
+      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="timeline">
+        <Reveal>
+          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Journey</p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
+            Learning through fundamentals, projects, and sharper product decisions.
+          </h2>
         </Reveal>
-
-        <div className="space-y-10">
-          {projects.map((project, index) => (
-            <Reveal className="glass-panel overflow-hidden rounded-[32px]" delay={index * 0.04} key={project.id}>
-              <article className="grid gap-0 lg:grid-cols-[0.45fr_0.55fr]" data-cursor="project" id={`project-${project.id}`}>
-                <ProjectSpotlight project={project} index={index} />
-                <div className="p-6 sm:p-8">
-                  <p className="text-sm uppercase tracking-[0.24em] text-cyan-200/72">{project.category}</p>
-                  <h3 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{project.name}</h3>
-                  <p className="mt-5 text-lg leading-8 text-white/72">{project.summary}</p>
-                  <div className="mt-7 grid gap-4">
-                    {[
-                      ["Problem", project.problem],
-                      ["Solution", project.solution],
-                      ["Architecture", project.architecture],
-                      ["Technical challenges", project.challenges],
-                      ["Results", project.results],
-                    ].map(([title, text]) => (
-                      <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4" key={title}>
-                        <p className="text-sm font-medium text-white">{title}</p>
-                        <p className="mt-2 text-sm leading-6 text-white/58">{text}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-7">
-                    <p className="text-sm font-medium text-white">Key features</p>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {project.features.map((feature) => (
-                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/64" key={feature}>
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="mt-6 text-sm leading-7 text-white/58">{project.technology.join(" / ")}</p>
-                  <div className="mt-7 flex flex-wrap gap-3">
-                    <Button asChild variant="ghost">
-                      <a href={`#project-${project.id}`}>Case Study</a>
-                    </Button>
-                    <Button asChild variant="ghost">
-                      <a href="#contact">Live Demo</a>
-                    </Button>
-                    <Button asChild variant="ghost">
-                      <a href="#contact">GitHub</a>
-                    </Button>
-                  </div>
+        <div className="mt-12 space-y-5">
+          {timeline.map((item, index) => (
+            <Reveal className="timeline-row grid gap-5 border-l border-cyan-200/18 pl-6 md:grid-cols-[0.22fr_0.78fr] md:gap-10" delay={index * 0.06} key={item.title}>
+              <p className="text-sm font-semibold text-cyan-200">{item.period}</p>
+              <div className="rounded-3xl border border-white/10 bg-[#161F36]/50 p-6">
+                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.points.map((point) => (
+                    <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-sm text-white/64" key={point}>
+                      {point}
+                    </span>
+                  ))}
                 </div>
-              </article>
+              </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto grid max-w-6xl gap-4 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8" id="education">
-        <Reveal className="glass-panel rounded-3xl p-7">
+      <section className="relative z-10 mx-auto grid max-w-6xl gap-4 px-4 py-20 sm:px-6 md:grid-cols-2 lg:px-8" id="certificates">
+        <Reveal className="rounded-3xl border border-white/10 bg-[#0E1726]/70 p-7">
           <GraduationCap aria-hidden="true" className="h-7 w-7 text-cyan-300" />
           <p className="mt-6 text-sm uppercase tracking-[0.24em] text-cyan-200/72">Education</p>
           <h2 className="mt-3 text-3xl font-semibold text-white">Bachelor of Computer Applications</h2>
-          <p className="mt-4 text-white/62">Graduated in 2025. The academic foundation is reinforced by project work across MERN, AI, cloud, and modern frontend systems.</p>
+          <p className="mt-4 text-white/62">BCA Graduate, 2025.</p>
         </Reveal>
-        <Reveal className="glass-panel rounded-3xl p-7" delay={0.05}>
+        <Reveal className="rounded-3xl border border-white/10 bg-[#0E1726]/70 p-7" delay={0.05}>
           <Award aria-hidden="true" className="h-7 w-7 text-violet-300" />
           <p className="mt-6 text-sm uppercase tracking-[0.24em] text-cyan-200/72">Certificates</p>
-          <div className="mt-5 space-y-4">
+          <div className="mt-5 flex flex-wrap gap-2">
             {certificates.map((certificate) => (
-              <div className="flex gap-3 text-white/68" key={certificate}>
-                <CheckCircle2 aria-hidden="true" className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
-                <span>{certificate}</span>
-              </div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-sm text-white/68" key={certificate}>
+                <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-cyan-300" />
+                {certificate}
+              </span>
             ))}
           </div>
         </Reveal>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="services">
-        <Reveal>
-          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Services</p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-            The work maps directly to product teams.
-          </h2>
-        </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {services.map(([title, text], index) => (
-            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={title}>
-              <BriefcaseBusiness aria-hidden="true" className="h-6 w-6 text-cyan-300" />
-              <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
-              <p className="mt-3 leading-7 text-white/60">{text}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="timeline">
-        <Reveal>
-          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Experience timeline</p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-            A path through fundamentals, product builds, and AI systems.
-          </h2>
-        </Reveal>
-        <div className="mt-12 space-y-5">
-          {timeline.map((item, index) => (
-            <Reveal className="grid gap-5 border-l border-white/14 pl-6 md:grid-cols-[0.24fr_0.76fr] md:gap-10" delay={index * 0.06} key={item.title}>
-              <p className="text-sm text-cyan-200">{item.period}</p>
-              <div className="glass-panel rounded-3xl p-6">
-                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                <p className="mt-3 leading-7 text-white/62">{item.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-4 md:grid-cols-3">
-          {testimonials.map((item, index) => (
-            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={item.by}>
-              <Star aria-hidden="true" className="h-5 w-5 fill-cyan-200 text-cyan-200" />
-              <p className="mt-6 leading-7 text-white/66">{item.quote}</p>
-              <p className="mt-5 text-sm text-cyan-200">{item.by}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative z-10 mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8" id="faq">
-        <Reveal>
-          <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">FAQ</p>
-          <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-            Recruiter-ready context.
-          </h2>
-        </Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {faqs.map(([question, answer], index) => (
-            <Reveal className="glass-panel rounded-3xl p-6" delay={index * 0.05} key={question}>
-              <MessageSquareText aria-hidden="true" className="h-5 w-5 text-violet-300" />
-              <h3 className="mt-5 text-lg font-semibold text-white">{question}</h3>
-              <p className="mt-3 leading-7 text-white/60">{answer}</p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       <section className="relative z-10 px-4 py-20 sm:px-6 lg:px-8" id="contact">
-        <Reveal className="glass-panel mx-auto max-w-6xl overflow-hidden rounded-[32px]">
-          <div className="grid gap-0 lg:grid-cols-[1fr_0.82fr]">
+        <Reveal className="contact-panel mx-auto max-w-6xl overflow-hidden rounded-[34px] border border-white/12 bg-[#0E1726]/78">
+          <div className="grid gap-0 lg:grid-cols-[1fr_0.78fr]">
             <div className="p-7 sm:p-10">
               <p className="text-sm uppercase tracking-[0.28em] text-cyan-200/80">Contact</p>
               <h2 className="mt-4 max-w-3xl text-3xl font-semibold text-white sm:text-5xl">
-                Available for software engineering, MERN, frontend, backend, and AI-focused roles.
+                Let&apos;s Build Something Amazing Together.
               </h2>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-white/64">
-                Best fit: teams building product dashboards, AI workflows, authenticated applications,
-                API-backed platforms, and interfaces that need strong engineering taste.
+                I&apos;m looking for a team where I can learn fast, contribute carefully, and keep building better full-stack products.
               </p>
               <form
                 action="mailto:swarnakarshrushti@gmail.com"
@@ -852,7 +920,7 @@ export function Portfolio() {
                     className="field-input min-h-32 resize-none"
                     minLength={12}
                     name="message"
-                    placeholder="Tell me about the role or project."
+                    placeholder="Tell me about the role, internship, or opportunity."
                     required
                   />
                 </label>
@@ -863,20 +931,18 @@ export function Portfolio() {
               </form>
             </div>
             <div className="border-t border-white/10 bg-white/[0.035] p-7 sm:p-10 lg:border-l lg:border-t-0">
-              <div className="space-y-4">
+              <div className="grid gap-4">
                 {[
-                  [ShieldCheck, "Production-minded architecture"],
-                  [Cloud, "Cloudinary, Firebase, Docker, Vercel, Render"],
-                  [Map, "Leaflet, OpenStreetMap, geospatial discovery"],
-                  [Layers3, "Dashboards, APIs, auth, and database design"],
-                  [BookOpen, "BookNest commerce and reading discovery"],
-                  [FileText, "Resume available on request"],
-                ].map(([Icon, label]) => (
-                  <div className="flex items-center gap-3" key={String(label)}>
-                    <span className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-black/30">
-                      <Icon aria-hidden="true" className="h-5 w-5 text-cyan-200" />
-                    </span>
-                    <span className="text-sm text-white/68">{label as string}</span>
+                  [Mail, "Email", "swarnakarshrushti@gmail.com"],
+                  [Code2, "GitHub", "Available on request"],
+                  [ExternalLink, "LinkedIn", "Available on request"],
+                  [FileText, "Resume", "Available on request"],
+                  [ShieldCheck, "Availability", "Open for Full-Time Roles, Internships, and Graduate Programs"],
+                ].map(([Icon, label, value]) => (
+                  <div className="rounded-3xl border border-white/10 bg-black/22 p-5" key={String(label)}>
+                    <Icon aria-hidden="true" className="h-5 w-5 text-cyan-200" />
+                    <p className="mt-4 text-sm text-cyan-100">{label as string}</p>
+                    <p className="mt-1 text-sm leading-6 text-white/62">{value as string}</p>
                   </div>
                 ))}
               </div>
@@ -885,12 +951,18 @@ export function Portfolio() {
         </Reveal>
       </section>
 
-      <footer className="relative z-10 mx-auto flex max-w-6xl flex-col gap-4 px-4 pb-10 pt-4 text-sm text-white/42 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-        <p>Copyright 2026 Shrushti Swarnakar. Built with Next.js, motion, and product-level detail.</p>
-        <a className="inline-flex items-center gap-2 hover:text-white" href="#top">
-          <Rocket aria-hidden="true" className="h-4 w-4" />
-          Back to top
-        </a>
+      <footer className="relative z-10 mx-auto max-w-6xl px-4 pb-10 pt-4 text-sm text-white/42 sm:px-6 lg:px-8">
+        <div className="mb-6 h-px bg-gradient-to-r from-transparent via-cyan-300/50 to-transparent" />
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <p>
+            Designed & Developed by <span className="text-white/74">Shrushti Swarnakar</span>
+          </p>
+          <p>Built using Next.js, React, TypeScript, TailwindCSS, Framer Motion, and GSAP.</p>
+          <a className="inline-flex items-center gap-2 hover:text-white" href="#top">
+            <Rocket aria-hidden="true" className="h-4 w-4" />
+            Back to top
+          </a>
+        </div>
       </footer>
     </main>
   );

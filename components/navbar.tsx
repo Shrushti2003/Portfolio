@@ -6,15 +6,18 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  ["Work", "#work"],
-  ["Stack", "#stack"],
+  ["Home", "#top"],
+  ["Projects", "#work"],
+  ["About", "#about"],
+  ["Skills", "#stack"],
   ["Journey", "#timeline"],
+  ["Certificates", "#certificates"],
   ["Contact", "#contact"],
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("#work");
+  const [activeSection, setActiveSection] = useState("#top");
 
   useEffect(() => {
     const sections = navItems.map(([, href]) => document.querySelector(href));
@@ -43,7 +46,7 @@ export function Navbar() {
     >
       <motion.nav
         animate={{
-          maxWidth: scrolled ? 980 : 1152,
+          maxWidth: scrolled ? 1040 : 1180,
           paddingTop: scrolled ? 6 : 8,
           paddingBottom: scrolled ? 6 : 8,
         }}
@@ -62,10 +65,10 @@ export function Navbar() {
           </span>
         </a>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {navItems.map(([label, href]) => (
             <a
-              className={`rounded-full px-4 py-2 text-sm transition ${
+              className={`rounded-full px-3 py-2 text-sm transition ${
                 activeSection === href
                   ? "bg-cyan-300/12 text-cyan-100 shadow-[inset_0_0_0_1px_rgba(103,232,249,0.18)]"
                   : "text-white/62 hover:bg-white/8 hover:text-white"

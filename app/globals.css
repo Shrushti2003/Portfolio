@@ -54,6 +54,17 @@ a {
   mask-image: radial-gradient(circle at 50% 20%, black, transparent 72%);
 }
 
+.aurora-field {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(45, 212, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 80% 28%, rgba(139, 92, 246, 0.12), transparent 30%),
+    linear-gradient(115deg, transparent 12%, rgba(255, 255, 255, 0.035) 42%, transparent 62%);
+  filter: saturate(1.12);
+  opacity: 0.78;
+  transform: translateZ(0);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
 .glass-panel {
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035)),
@@ -65,6 +76,66 @@ a {
 
 .magnetic-field {
   transform: translateZ(0);
+}
+
+.developer-card,
+.project-shell,
+.contact-panel,
+.counter-tile,
+.tech-cluster {
+  transform: translateZ(0);
+}
+
+.developer-card {
+  box-shadow:
+    0 24px 90px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.project-shell {
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(14, 23, 38, 0.66);
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.project-shell:hover {
+  border-color: rgba(103, 232, 249, 0.34);
+  box-shadow: 0 26px 90px rgba(45, 212, 255, 0.09);
+}
+
+.tech-galaxy {
+  perspective: 1000px;
+}
+
+.tech-cluster {
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.tech-cluster:hover {
+  border-color: rgba(103, 232, 249, 0.32);
+  background: rgba(22, 31, 54, 0.68);
+  transform: translateY(-4px) rotateX(1.5deg);
+}
+
+.tech-chip {
+  transition: border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.tech-chip:hover {
+  border-color: rgba(103, 232, 249, 0.44);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.floating-project {
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.floating-project:hover {
+  border-color: rgba(103, 232, 249, 0.35);
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: 0 16px 45px rgba(45, 212, 255, 0.1);
 }
 
 .field-input {
@@ -101,6 +172,16 @@ a {
 
   50% {
     background-position: 100% 50%;
+  }
+}
+
+@keyframes aurora-drift {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1.5%, 1%, 0) scale(1.04);
   }
 }
 
