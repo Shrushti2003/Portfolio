@@ -30,7 +30,7 @@ export default function Home() {
       "AI Integrations",
       "Frontend Development",
     ],
-    url: "https://shrushti-swarnakar.dev",
+    url: "https://shrushti-swarnakar-portfolio.shrushtiswarnakar99.chatgpt.site",
   };
 
   return (

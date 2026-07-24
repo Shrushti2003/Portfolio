@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://shrushti-swarnakar.dev/sitemap.xml",
+    sitemap: "https://shrushti-swarnakar-portfolio.shrushtiswarnakar99.chatgpt.site/sitemap.xml",
   };
 }

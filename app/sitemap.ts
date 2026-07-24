@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://shrushti-swarnakar.dev";
+  const baseUrl = "https://shrushti-swarnakar-portfolio.shrushtiswarnakar99.chatgpt.site";
 
   return [
     {

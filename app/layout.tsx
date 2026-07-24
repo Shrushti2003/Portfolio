@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shrushti-swarnakar.dev"),
+  metadataBase: new URL("https://shrushti-swarnakar-portfolio.shrushtiswarnakar99.chatgpt.site"),
   title: {
     default: "Shrushti Swarnakar | Full Stack Developer",
     template: "%s | Shrushti Swarnakar",
