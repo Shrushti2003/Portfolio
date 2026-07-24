@@ -4,12 +4,11 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
-const modules = [
-  { label: "UI", color: "#ff8ccf", position: [-1.45, 0.92, 0.08] as [number, number, number] },
-  { label: "API", color: "#40d7e8", position: [1.28, 0.62, -0.18] as [number, number, number] },
-  { label: "DB", color: "#c9ff4a", position: [-0.96, -1.0, -0.2] as [number, number, number] },
-  { label: "AI", color: "#8f46ff", position: [1.05, -0.9, 0.2] as [number, number, number] },
-  { label: "UX", color: "#ff6f61", position: [0.12, 1.45, -0.08] as [number, number, number] },
+const layers = [
+  { position: [-1.08, 0.52, -0.28] as const, scale: [1.58, 0.035, 0.82] as const, rotation: [0.06, -0.42, 0.02] as const },
+  { position: [0.16, 0.16, 0.02] as const, scale: [1.9, 0.035, 1.02] as const, rotation: [0.04, -0.2, -0.02] as const },
+  { position: [1.0, -0.2, 0.3] as const, scale: [1.5, 0.035, 0.76] as const, rotation: [-0.02, 0.26, 0.02] as const },
+  { position: [-0.34, -0.62, 0.14] as const, scale: [1.26, 0.035, 0.66] as const, rotation: [-0.05, 0.5, -0.04] as const },
 ];
 
 function useVisibleCanvas() {
@@ -25,90 +24,121 @@ function useVisibleCanvas() {
   return visible;
 }
 
-function RoundedModule({
-  color,
-  position,
-  rotation,
-  scale,
-}: {
-  color: string;
-  position: [number, number, number];
-  rotation: [number, number, number];
-  scale: [number, number, number];
-}) {
+function DataPath({ points, delay = 0 }: { points: THREE.Vector3[]; delay?: number }) {
+  const marker = useRef<THREE.Mesh>(null);
+  const geometry = useMemo(() => new THREE.BufferGeometry().setFromPoints(points), [points]);
+  const curve = useMemo(() => new THREE.CatmullRomCurve3(points), [points]);
+
+  useFrame((state) => {
+    if (!marker.current) return;
+    const progress = (Math.sin(state.clock.elapsedTime * 0.42 + delay) + 1) / 2;
+    marker.current.position.copy(curve.getPoint(progress));
+  });
+
+  useEffect(() => () => geometry.dispose(), [geometry]);
+
   return (
-    <mesh position={position} rotation={rotation} scale={scale}>
-      <boxGeometry args={[1, 0.16, 0.72]} />
-      <meshStandardMaterial color={color} metalness={0.18} roughness={0.36} />
-    </mesh>
+    <group>
+      <line>
+        <primitive attach="geometry" object={geometry} />
+        <lineBasicMaterial color="#ff2d7a" transparent opacity={0.34} />
+      </line>
+      <mesh ref={marker}>
+        <sphereGeometry args={[0.035, 14, 14]} />
+        <meshStandardMaterial color="#ff2d7a" emissive="#ff2d7a" emissiveIntensity={1.8} />
+      </mesh>
+    </group>
   );
 }
 
-function Sculpture() {
+function ArchitecturalSculpture() {
   const group = useRef<THREE.Group>(null);
   const pointer = useRef({ x: 0, y: 0 });
+  const scroll = useRef(0);
   const visible = useVisibleCanvas();
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 720;
 
-  const lineGeometries = useMemo(
-    () =>
-      modules.map((module) =>
-        new THREE.BufferGeometry().setFromPoints([
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(module.position[0], module.position[1], module.position[2]),
-        ]),
-      ),
+  const paths = useMemo(
+    () => [
+      [new THREE.Vector3(-1.22, 0.5, -0.1), new THREE.Vector3(-0.34, 0.12, 0.28), new THREE.Vector3(0.76, -0.18, 0.5)],
+      [new THREE.Vector3(-0.64, -0.58, 0.28), new THREE.Vector3(0.02, -0.05, -0.16), new THREE.Vector3(1.22, 0.18, 0.22)],
+      [new THREE.Vector3(-1.08, 0.02, -0.38), new THREE.Vector3(-0.12, 0.54, 0.04), new THREE.Vector3(0.92, 0.02, 0.38)],
+    ],
     [],
   );
 
   useEffect(() => {
-    const move = (event: PointerEvent) => {
+    const updatePointer = (event: PointerEvent) => {
       pointer.current = {
-        x: (event.clientX / window.innerWidth - 0.5) * 0.72,
-        y: (event.clientY / window.innerHeight - 0.5) * 0.46,
+        x: (event.clientX / window.innerWidth - 0.5) * 0.55,
+        y: (event.clientY / window.innerHeight - 0.5) * 0.38,
       };
     };
+    const updateScroll = () => {
+      scroll.current = Math.min(window.scrollY / Math.max(window.innerHeight * 1.4, 1), 1);
+    };
 
-    window.addEventListener("pointermove", move, { passive: true });
-    return () => window.removeEventListener("pointermove", move);
+    updateScroll();
+    window.addEventListener("pointermove", updatePointer, { passive: true });
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", updatePointer);
+      window.removeEventListener("scroll", updateScroll);
+    };
   }, []);
 
   useFrame((state) => {
     if (!visible || !group.current) return;
     const t = state.clock.elapsedTime;
-    group.current.rotation.y += (pointer.current.x + Math.sin(t * 0.28) * 0.16 - group.current.rotation.y) * 0.045;
-    group.current.rotation.x += (-pointer.current.y + Math.sin(t * 0.42) * 0.06 - group.current.rotation.x) * 0.05;
-    group.current.position.y = Math.sin(t * 0.8) * 0.05;
+    const assembly = scroll.current;
+    group.current.rotation.y += (pointer.current.x - 0.38 + assembly * 0.46 - group.current.rotation.y) * 0.035;
+    group.current.rotation.x += (-pointer.current.y + 0.08 + Math.sin(t * 0.26) * 0.035 - group.current.rotation.x) * 0.04;
+    group.current.position.y = Math.sin(t * 0.46) * 0.035 - assembly * 0.08;
+    group.current.scale.setScalar(isMobile ? 0.86 : 1);
   });
 
   return (
-    <group ref={group} rotation={[0.2, -0.35, 0.02]}>
-      <group>
-        <RoundedModule color="#ff8ccf" position={[-0.48, 0.18, 0.05]} rotation={[0.08, -0.36, -0.08]} scale={[1.24, 1, 1.05]} />
-        <RoundedModule color="#40d7e8" position={[0.42, -0.08, -0.05]} rotation={[-0.08, 0.34, 0.1]} scale={[1.18, 1, 1]} />
-        <RoundedModule color="#c9ff4a" position={[0.02, -0.42, 0.1]} rotation={[0.02, 0.08, -0.18]} scale={[1, 1, 0.92]} />
-        <RoundedModule color="#ff6f61" position={[-0.18, 0.56, -0.08]} rotation={[0.14, 0.2, 0.18]} scale={[0.86, 1, 0.84]} />
-      </group>
-
-      <mesh position={[-0.34, 0.08, 0.58]} rotation={[0.12, -0.18, 0.06]}>
-        <boxGeometry args={[0.55, 1.18, 0.14]} />
-        <meshStandardMaterial color="#17131f" metalness={0.34} roughness={0.28} />
-      </mesh>
-      <mesh position={[0.36, -0.08, 0.62]} rotation={[-0.08, 0.24, -0.08]}>
-        <boxGeometry args={[0.55, 1.18, 0.14]} />
-        <meshStandardMaterial color="#17131f" metalness={0.34} roughness={0.28} />
+    <group ref={group} rotation={[0.08, -0.38, 0]}>
+      <mesh position={[0, 0, 0]} visible={false}>
+        <sphereGeometry args={[0.1, 8, 8]} />
+        <meshBasicMaterial />
       </mesh>
 
-      {lineGeometries.map((geometry, index) => (
-        <group key={modules[index].label}>
-          <line>
-            <primitive object={geometry} attach="geometry" />
-            <lineBasicMaterial color={modules[index].color} transparent opacity={0.48} />
-          </line>
-          <mesh position={modules[index].position}>
-            <boxGeometry args={[0.34, 0.34, 0.12]} />
-            <meshStandardMaterial color={modules[index].color} emissive={modules[index].color} emissiveIntensity={0.2} roughness={0.28} />
+      {layers.map((layer, index) => (
+        <group key={index} position={layer.position} rotation={layer.rotation}>
+          <mesh scale={layer.scale}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshPhysicalMaterial
+              color={index % 2 ? "#f2efea" : "#1a1718"}
+              metalness={index % 2 ? 0.12 : 0.62}
+              opacity={index % 2 ? 0.28 : 0.72}
+              roughness={0.18}
+              transparent
+              transmission={index % 2 ? 0.18 : 0}
+            />
+          </mesh>
+          <mesh position={[0, 0.036, 0]} scale={[layer.scale[0] * 1.01, 0.008, 0.012]}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color={index === 1 ? "#ff2d7a" : "#5b0a27"} emissive={index === 1 ? "#ff2d7a" : "#5b0a27"} emissiveIntensity={0.8} />
           </mesh>
         </group>
+      ))}
+
+      {!isMobile ? (
+        <>
+          <mesh position={[-0.78, -0.06, 0.55]} rotation={[0.08, -0.18, 0.03]} scale={[0.06, 1.42, 0.62]}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color="#c8c5bf" metalness={0.8} roughness={0.22} />
+          </mesh>
+          <mesh position={[0.72, 0.1, -0.36]} rotation={[-0.04, 0.22, -0.04]} scale={[0.05, 1.2, 0.5]}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color="#5b0a27" metalness={0.56} roughness={0.2} />
+          </mesh>
+        </>
+      ) : null}
+
+      {paths.map((points, index) => (
+        <DataPath delay={index * 1.6} key={index} points={points} />
       ))}
     </group>
   );
@@ -127,29 +157,28 @@ export function OrbitalField() {
 
   if (reducedMotion) {
     return (
-      <div className="sculpture-fallback" aria-hidden="true">
-        <div className="fallback-window one">React</div>
-        <div className="fallback-window two">API</div>
-        <div className="fallback-window three">MongoDB</div>
-        <div className="fallback-monogram">SS</div>
+      <div className="architecture-fallback" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <strong>SS</strong>
       </div>
     );
   }
 
   return (
-    <div className="core-canvas" aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 5.2], fov: 42 }} dpr={[1, 1.55]} gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}>
-        <ambientLight intensity={1.1} />
-        <directionalLight color="#fff3dc" intensity={2.4} position={[2, 3, 4]} />
-        <pointLight color="#ff8ccf" intensity={4.8} position={[-2.6, 2, 3]} />
-        <pointLight color="#40d7e8" intensity={3.5} position={[2.4, -1.5, 3]} />
-        <Sculpture />
+    <div className="architecture-canvas" aria-hidden="true">
+      <Canvas
+        camera={{ position: [0, 0, 5.15], fov: 39 }}
+        dpr={[1, 1.55]}
+        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+      >
+        <ambientLight intensity={0.72} />
+        <directionalLight color="#f2efea" intensity={2.2} position={[2, 3, 4]} />
+        <pointLight color="#5b0a27" intensity={5.6} position={[-2.4, 1.8, 2.8]} />
+        <pointLight color="#ff2d7a" intensity={3.6} position={[2.2, -1.4, 2.6]} />
+        <ArchitecturalSculpture />
       </Canvas>
-      <div className="core-labels">
-        {modules.map((module) => (
-          <span key={module.label}>{module.label}</span>
-        ))}
-      </div>
     </div>
   );
 }

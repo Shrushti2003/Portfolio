@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Shrushti Swarnakar",
   },
   description:
-    "Creative full-stack developer portfolio for Shrushti Swarnakar, a BCA 2025 graduate with 7.50 CGPA, 400+ LeetCode problems, MERN projects, AI workflows, and contact at swarnakarshrushti@gmail.com.",
+    "Digital Architecture in Motion portfolio for Shrushti Swarnakar, a BCA 2025 full-stack developer with MERN projects, AI workflows, 400+ LeetCode problems, and contact at swarnakarshrushti@gmail.com.",
   keywords: [
     "Shrushti Swarnakar",
     "Full Stack Developer",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shrushti Swarnakar | Full Stack Developer",
     description:
-      "Creative Code Playground for a BCA 2025 full-stack developer with 400+ LeetCode problems and MERN, AI, cloud, and frontend projects.",
+      "A premium Digital Architecture in Motion portfolio for a BCA 2025 full-stack developer with MERN, AI, cloud, and frontend projects.",
     type: "website",
     images: [
       {
@@ -57,10 +57,6 @@ export const metadata: Metadata = {
       "Recruiter-focused portfolio for a Full Stack Developer, MERN Stack Developer, and Frontend Engineer.",
     images: ["/og.png"],
   },
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
 };
 
 export default function RootLayout({
@@ -70,6 +66,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link href="/favicon.svg" rel="icon" />
+        <link href="/favicon.svg" rel="shortcut icon" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

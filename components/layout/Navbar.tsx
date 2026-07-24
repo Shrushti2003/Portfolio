@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 import { socialLinks } from "@/lib/portfolio-data";
 
 const navItems = [
-  ["Work", "#work"],
-  ["Skills", "#skills"],
+  ["Selected Work", "#work"],
+  ["Expertise", "#expertise"],
+  ["About", "#about"],
   ["Journey", "#journey"],
   ["Certificates", "#certificates"],
-  ["About", "#about"],
   ["Contact", "#contact"],
 ];
 

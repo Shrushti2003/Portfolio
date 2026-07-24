@@ -46,8 +46,8 @@ export function CursorSystem() {
       }}
       className={`pointer-events-none fixed left-0 top-0 z-[70] hidden rounded-full border mix-blend-screen md:block ${
         active
-          ? "h-9 w-9 border-cyan-200/80 bg-cyan-200/12"
-          : "h-5 w-5 border-cyan-200/70 bg-cyan-200/10"
+          ? "h-8 w-8 border-[#ff2d7a]/80 bg-[#ff2d7a]/12"
+          : "h-4 w-4 border-[#f2efea]/70 bg-[#f2efea]/10"
       }`}
       transition={{ type: "spring", stiffness: 360, damping: 32 }}
     />
