@@ -1,118 +1,148 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Lenis from "lenis";
 import {
   ArrowUpRight,
-  BookOpen,
+  Award,
   BrainCircuit,
-  Database,
+  Check,
+  Code2,
+  Copy,
   ExternalLink,
   FileText,
   GraduationCap,
-  Code2,
   Layers3,
-  Mail,
   MapPin,
-  Server,
+  Rocket,
+  Send,
   ShieldCheck,
   Sparkles,
   Trophy,
   X,
 } from "lucide-react";
+import { CursorSystem } from "@/components/animations/CursorSystem";
 import { Reveal } from "@/components/animations/Reveal";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { certificates, contactCards, projects, socialLinks, stackGroups, timeline } from "@/lib/portfolio-data";
 import type { Project } from "@/types/portfolio";
 
-const ProjectCore = dynamic(
+const CodeSculpture = dynamic(
   () => import("@/components/animations/OrbitalField").then((module) => module.OrbitalField),
-  {
-    ssr: false,
-    loading: () => <ProjectCoreFallback />,
-  },
+  { ssr: false, loading: () => <SculptureFallback /> },
 );
 
-const selectedOrder = ["strategy-hub", "zylora", "cloudnest", "booknest", "netflix-clone"];
+const projectOrder = ["strategy-hub", "zylora", "cloudnest", "booknest", "netflix-clone"];
 
-const capabilityMap = [
+const projectThemes: Record<string, { theme: string; sticker: string; verb: string }> = {
+  "strategy-hub": { theme: "project-violet", sticker: "AI prep lab", verb: "Analyzes" },
+  zylora: { theme: "project-green", sticker: "Reuse network", verb: "Connects" },
+  cloudnest: { theme: "project-blue", sticker: "Cloud vault", verb: "Stores" },
+  booknest: { theme: "project-peach", sticker: "Book commerce", verb: "Guides" },
+  "netflix-clone": { theme: "project-red", sticker: "Streaming UI", verb: "Polishes" },
+};
+
+const capabilities = [
   {
-    title: "Product interfaces",
+    title: "Frontend experiences",
     icon: Sparkles,
-    text: "Responsive flows, dashboard hierarchy, commerce browsing, and touch-ready interaction states.",
-    projects: ["BookNest", "Netflix Clone", "Strategy Hub"],
+    text: "Expressive responsive interfaces, motion systems, product surfaces, and touch-friendly UI details.",
+    stack: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Framer Motion"],
+    projects: ["BookNest", "Strategy Hub", "Netflix Clone"],
   },
   {
-    title: "Full-stack applications",
+    title: "Full-stack products",
     icon: Layers3,
-    text: "React/Next.js frontends connected to Express APIs, MongoDB models, authentication, and deployed products.",
+    text: "Complete MERN-style products with real flows, dashboards, data persistence, and deployment awareness.",
+    stack: ["Node.js", "Express.js", "MongoDB", "Mongoose", "REST APIs"],
     projects: ["Strategy Hub", "Zylora", "CloudNest Drive"],
   },
   {
-    title: "Authentication and APIs",
+    title: "Auth, APIs and data",
     icon: ShieldCheck,
-    text: "JWT, Google sign-in, role-aware states, protected data, and practical REST API design.",
+    text: "JWT, OAuth-aware flows, protected routes, saved reports, resource listings, folders, and wishlist state.",
+    stack: ["JWT", "Firebase", "MongoDB", "REST APIs", "Postman"],
+    projects: ["Zylora", "CloudNest Drive", "Strategy Hub"],
+  },
+  {
+    title: "AI and cloud workflows",
+    icon: BrainCircuit,
+    text: "Gemini-powered reports, AI-guided roadmaps, pricing ideas, Cloudinary uploads, and product automation.",
+    stack: ["Gemini AI", "Cloudinary", "Docker", "Vercel", "Render"],
     projects: ["Strategy Hub", "Zylora", "CloudNest Drive"],
   },
   {
-    title: "Cloud and media systems",
-    icon: Server,
-    text: "Uploads, previews, folders, Cloudinary pipelines, storage dashboards, and quota-aware UI.",
-    projects: ["CloudNest Drive"],
-  },
-  {
-    title: "AI-assisted workflows",
-    icon: BrainCircuit,
-    text: "Gemini reports, prompt-shaped product flows, ATS guidance, roadmaps, and AI pricing concepts.",
-    projects: ["Strategy Hub", "Zylora"],
-  },
-  {
-    title: "Data-backed products",
-    icon: Database,
-    text: "MongoDB-backed listings, saved reports, resources, wishlists, folders, and persistent user state.",
-    projects: ["Strategy Hub", "Zylora", "BookNest"],
+    title: "Problem solving",
+    icon: Trophy,
+    text: "400+ LeetCode problems strengthened DSA patterns, debugging, and efficient implementation habits.",
+    stack: ["C++", "JavaScript", "Algorithms", "Data Structures"],
+    projects: ["LeetCode", "C++ DSA"],
   },
 ];
 
-function ProjectCoreFallback() {
+function SculptureFallback() {
   return (
-    <div className="core-fallback" aria-hidden="true">
-      <div className="core-shell">
-        <span className="core-mark">SS</span>
-        {["UI", "API", "DB", "AI", "UX", "Cloud"].map((label, index) => (
-          <span className={`core-node node-${index}`} key={label}>
-            {label}
-          </span>
-        ))}
-      </div>
+    <div className="sculpture-fallback" aria-hidden="true">
+      <div className="fallback-window one">React</div>
+      <div className="fallback-window two">API</div>
+      <div className="fallback-window three">DB</div>
+      <div className="fallback-monogram">SS</div>
     </div>
   );
 }
 
-function ProjectArtwork({ project, index }: { project: Project; index: number }) {
-  const terms = project.gallery.slice(0, 5);
+function Magnetic({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <span className={`magnetic-wrap ${className}`}>{children}</span>;
+}
+
+function CountUp({ value }: { value: number }) {
+  const [count, setCount] = useState(0);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let frame = 0;
+    const start = performance.now();
+    const tick = (time: number) => {
+      const progress = Math.min((time - start) / 1200, 1);
+      setCount(Math.round(value * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(frame);
+  }, [reducedMotion, value]);
+
+  return <>{reducedMotion ? value : count}+</>;
+}
+
+function ProjectPoster({ project, index }: { project: Project; index: number }) {
+  const theme = projectThemes[project.id];
+  const features = project.features.slice(0, 5);
 
   return (
-    <div className={`project-art project-art-${index % 4}`} aria-label={`${project.name} project identity artwork`}>
-      <div className="art-header">
-        <span>{project.category}</span>
-        <span>{String(index + 1).padStart(2, "0")}</span>
+    <div className={`project-poster ${theme.theme}`}>
+      <div className="poster-orbit" aria-hidden="true" />
+      <div className="poster-top">
+        <span>{theme.sticker}</span>
+        <strong>{String(index + 1).padStart(2, "0")}</strong>
       </div>
-      <div className="art-stage">
-        <div className="art-map">
-          {terms.map((term, termIndex) => (
-            <span className={`art-chip chip-${termIndex}`} key={term}>
-              {term}
-            </span>
-          ))}
-        </div>
-        <div className="art-product">
+      <div className="poster-stack" aria-hidden="true">
+        <div className="poster-window main-window">
           <span>{project.name}</span>
-          <small>{project.metrics.join(" / ")}</small>
+          <small>{theme.verb} product flow</small>
         </div>
+        <div className="poster-window mini-window">{project.technology[0]}</div>
+        <div className="poster-window mini-window alt">{project.technology[1]}</div>
+      </div>
+      <div className="poster-features">
+        {features.map((feature) => (
+          <span key={feature}>{feature}</span>
+        ))}
       </div>
     </div>
   );
@@ -125,21 +155,19 @@ function CaseStudyDrawer({ project, onClose }: { project: Project | null; onClos
     if (!project) return;
 
     const previous = document.activeElement as HTMLElement | null;
-    const handleKey = (event: KeyboardEvent) => {
+    const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
 
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKey);
+    window.addEventListener("keydown", close);
     window.history.replaceState(null, "", `#case-${project.id}`);
     window.setTimeout(() => closeRef.current?.focus(), 20);
 
     return () => {
       document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKey);
-      if (window.location.hash === `#case-${project.id}`) {
-        window.history.replaceState(null, "", "#work");
-      }
+      window.removeEventListener("keydown", close);
+      if (window.location.hash === `#case-${project.id}`) window.history.replaceState(null, "", "#work");
       previous?.focus?.();
     };
   }, [onClose, project]);
@@ -158,12 +186,12 @@ function CaseStudyDrawer({ project, onClose }: { project: Project | null; onClos
           role="dialog"
         >
           <motion.article
-            animate={{ x: 0 }}
-            className="case-drawer"
-            exit={{ x: "100%" }}
-            initial={{ x: "100%" }}
+            animate={{ clipPath: "inset(0 0 0 0 round 34px)", y: 0 }}
+            className={`case-drawer ${projectThemes[project.id]?.theme ?? ""}`}
+            exit={{ clipPath: "inset(0 0 100% 0 round 34px)", y: 28 }}
+            initial={{ clipPath: "inset(0 0 100% 0 round 34px)", y: 28 }}
             onClick={(event) => event.stopPropagation()}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="case-topline">
               <span>{project.category}</span>
@@ -171,8 +199,11 @@ function CaseStudyDrawer({ project, onClose }: { project: Project | null; onClos
                 <X aria-hidden="true" />
               </button>
             </div>
-            <h2 id="case-study-title">{project.name}</h2>
-            <p className="case-overview">{project.overview}</p>
+            <div className="case-hero">
+              <span className="case-sticker">{projectThemes[project.id]?.sticker}</span>
+              <h2 id="case-study-title">{project.name}</h2>
+              <p>{project.overview}</p>
+            </div>
             <div className="case-facts">
               {[
                 ["Role", project.role],
@@ -189,9 +220,9 @@ function CaseStudyDrawer({ project, onClose }: { project: Project | null; onClos
             <div className="case-grid">
               {[
                 ["Problem", project.problem],
-                ["What Shrushti Built", project.solution],
+                ["Solution", project.solution],
                 ["Architecture", project.architecture],
-                ["Learning", project.learning],
+                ["What I learned", project.learning],
               ].map(([title, text]) => (
                 <section key={title}>
                   <h3>{title}</h3>
@@ -199,7 +230,7 @@ function CaseStudyDrawer({ project, onClose }: { project: Project | null; onClos
                 </section>
               ))}
             </div>
-            <div className="case-stack" aria-label={`${project.name} technology stack`}>
+            <div className="case-stack">
               {project.technology.map((tech) => (
                 <span key={tech}>{tech}</span>
               ))}
@@ -225,36 +256,17 @@ function CaseStudyDrawer({ project, onClose }: { project: Project | null; onClos
   );
 }
 
-function CountUp({ value }: { value: number }) {
-  const [count, setCount] = useState(0);
-  const prefersReducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    let frame = 0;
-    const start = performance.now();
-    const tick = (time: number) => {
-      const progress = Math.min((time - start) / 1100, 1);
-      setCount(Math.round(value * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [prefersReducedMotion, value]);
-
-  return <>{prefersReducedMotion ? value : count}+</>;
-}
-
 export function Portfolio() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [copied, setCopied] = useState(false);
   const currentYear = new Date().getFullYear();
+  const { scrollYProgress } = useScroll();
+  const heroY = useTransform(scrollYProgress, [0, 0.18], [0, -80]);
+  const ribbonX = useTransform(scrollYProgress, [0, 1], ["0%", "-32%"]);
+
   const orderedProjects = useMemo(
-    () => selectedOrder.map((id) => projects.find((project) => project.id === id)).filter(Boolean) as Project[],
+    () => projectOrder.map((id) => projects.find((project) => project.id === id)).filter(Boolean) as Project[],
     [],
   );
 
@@ -277,33 +289,47 @@ export function Portfolio() {
 
   useEffect(() => {
     const projectId = window.location.hash.replace("#case-", "");
-    if (!projectId) return;
     const project = projects.find((item) => item.id === projectId);
     if (project) window.setTimeout(() => setSelectedProject(project), 0);
   }, []);
 
+  const copyEmail = useCallback(async () => {
+    await navigator.clipboard.writeText("swarnakarshrushti@gmail.com");
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  }, []);
+
   return (
-    <main className="site-shell" id="top">
+    <main className="playground-shell" id="top">
       <a className="skip-link" href="#work">
         Skip to selected work
       </a>
+      <CursorSystem />
       <Navbar
         menuOpen={mobileMenuOpen}
         onMenuToggle={() => setMobileMenuOpen((open) => !open)}
         onNavigate={() => setMobileMenuOpen(false)}
       />
       <CaseStudyDrawer project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <motion.div aria-hidden="true" className="progress-brush" style={{ scaleX: scrollYProgress }} />
 
       <AnimatePresence>
         {mobileMenuOpen ? (
-          <motion.div animate={{ opacity: 1 }} className="mobile-menu" exit={{ opacity: 0 }} initial={{ opacity: 0 }}>
+          <motion.div
+            animate={{ clipPath: "circle(150% at 90% 8%)" }}
+            className="mobile-menu"
+            exit={{ clipPath: "circle(0% at 90% 8%)" }}
+            initial={{ clipPath: "circle(0% at 90% 8%)" }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          >
             <button aria-label="Close navigation menu" onClick={() => setMobileMenuOpen(false)} type="button">
-              <X aria-hidden="true" /> Close
+              Close <X aria-hidden="true" />
             </button>
             {[
               ["Work", "#work"],
-              ["Capabilities", "#capabilities"],
-              ["About", "#about"],
+              ["Skills", "#skills"],
+              ["Journey", "#journey"],
+              ["Certificates", "#certificates"],
               ["Contact", "#contact"],
             ].map(([label, href]) => (
               <a href={href} key={href} onClick={() => setMobileMenuOpen(false)}>
@@ -318,81 +344,86 @@ export function Portfolio() {
       </AnimatePresence>
 
       <section className="hero-section section-frame" aria-labelledby="hero-title">
-        <div className="hero-copy">
+        <motion.div className="hero-copy" style={{ y: heroY }}>
           <Reveal>
-            <p className="section-kicker">Full-stack / MERN developer</p>
-            <h1 id="hero-title">Shrushti Swarnakar</h1>
-            <p className="hero-line">Full-stack developer building thoughtful products from interface to infrastructure.</p>
-            <p className="hero-support">
-              BCA 2025 graduate with verified work across React, Next.js, TypeScript, Node.js, Express,
-              MongoDB, authentication, cloud integrations, and AI-assisted product flows.
-            </p>
-            <div className="availability">
-              <span aria-hidden="true" />
-              Open to full-time roles, internships, and graduate programs
-            </div>
+            <span className="studio-badge">Shrushti&apos;s Creative Code Playground</span>
+            <h1 id="hero-title">
+              <span>Shrushti</span>
+              <span>Swarnakar</span>
+            </h1>
+            <p className="role-line">Full-Stack Developer / MERN Stack Developer / Frontend Engineer</p>
+            <p className="hero-line">I build complete digital products where interfaces, APIs, databases, cloud flows, and AI ideas click into place.</p>
             <div className="hero-actions">
-              <Button asChild size="lg">
-                <a href="#work">
-                  Explore selected work <ArrowUpRight aria-hidden="true" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="ghost">
-                <a href={socialLinks.resume}>
-                  Resume <FileText aria-hidden="true" />
-                </a>
-              </Button>
-              <a className="icon-link" href={socialLinks.github} rel="noopener noreferrer" target="_blank" aria-label="GitHub profile">
-                <Code2 aria-hidden="true" />
+              <Magnetic>
+                <Button asChild size="lg">
+                  <a href="#work">
+                    Explore My Work <ArrowUpRight aria-hidden="true" />
+                  </a>
+                </Button>
+              </Magnetic>
+              <Magnetic>
+                <Button asChild size="lg" variant="ghost">
+                  <a href={socialLinks.resume}>
+                    View Resume <FileText aria-hidden="true" />
+                  </a>
+                </Button>
+              </Magnetic>
+              <a className="round-link" href={socialLinks.github} rel="noopener noreferrer" target="_blank" aria-label="Open GitHub profile">
+                Git
               </a>
-              <a className="icon-link" href={socialLinks.linkedin} rel="noopener noreferrer" target="_blank" aria-label="LinkedIn profile">
-                <ExternalLink aria-hidden="true" />
+              <a className="round-link" href={socialLinks.linkedin} rel="noopener noreferrer" target="_blank" aria-label="Open LinkedIn profile">
+                In
               </a>
             </div>
           </Reveal>
+          <Reveal className="availability-strip" delay={0.15}>
+            <span aria-hidden="true" />
+            Available for full-time roles, software-development internships, and graduate programs
+          </Reveal>
+        </motion.div>
+        <div className="hero-stage">
+          <CodeSculpture />
+          <div className="hero-sticker sticker-one">React</div>
+          <div className="hero-sticker sticker-two">MongoDB</div>
+          <div className="hero-sticker sticker-three">AI flows</div>
         </div>
-        <div className="hero-visual">
-          <ProjectCore />
-        </div>
-        <a className="scroll-cue" href="#work">
-          <span>Selected work</span>
-        </a>
+        <motion.div aria-hidden="true" className="hero-ribbon" style={{ x: ribbonX }}>
+          Full-stack developer / MERN stack / frontend engineer / product builder / DSA practice /
+        </motion.div>
       </section>
 
       <section className="work-section section-frame" id="work" aria-labelledby="work-title">
-        <Reveal>
-          <p className="section-kicker">Selected Work</p>
-          <div className="section-heading">
-            <h2 id="work-title">Five builds, led by product evidence.</h2>
-            <p>
-              The strongest projects are presented as concise case studies. Live links appear only where the
-              repository data provides a verified URL.
-            </p>
-          </div>
+        <Reveal className="section-intro colorful-intro">
+          <span className="section-index">01</span>
+          <p className="section-kicker">Selected projects</p>
+          <h2 id="work-title">Product stories with color, code, and proof.</h2>
+          <p>
+            Five verified projects, presented as playful case studies. Live demo buttons only appear where a real URL exists in the project data.
+          </p>
         </Reveal>
-        <div className="project-list">
+        <div className="project-showcase">
           {orderedProjects.map((project, index) => (
-            <Reveal className="project-row" delay={index * 0.04} key={project.id}>
+            <Reveal className={`project-feature ${projectThemes[project.id]?.theme}`} delay={index * 0.05} key={project.id}>
               <article id={`project-${project.id}`}>
-                <ProjectArtwork project={project} index={index} />
+                <ProjectPoster project={project} index={index} />
                 <div className="project-copy">
                   <span className="project-number">{String(index + 1).padStart(2, "0")}</span>
                   <p className="project-category">{project.category}</p>
                   <h3>{project.name}</h3>
                   <p className="project-problem">{project.problem}</p>
                   <p>{project.solution}</p>
-                  <dl>
+                  <div className="project-meta-grid">
                     <div>
-                      <dt>Role</dt>
-                      <dd>{project.role}</dd>
+                      <span>Role</span>
+                      <strong>{project.role}</strong>
                     </div>
                     <div>
-                      <dt>Technical challenge</dt>
-                      <dd>{project.challenges}</dd>
+                      <span>Technical challenge</span>
+                      <strong>{project.challenges}</strong>
                     </div>
-                  </dl>
+                  </div>
                   <div className="project-stack">
-                    {project.technology.slice(0, 6).map((tech) => (
+                    {project.technology.slice(0, 7).map((tech) => (
                       <span key={tech}>{tech}</span>
                     ))}
                   </div>
@@ -405,7 +436,7 @@ export function Portfolio() {
                       </Button>
                     ) : null}
                     <Button onClick={() => setSelectedProject(project)} type="button" variant="ghost">
-                      Case study <ArrowUpRight aria-hidden="true" />
+                      Open case study <ArrowUpRight aria-hidden="true" />
                     </Button>
                   </div>
                 </div>
@@ -415,57 +446,98 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section className="capability-section section-frame" id="capabilities" aria-labelledby="capabilities-title">
-        <Reveal>
-          <p className="section-kicker">Capabilities / Technical Profile</p>
-          <div className="section-heading">
-            <h2 id="capabilities-title">What Shrushti can build.</h2>
-            <p>Skills are grouped by practical output and tied back to projects recruiters can inspect.</p>
-          </div>
+      <section className="skills-section section-frame" id="skills" aria-labelledby="skills-title">
+        <Reveal className="section-intro dark-intro">
+          <span className="section-index">02</span>
+          <p className="section-kicker">Capabilities and skills</p>
+          <h2 id="skills-title">A playful toolkit for real product work.</h2>
+          <p>Technologies are organized by what they help Shrushti build, not fake percentages.</p>
         </Reveal>
-        <div className="capability-grid">
-          {capabilityMap.map((capability, index) => {
+        <div className="capability-playground">
+          {capabilities.map((capability, index) => {
             const Icon = capability.icon;
             return (
-              <Reveal className="capability-item" delay={index * 0.04} key={capability.title}>
+              <Reveal className={`capability-bubble bubble-${index}`} delay={index * 0.04} key={capability.title}>
                 <Icon aria-hidden="true" />
                 <h3>{capability.title}</h3>
                 <p>{capability.text}</p>
-                <div>
-                  {capability.projects.map((project) => (
-                    <span key={project}>{project}</span>
+                <div className="bubble-stack">
+                  {capability.stack.map((tech) => (
+                    <span key={tech}>{tech}</span>
                   ))}
                 </div>
+                <small>{capability.projects.join(" / ")}</small>
               </Reveal>
             );
           })}
         </div>
-        <Reveal className="tech-rail">
-          {stackGroups.flatMap((group) => group.items).filter((item, index, arr) => arr.indexOf(item) === index).map((tech) => (
-            <span key={tech}>{tech}</span>
-          ))}
+        <Reveal className="tech-marquee" aria-label="Technology stack">
+          <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 28, ease: "linear", repeat: Infinity }}>
+            {[...stackGroups.flatMap((group) => group.items), ...stackGroups.flatMap((group) => group.items)].map((tech, index) => (
+              <span key={`${tech}-${index}`}>{tech}</span>
+            ))}
+          </motion.div>
+        </Reveal>
+      </section>
+
+      <section className="leetcode-section section-frame" id="leetcode" aria-labelledby="leetcode-title">
+        <Reveal className="leetcode-card">
+          <div className="algorithm-path" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <div>
+            <p className="section-kicker">Problem solving</p>
+            <h2 id="leetcode-title">
+              <CountUp value={400} /> LeetCode problems solved
+            </h2>
+            <p>
+              Consistent DSA practice strengthened pattern recognition, debugging, implementation speed, and the ability to reason through product logic.
+            </p>
+          </div>
+          <Button asChild variant="ghost">
+            <a href={socialLinks.leetcode} rel="noopener noreferrer" target="_blank">
+              View LeetCode <ArrowUpRight aria-hidden="true" />
+            </a>
+          </Button>
         </Reveal>
       </section>
 
       <section className="about-section section-frame" id="about" aria-labelledby="about-title">
-        <Reveal className="about-intro">
-          <p className="section-kicker">About and Journey</p>
-          <h2 id="about-title">From C++ fundamentals to full-stack product systems.</h2>
+        <Reveal className="about-copy">
+          <span className="section-index">03</span>
+          <p className="section-kicker">About me</p>
+          <h2 id="about-title">I like turning messy ideas into working software.</h2>
           <p>
-            Shrushti is a 2025 BCA graduate focused on complete product builds: interfaces that are easy
-            to use, backend APIs that support the flow, and data models that make the product real.
+            Shrushti is a 2025 BCA graduate with a 7.50 CGPA, moving from C++ and DSA fundamentals into MERN and full-stack product development. The work centers on complete builds: frontend experience, APIs, authentication, database-backed features, cloud integrations, and AI-assisted workflows.
           </p>
         </Reveal>
-        <div className="timeline">
+        <Reveal className="about-collage" delay={0.1}>
+          <div className="collage-card coral">BCA 2025</div>
+          <div className="collage-card lime">CGPA 7.50</div>
+          <div className="collage-card violet">MERN builder</div>
+          <div className="collage-card cyan">India</div>
+        </Reveal>
+      </section>
+
+      <section className="journey-section section-frame" id="journey" aria-labelledby="journey-title">
+        <Reveal className="section-intro">
+          <span className="section-index">04</span>
+          <p className="section-kicker">Development journey</p>
+          <h2 id="journey-title">A learning path that keeps turning into products.</h2>
+        </Reveal>
+        <div className="journey-path">
           {timeline.map((item, index) => {
             const Icon = item.icon;
             return (
-              <Reveal className="timeline-item" delay={index * 0.04} key={`${item.period}-${item.title}`}>
-                <span className="timeline-period">{item.period}</span>
+              <Reveal className="journey-milestone" delay={index * 0.05} key={`${item.period}-${item.title}`}>
+                <span className="path-year">{item.period}</span>
                 <div>
                   <Icon aria-hidden="true" />
                   <h3>{item.title}</h3>
-                  <p className="timeline-meta">{item.meta}</p>
+                  <strong>{item.meta}</strong>
                   <p>{item.text}</p>
                 </div>
               </Reveal>
@@ -474,99 +546,90 @@ export function Portfolio() {
         </div>
       </section>
 
-      <section className="credentials-section section-frame" id="credentials" aria-labelledby="credentials-title">
-        <Reveal>
-          <p className="section-kicker">Credentials</p>
-          <div className="section-heading">
-            <h2 id="credentials-title">Compact proof points.</h2>
-            <p>Education, training milestones, resume access, and problem-solving practice in one place.</p>
-          </div>
+      <section className="certificates-section section-frame" id="certificates" aria-labelledby="certificates-title">
+        <Reveal className="section-intro dark-intro">
+          <span className="section-index">05</span>
+          <p className="section-kicker">Certificates</p>
+          <h2 id="certificates-title">Verified learning, no invented credentials.</h2>
+          <p>Credential files or URLs were not present in the repository, so these are shown as verified learning records without fake buttons.</p>
         </Reveal>
-        <div className="credentials-layout">
-          <Reveal className="leetcode-proof">
-            <Trophy aria-hidden="true" />
-            <span>LeetCode achievement</span>
-            <strong>
-              <CountUp value={400} /> problems solved
-            </strong>
-            <p>Consistent practice strengthened data structures, algorithms, debugging, and efficient code.</p>
-            <Button asChild variant="ghost">
-              <a href={socialLinks.leetcode} rel="noopener noreferrer" target="_blank">
-                View profile <ArrowUpRight aria-hidden="true" />
-              </a>
-            </Button>
-          </Reveal>
-          <div className="credential-list">
-            {certificates.map((certificate) => (
-              <Reveal className="credential-item" key={`${certificate.issuer}-${certificate.title}`}>
-                <BookOpen aria-hidden="true" />
-                <div>
-                  <span>{certificate.issuer}</span>
-                  <h3>{certificate.title}</h3>
-                  <p>{certificate.focus}</p>
-                  <small>{certificate.completed}</small>
-                </div>
-              </Reveal>
-            ))}
-            <Reveal className="credential-item">
-              <GraduationCap aria-hidden="true" />
-              <div>
-                <span>Education</span>
-                <h3>Bachelor of Computer Applications</h3>
-                <p>BCA graduate, 2025. CGPA 7.50.</p>
-              </div>
+        <div className="certificate-stack">
+          {certificates.filter((certificate) => certificate.issuer !== "LeetCode").map((certificate, index) => (
+            <Reveal className="certificate-paper" delay={index * 0.06} key={`${certificate.issuer}-${certificate.title}`}>
+              <span className="paper-seal" aria-hidden="true">
+                <Award />
+              </span>
+              <p>{certificate.issuer}</p>
+              <h3>{certificate.title}</h3>
+              <strong>{certificate.focus}</strong>
+              <small>{certificate.completed}</small>
+              <span className="no-credential">Credential link not available in repository</span>
             </Reveal>
-          </div>
+          ))}
         </div>
       </section>
 
+      <section className="education-section section-frame" id="education" aria-labelledby="education-title">
+        <Reveal className="education-panel">
+          <GraduationCap aria-hidden="true" />
+          <div>
+            <p className="section-kicker">Education and resume</p>
+            <h2 id="education-title">Bachelor of Computer Applications, 2025.</h2>
+            <p>CGPA 7.50. Resume is available as the verified text file included in the portfolio repository.</p>
+          </div>
+          <Button asChild>
+            <a href={socialLinks.resume}>
+              View Resume <FileText aria-hidden="true" />
+            </a>
+          </Button>
+        </Reveal>
+      </section>
+
       <section className="contact-section section-frame" id="contact" aria-labelledby="contact-title">
-        <Reveal>
+        <Reveal className="contact-hero">
           <p className="section-kicker">Contact</p>
           <h2 id="contact-title">Let&apos;s build something useful.</h2>
-          <p>
-            Available for full-time software engineering roles, Software Development Internship opportunities, and
-            graduate programs. Current location: India.
-          </p>
+          <p>Open to full-time roles, software-development internships, and graduate programs. Based in India.</p>
         </Reveal>
-        <div className="contact-actions">
+        <div className="contact-board">
+          <button className="copy-email" onClick={copyEmail} type="button">
+            {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
+            {copied ? "Copied!" : "Copy email"}
+            <strong>swarnakarshrushti@gmail.com</strong>
+          </button>
+          <a className="mail-composer" href="mailto:swarnakarshrushti@gmail.com?subject=Opportunity%20for%20Shrushti%20Swarnakar&body=Hi%20Shrushti%2C%0A%0AI%27d%20like%20to%20connect%20about...">
+            <Send aria-hidden="true" />
+            Write email
+          </a>
           {contactCards
-            .filter((card) => card.label !== "Current Location")
+            .filter((card) => !["Email", "Current Location"].includes(card.label))
             .map((card) => {
               const Icon = card.icon;
-              const isExternal = card.href.startsWith("http");
+              const external = card.href.startsWith("http");
               return (
-                <a
-                  className="contact-link"
-                  href={card.href}
-                  key={card.label}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                  target={isExternal ? "_blank" : undefined}
-                >
+                <a className="contact-link" href={card.href} key={card.label} rel={external ? "noopener noreferrer" : undefined} target={external ? "_blank" : undefined}>
                   <Icon aria-hidden="true" />
                   <span>{card.label}</span>
                   <strong>{card.value}</strong>
                 </a>
               );
             })}
-          <a
-            className="mailto-composer"
-            href="mailto:swarnakarshrushti@gmail.com?subject=Opportunity%20for%20Shrushti%20Swarnakar&body=Hi%20Shrushti%2C%0A%0AI%27d%20like%20to%20connect%20about..."
-          >
-            <Mail aria-hidden="true" />
-            Compose email
-          </a>
-        </div>
-        <div className="location-line">
-          <MapPin aria-hidden="true" />
-          India
+          <div className="contact-location">
+            <MapPin aria-hidden="true" />
+            India
+          </div>
         </div>
       </section>
 
       <footer className="footer">
-        <span className="footer-mark">SS</span>
-        <p>Designed and developed by Shrushti Swarnakar. Copyright {currentYear}.</p>
-        <a href="#top">Back to top</a>
+        <div>
+          <span className="footer-mark">SS</span>
+          <p>Shrushti Swarnakar / Full-Stack Developer / swarnakarshrushti@gmail.com</p>
+        </div>
+        <a href="#top">
+          Back to top <Rocket aria-hidden="true" />
+        </a>
+        <small>Copyright {currentYear}. Built as a creative code playground.</small>
       </footer>
     </main>
   );

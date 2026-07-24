@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Shrushti Swarnakar",
   },
   description:
-    "Recruiter-focused portfolio for Shrushti Swarnakar, a BCA 2025 graduate with 7.50 CGPA, 400+ LeetCode problems, and production-quality MERN, AI, cloud storage, commerce, and frontend projects.",
+    "Creative full-stack developer portfolio for Shrushti Swarnakar, a BCA 2025 graduate with 7.50 CGPA, 400+ LeetCode problems, MERN projects, AI workflows, and contact at swarnakarshrushti@gmail.com.",
   keywords: [
     "Shrushti Swarnakar",
     "Full Stack Developer",
@@ -33,10 +33,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Shrushti Swarnakar" }],
   creator: "Shrushti Swarnakar",
+  other: {
+    email: "swarnakarshrushti@gmail.com",
+  },
   openGraph: {
     title: "Shrushti Swarnakar | Full Stack Developer",
     description:
-      "BCA 2025 graduate with 7.50 CGPA, 400+ LeetCode problems, and production-quality full-stack projects.",
+      "Creative Code Playground for a BCA 2025 full-stack developer with 400+ LeetCode problems and MERN, AI, cloud, and frontend projects.",
     type: "website",
     images: [
       {

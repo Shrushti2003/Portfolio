@@ -12,6 +12,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Shrushti Swarnakar",
+    email: "swarnakarshrushti@gmail.com",
     jobTitle: ["Full Stack Developer", "MERN Stack Developer", "Frontend Engineer"],
     alumniOf: "Bachelor of Computer Applications, 2025",
     sameAs: [

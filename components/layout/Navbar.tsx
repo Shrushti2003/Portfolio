@@ -8,7 +8,9 @@ import { socialLinks } from "@/lib/portfolio-data";
 
 const navItems = [
   ["Work", "#work"],
-  ["Capabilities", "#capabilities"],
+  ["Skills", "#skills"],
+  ["Journey", "#journey"],
+  ["Certificates", "#certificates"],
   ["About", "#about"],
   ["Contact", "#contact"],
 ];
