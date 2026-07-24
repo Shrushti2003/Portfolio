@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Portfolio } from "@/components/portfolio";
+import { Portfolio } from "@/components/sections/Portfolio";
 
 export const metadata: Metadata = {
-  title: "Full Stack Developer, MERN Stack Developer, and Frontend Engineer",
+  title: "Full Stack Developer Portfolio",
   description:
-    "Explore Shrushti Swarnakar's Strategy Hub, Zylora, CloudNest Drive, BookNest, Netflix Clone, 400+ LeetCode practice, CGPA, skills, journey, certificates, and contact details.",
+    "Selected full-stack, MERN, AI, cloud, commerce, and frontend projects by Shrushti Swarnakar, a 2025 BCA graduate open to software engineering roles.",
 };
 
 export default function Home() {
