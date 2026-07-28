@@ -2,13 +2,13 @@
 
 A modern and responsive developer portfolio showcasing my full stack projects, technical skills, certificates, achievements, and development journey.
 
-The portfolio features a clean dark interface, smooth animations, interactive project showcases, detailed case studies, and a custom CGI-inspired hero section.
+The website features a clean dark interface, smooth animations, interactive project showcases, detailed case studies, and a custom CGI-inspired hero section.
 
 ## Live Portfolio
 
 [View Live Portfolio](https://portfolio-nine-rho-gcua117klc.vercel.app)
 
-![Portfolio Preview](./public/og.png)
+![Shrushti Swarnakar Portfolio Website](./website%20photo.png)
 
 ## About Me
 
@@ -16,20 +16,20 @@ I’m Shrushti Swarnakar, a Full Stack Developer and BCA graduate from Pune, Ind
 
 My work includes AI-powered platforms, cloud storage applications, marketplace systems, authentication flows, REST APIs, and database-driven dashboards. I am currently looking for Software Engineer, Full Stack Developer, and Backend Developer opportunities.
 
-## Features
+## Portfolio Features
 
-- Clean, modern, and responsive user interface
+- Clean, modern, and responsive interface
 - Interactive CGI-inspired hero section
 - Smooth reveal animations and transitions
 - Selected projects with screenshots and live links
 - Dedicated case study pages for major projects
 - Interactive technology constellation
-- Project filtering based on development category
+- Project filtering by development category
 - Certificates and achievements section
 - Downloadable resume
 - GitHub, LinkedIn, LeetCode, and email links
-- Responsive navigation for desktop and mobile devices
-- Accessible labels and keyboard-friendly controls
+- Responsive desktop and mobile navigation
+- Accessible controls and semantic page structure
 - SEO metadata, sitemap, and robots configuration
 - Local font loading for improved performance
 - Vercel and Cloudflare Worker deployment support
@@ -40,7 +40,9 @@ My work includes AI-powered platforms, cloud storage applications, marketplace s
 
 An AI-powered interview preparation platform that provides resume feedback, ATS guidance, interview questions, saved reports, and personalized learning roadmaps.
 
-**Technologies:** Next.js, React, TypeScript, Node.js, Express.js, MongoDB, JWT, Gemini AI
+**Key features:** Gemini AI reports, ATS resume guidance, resume parsing, interview questions, saved reports, roadmap generation, PDF export, authentication, and a responsive dashboard.
+
+**Technologies:** Next.js, React, TypeScript, Node.js, Express.js, MongoDB, Mongoose, JWT, Gemini AI, Puppeteer, and Cloudinary
 
 [Live Demo](https://strategy-hub-interview-app.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Strategy-Hub-Interview-App)
 
@@ -48,31 +50,39 @@ An AI-powered interview preparation platform that provides resume feedback, ATS 
 
 A circular economy platform designed for buying, selling, donating, and discovering reusable items. It includes geolocation, role-based dashboards, messaging, and AI-assisted pricing.
 
-**Technologies:** React, TypeScript, Node.js, Express.js, MongoDB, Firebase, Leaflet, Docker
+**Key features:** Google sign-in, nearby search, interactive maps, resource listings, buyer and seller dashboards, saved items, messaging, and AI pricing.
+
+**Technologies:** React, TypeScript, Vite, Node.js, Express.js, MongoDB, Firebase, Leaflet, OpenStreetMap, FastAPI, and Docker
 
 [Live Demo](https://zylora-frontend.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Zylora)
 
 ### CloudNest Drive
 
-A cloud storage dashboard for uploading, organizing, previewing, sharing, and recovering files. It also includes account storage limits, subscription screens, and support flows.
+A cloud storage dashboard for uploading, organizing, previewing, sharing, and recovering files. It also includes storage limits, subscription screens, and support flows.
 
-**Technologies:** React, Vite, Node.js, Express.js, MongoDB, Cloudinary, Stripe, JWT
+**Key features:** File uploads, folders, media previews, share links, trash recovery, storage quotas, Google OAuth, subscriptions, and support pages.
+
+**Technologies:** React, Vite, Node.js, Express.js, MongoDB, Cloudinary, Stripe, Google OAuth, and JWT
 
 [Live Demo](https://cloudnest-liart.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Google-Drive-Clone)
 
 ### LumiBooks
 
-A responsive online bookstore that allows users to explore books, browse categories, view book details, and access a dedicated reading interface.
+A responsive online bookstore that allows users to explore books, browse categories, view book details, and use a dedicated reading interface.
 
-**Technologies:** Next.js, React, TypeScript, Node.js, MongoDB, Tailwind CSS
+**Key features:** Book discovery, category browsing, trending books, detailed book pages, authentication, user dashboard, and reading interface.
+
+**Technologies:** Next.js, React, TypeScript, Node.js, MongoDB, and Tailwind CSS
 
 [Live Demo](https://lumibooks.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Online-Book-Store)
 
 ### Netflix Clone
 
-A responsive streaming platform interface with authentication screens, movie and series browsing, content details, and person pages.
+A responsive streaming platform interface with authentication pages, movie and series browsing, content details, and person pages.
 
-**Technologies:** React, Vite, Node.js, Express.js, MongoDB, JWT
+**Key features:** Responsive landing page, authentication screens, movie and series browsing, content details, and cast information.
+
+**Technologies:** React, Vite, Node.js, Express.js, MongoDB, and JWT
 
 [GitHub Repository](https://github.com/Shrushti2003/netflix-clone)
 
@@ -88,6 +98,7 @@ A responsive streaming platform interface with authentication screens, movie and
 - CSS3
 - Tailwind CSS
 - Vite
+- Framer Motion
 
 ### Backend
 
@@ -103,7 +114,7 @@ A responsive streaming platform interface with authentication screens, movie and
 - Firebase
 - Cloudinary
 
-### Tools
+### Tools and Deployment
 
 - Git
 - GitHub
@@ -111,8 +122,11 @@ A responsive streaming platform interface with authentication screens, movie and
 - Cloudflare Workers
 - Wrangler
 - ESLint
+- Docker
 
-### Portfolio-Specific Technologies
+## Portfolio Technology
+
+This portfolio was developed using:
 
 - React 19
 - Next.js 16
@@ -122,13 +136,14 @@ A responsive streaming platform interface with authentication screens, movie and
 - Framer Motion
 - Lucide React
 - Radix UI
+- CSS custom properties
 - Local Geist fonts
 
 ## Project Structure
 
 ```text
 app/
-├── projects/[slug]/       Dynamic project case-study routes
+├── projects/[slug]/       Dynamic project case study routes
 ├── globals.css            Global styles and responsive design
 ├── layout.tsx             Root layout and metadata
 ├── page.tsx               Main portfolio page
@@ -142,7 +157,7 @@ components/
 └── ui/                    Reusable interface components
 
 lib/
-├── portfolio-data.ts      Projects, skills and portfolio content
+├── portfolio-data.ts      Projects, skills, and portfolio content
 ├── site-config.ts         Site metadata and public URL
 └── utils.ts               Shared utility functions
 
@@ -150,7 +165,7 @@ public/
 ├── certificates/          Certificate files and previews
 ├── documents/             Downloadable resume
 ├── fonts/                 Local Geist font files
-├── media/                 Hero artwork and media
+├── media/                 Hero artwork and media assets
 └── projects/              Project screenshots
 
 tests/                     Server-rendered route tests
@@ -162,7 +177,7 @@ worker/                    Cloudflare Worker entry
 
 ### Prerequisites
 
-Install the following before running the project:
+Make sure the following are installed:
 
 - Node.js 22.13 or newer
 - npm
@@ -172,13 +187,13 @@ Install the following before running the project:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Shrushti2003/your-portfolio-repository.git
+git clone https://github.com/Shrushti2003/Portfolio.git
 ```
 
 2. Open the project directory:
 
 ```bash
-cd your-portfolio-repository
+cd Portfolio
 ```
 
 3. Install the dependencies:
@@ -197,7 +212,7 @@ npm run dev
 
 ## Environment Variables
 
-The portfolio does not require private runtime secrets.
+The portfolio does not require any private runtime secrets.
 
 To configure the public website URL, create a `.env.local` file in the project root:
 
@@ -211,53 +226,53 @@ Do not commit `.env.local` or any file containing private credentials.
 
 ## Available Commands
 
+Start the development server:
+
 ```bash
 npm run dev
 ```
 
-Starts the Vinext development server.
+Create the Vinext and Cloudflare Worker production build:
 
 ```bash
 npm run build
 ```
 
-Creates the Vinext and Cloudflare Worker production build.
+Create the production build for Vercel:
 
 ```bash
 npm run build:vercel
 ```
 
-Creates the production build for Vercel.
+Run the generated Worker build locally:
 
 ```bash
 npm run start
 ```
 
-Runs the generated Worker build locally.
+Check the project with ESLint:
 
 ```bash
 npm run lint
 ```
 
-Checks the project using ESLint.
+Check TypeScript types:
 
 ```bash
 npm run typecheck
 ```
 
-Checks TypeScript types without generating output.
+Build the project and run the server-rendered route tests:
 
 ```bash
 npm test
 ```
 
-Builds the project and runs server-rendered route tests.
-
 ## Deployment on Vercel
 
 1. Push the project to a GitHub repository.
 2. Import the repository into Vercel.
-3. Set the build command to:
+3. Use the following build command:
 
 ```bash
 npm run build:vercel
@@ -282,7 +297,7 @@ The portfolio includes:
 - Optimized WebP hero artwork
 - Lightweight interface animations
 - Reduced-motion support
-- Semantic page sections
+- Semantic HTML sections
 - Accessible labels for icon-only controls
 - Keyboard-friendly interactive elements
 - SEO-friendly metadata
@@ -290,7 +305,7 @@ The portfolio includes:
 
 ## Achievements
 
-- Solved 423+ problems on LeetCode
+- Solved 423+ LeetCode problems
 - Built and deployed multiple AI-powered and full stack applications
 - Completed Full Stack Web Development training
 - Earned Data Structures completion and excellence certificates
