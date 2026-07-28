@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://shrushti-swarnakar-portfolio.shrushtiswarnakar99.chatgpt.site";
-
   return [
     {
-      url: baseUrl,
+      url: siteUrl,
       lastModified: new Date("2026-07-18"),
       changeFrequency: "monthly",
       priority: 1,

@@ -1,17 +1,15 @@
 "use client";
-
-import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import Lenis from "lenis";
+import { type CSSProperties, type TouchEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowUpRight,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Code2,
   Copy,
   ExternalLink,
   FileText,
-  Mail,
   MapPin,
   Trophy,
   X,
@@ -19,36 +17,30 @@ import {
 import { CursorSystem } from "@/components/animations/CursorSystem";
 import { Reveal } from "@/components/animations/Reveal";
 import { Navbar } from "@/components/layout/Navbar";
+import { HeroVisual } from "@/components/sections/HeroVisual";
+import { TechStackConstellation } from "@/components/sections/TechStackConstellation";
 import { Button } from "@/components/ui/button";
-import { certificates, contactCards, projects, socialLinks, timeline } from "@/lib/portfolio-data";
+import { certificates, contactCards, foundationalProjects, projects, socialLinks, timeline } from "@/lib/portfolio-data";
 import type { Project } from "@/types/portfolio";
 
-const ArchitectureScene = dynamic(
-  () => import("@/components/animations/OrbitalField").then((module) => module.OrbitalField),
-  { ssr: false, loading: () => <ArchitectureFallback /> },
-);
-
-const orderedProjectIds = ["strategy-hub", "zylora", "cloudnest", "booknest", "netflix-clone"];
-
-const expertise = [
-  ["Frontend engineering", "React, Next.js, TypeScript, Tailwind CSS, Redux, Framer Motion"],
-  ["Full-stack applications", "Node.js, Express.js, MongoDB, REST APIs, deployment-aware product flows"],
-  ["Authentication and security", "JWT, Google sign-in, protected state, role-aware product behavior"],
-  ["AI-assisted workflows", "Gemini AI reports, ATS guidance, roadmaps, prompt-shaped product logic"],
-  ["Cloud and media integration", "Cloudinary, Firebase, Docker, Vercel, Render, upload pipelines"],
-  ["Problem solving", "C++, DSA practice, 400+ LeetCode problems, debugging, implementation discipline"],
+const orderedProjectIds = ["strategy-hub", "zylora", "cloudnest", "lumibooks", "netflix-clone"];
+const buildProcess = [
+  ["IDEA", "Understand the problem and decide what the user needs."],
+  ["INTERFACE", "Design responsive screens that are clear and easy to use."],
+  ["LOGIC", "Connect APIs, authentication, data and application state."],
+  ["PRODUCT", "Test each flow and turn the idea into a complete working application."],
 ];
-
-function ArchitectureFallback() {
-  return (
-    <div className="architecture-fallback" aria-hidden="true">
-      <span />
-      <span />
-      <span />
-      <strong>SS</strong>
-    </div>
-  );
-}
+const aboutStrengths = [
+  ["01", "Product thinking", "Turning requirements into clear user flows and useful interfaces."],
+  ["02", "Full stack execution", "Connecting responsive frontends with APIs, authentication and data."],
+  ["03", "Learning by building", "Improving through projects, iteration and real implementation."],
+];
+const aboutFacts = [
+  ["Based in", "Pune, India"],
+  ["Education", "BCA, 2025"],
+  ["Focus", "Full stack and frontend development"],
+  ["Status", "Open to opportunities"],
+];
 
 function CountUp({ value }: { value: number }) {
   const [count, setCount] = useState(0);
@@ -70,6 +62,29 @@ function CountUp({ value }: { value: number }) {
   return <>{reducedMotion ? value : count}+</>;
 }
 
+function FoundationalProjects() {
+  return (
+    <section className="foundational-work" aria-labelledby="foundational-title">
+      <Reveal className="foundational-heading">
+        <p className="eyebrow">Foundational Projects</p>
+        <h3 id="foundational-title">Earlier work that shows the progression.</h3>
+      </Reveal>
+      <div className="foundational-grid">
+        {foundationalProjects.map((project, index) => (
+          <Reveal className="foundational-card" delay={index * 0.035} key={project.href}>
+            <a href={project.href} rel="noopener noreferrer" target="_blank">
+              <span>{project.technology}</span>
+              <strong>{project.title}</strong>
+              <p>{project.description}</p>
+              <small>View repository <ArrowUpRight aria-hidden="true" /></small>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ProjectPlate({ project, index }: { project: Project; index: number }) {
   return (
     <div className="project-plate" aria-label={`${project.name} abstract project architecture`}>
@@ -89,147 +104,134 @@ function ProjectPlate({ project, index }: { project: Project; index: number }) {
   );
 }
 
-function CaseStudyDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
-  const closeRef = useRef<HTMLButtonElement>(null);
+function ProjectCarousel({ project, index }: { project: Project; index: number }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [failedSources, setFailedSources] = useState<Set<string>>(() => new Set());
+  const touchStartX = useRef<number | null>(null);
+  const screenshots = useMemo(
+    () => project.gallery.filter((screenshot) => !failedSources.has(screenshot.src)),
+    [failedSources, project.gallery],
+  );
+  const safeActiveIndex = screenshots.length > 0 ? Math.min(activeIndex, screenshots.length - 1) : 0;
+  const activeScreenshot = screenshots[safeActiveIndex];
 
-  useEffect(() => {
-    if (!project) return;
-    const previous = document.activeElement as HTMLElement | null;
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKey);
-    window.history.replaceState(null, "", `#case-${project.id}`);
-    window.setTimeout(() => closeRef.current?.focus(), 20);
+  const showPrevious = useCallback(() => {
+    if (screenshots.length === 0) return;
+    setActiveIndex((current) => (current === 0 ? screenshots.length - 1 : current - 1));
+  }, [screenshots.length]);
 
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKey);
-      if (window.location.hash === `#case-${project.id}`) window.history.replaceState(null, "", "#work");
-      previous?.focus?.();
-    };
-  }, [onClose, project]);
+  const showNext = useCallback(() => {
+    if (screenshots.length === 0) return;
+    setActiveIndex((current) => (current + 1) % screenshots.length);
+  }, [screenshots.length]);
+
+  const handleImageError = useCallback((src: string) => {
+    setFailedSources((current) => {
+      const next = new Set(current);
+      next.add(src);
+      return next;
+    });
+  }, []);
+
+  const handleTouchStart = useCallback((event: TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  }, []);
+
+  const handleTouchEnd = useCallback((event: TouchEvent<HTMLDivElement>) => {
+    if (touchStartX.current === null) return;
+    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const delta = touchStartX.current - endX;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 42) return;
+    if (delta > 0) showNext();
+    else showPrevious();
+  }, [showNext, showPrevious]);
+
+  if (!activeScreenshot) return <ProjectPlate project={project} index={index} />;
 
   return (
-    <AnimatePresence>
-      {project ? (
-        <motion.div
-          animate={{ opacity: 1 }}
-          aria-labelledby="case-study-title"
-          aria-modal="true"
-          className="case-overlay"
-          exit={{ opacity: 0 }}
-          initial={{ opacity: 0 }}
-          onClick={onClose}
-          role="dialog"
-        >
-          <motion.article
-            animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0 0)" }}
-            className="case-panel"
-            exit={{ opacity: 0, y: 18, clipPath: "inset(0 0 100% 0)" }}
-            initial={{ opacity: 0, y: 18, clipPath: "inset(0 0 100% 0)" }}
-            onClick={(event) => event.stopPropagation()}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="case-top">
-              <span>{project.category}</span>
-              <button aria-label="Close case study" onClick={onClose} ref={closeRef} type="button">
-                <X aria-hidden="true" />
-              </button>
-            </div>
-            <h2 id="case-study-title">{project.name}</h2>
-            <p className="case-lead">{project.overview}</p>
-            <div className="case-facts">
-              {[
-                ["Role", project.role],
-                ["Platform", project.platform],
-                ["Status", project.status],
-                ["Challenge", project.challenges],
-              ].map(([label, value]) => (
-                <div key={label}>
-                  <span>{label}</span>
-                  <p>{value}</p>
-                </div>
-              ))}
-            </div>
-            <div className="case-grid">
-              <section>
-                <h3>Problem</h3>
-                <p>{project.problem}</p>
-              </section>
-              <section>
-                <h3>What I built</h3>
-                <p>{project.solution}</p>
-              </section>
-              <section>
-                <h3>Architecture</h3>
-                <p>{project.architecture}</p>
-              </section>
-              <section>
-                <h3>Learning</h3>
-                <p>{project.learning}</p>
-              </section>
-            </div>
-            <div className="case-stack">
-              {project.technology.map((tech) => (
-                <span key={tech}>{tech}</span>
-              ))}
-            </div>
-            <div className="case-actions">
-              {project.liveUrl ? (
-                <Button asChild>
-                  <a href={project.liveUrl} rel="noopener noreferrer" target="_blank">
-                    Live link <ExternalLink aria-hidden="true" />
-                  </a>
-                </Button>
-              ) : null}
-              <Button asChild variant="ghost">
-                <a href={socialLinks.github} rel="noopener noreferrer" target="_blank">
-                  GitHub profile <Code2 aria-hidden="true" />
-                </a>
-              </Button>
-            </div>
-          </motion.article>
-        </motion.div>
+    <div className="project-carousel" aria-label={`${project.name} screenshots`}>
+      <div className="carousel-frame" onTouchEnd={handleTouchEnd} onTouchStart={handleTouchStart}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt={activeScreenshot.alt}
+          className="is-active"
+          decoding="async"
+          key={activeScreenshot.src}
+          loading="eager"
+          onError={() => handleImageError(activeScreenshot.src)}
+          src={activeScreenshot.src}
+        />
+      </div>
+      <div className="carousel-topline">
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <span>{activeScreenshot.caption}</span>
+      </div>
+      {screenshots.length > 1 ? (
+        <>
+          <div className="carousel-controls">
+            <button aria-label={`Show previous ${project.name} screenshot`} onClick={showPrevious} type="button">
+              <ChevronLeft aria-hidden="true" />
+            </button>
+            <button aria-label={`Show next ${project.name} screenshot`} onClick={showNext} type="button">
+              <ChevronRight aria-hidden="true" />
+            </button>
+          </div>
+          <div className="carousel-dots" role="tablist" aria-label={`${project.name} screenshot pagination`}>
+            {screenshots.map((screenshot, screenshotIndex) => (
+              <button
+                aria-label={`Show ${screenshot.caption}`}
+                aria-selected={screenshotIndex === safeActiveIndex}
+                className={screenshotIndex === safeActiveIndex ? "is-active" : undefined}
+                key={screenshot.src}
+                onClick={() => setActiveIndex(screenshotIndex)}
+                role="tab"
+                type="button"
+              />
+            ))}
+          </div>
+        </>
       ) : null}
-    </AnimatePresence>
+    </div>
+  );
+}
+
+function CertificateGallery() {
+  return (
+    <div className="certificate-grid">
+      {certificates.map((certificate, index) => (
+        <Reveal className="certificate-card" delay={index * 0.04} key={certificate.source}>
+          <a href={certificate.source} rel="noopener noreferrer" target="_blank">
+            <span className="certificate-index">{String(index + 1).padStart(2, "0")}</span>
+            <span className="certificate-preview">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img alt={certificate.alt} loading="lazy" src={certificate.preview} />
+            </span>
+            <span className="certificate-body">
+              <span>{certificate.issuer}</span>
+              <strong>{certificate.title}</strong>
+              {certificate.date ? <small>{certificate.date}</small> : null}
+              {certificate.note ? <em>{certificate.note}</em> : null}
+            </span>
+            <span className="certificate-action">
+              View certificate <ExternalLink aria-hidden="true" />
+            </span>
+          </a>
+        </Reveal>
+      ))}
+    </div>
   );
 }
 
 export function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [copied, setCopied] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const heroDepth = useTransform(scrollYProgress, [0, 0.22], [0, -48]);
   const currentYear = new Date().getFullYear();
 
   const orderedProjects = useMemo(
     () => orderedProjectIds.map((id) => projects.find((project) => project.id === id)).filter(Boolean) as Project[],
     [],
   );
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
-    let frame = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      frame = requestAnimationFrame(raf);
-    };
-    frame = requestAnimationFrame(raf);
-    return () => {
-      cancelAnimationFrame(frame);
-      lenis.destroy();
-    };
-  }, []);
-
-  useEffect(() => {
-    const id = window.location.hash.replace("#case-", "");
-    const project = projects.find((item) => item.id === id);
-    if (project) window.setTimeout(() => setSelectedProject(project), 0);
-  }, []);
 
   const copyEmail = useCallback(async () => {
     await navigator.clipboard.writeText("swarnakarshrushti@gmail.com");
@@ -242,8 +244,6 @@ export function Portfolio() {
       <a className="skip-link" href="#work">Skip to selected work</a>
       <CursorSystem />
       <Navbar menuOpen={menuOpen} onMenuToggle={() => setMenuOpen((open) => !open)} onNavigate={() => setMenuOpen(false)} />
-      <CaseStudyDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
-      <motion.div className="progress-line" style={{ scaleX: scrollYProgress }} aria-hidden="true" />
 
       <AnimatePresence>
         {menuOpen ? (
@@ -261,35 +261,44 @@ export function Portfolio() {
             ].map(([label, href]) => (
               <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>
             ))}
-            <a href={socialLinks.resume}>Resume <FileText aria-hidden="true" /></a>
+            <a href={socialLinks.resume} rel="noopener noreferrer" target="_blank">Resume <FileText aria-hidden="true" /></a>
           </motion.div>
         ) : null}
       </AnimatePresence>
 
       <section className="hero-section section-frame" aria-labelledby="hero-title">
-        <motion.div className="hero-copy" style={{ y: heroDepth }}>
+        <motion.div className="hero-copy">
           <Reveal>
-            <p className="eyebrow">Digital Architecture in Motion</p>
-            <h1 id="hero-title">Shrushti Swarnakar</h1>
-            <p className="role-line">Full-Stack Developer / MERN Stack Developer / Frontend Engineer</p>
+            <h1 className="hero-name" id="hero-title">
+              <span>Shrushti</span>
+              <span>Swarnakar</span>
+            </h1>
+            <div className="role-line" aria-label="Full stack developer. MERN Stack, frontend engineering and API based products.">
+              <strong>Full stack developer</strong>
+              <span>MERN Stack, frontend engineering and API based products</span>
+            </div>
             <p className="hero-lead">
-              I build complete digital products that connect refined interfaces with APIs, databases, cloud workflows, and AI-assisted systems.
+              I build thoughtful web products where polished interfaces meet dependable backend systems.
             </p>
             <p className="hero-support">
-              BCA 2025 graduate, CGPA 7.50, open to full-time roles, software-development internships, and graduate programs.
+              From responsive React experiences to APIs, authentication and databases, I enjoy turning complex ideas into practical products people can use.
             </p>
+            <div className="hero-availability" aria-label="BCA 2025, Pune India. Open to internships and entry level software roles.">
+              <span>BCA 2025 · Pune, India</span>
+              <span className="availability-badge"><i aria-hidden="true" />Open to internships and entry level software roles</span>
+            </div>
             <div className="hero-actions">
-              <Button asChild size="lg"><a href="#work">View Selected Work <ArrowUpRight aria-hidden="true" /></a></Button>
-              <Button asChild size="lg" variant="ghost"><a href={socialLinks.resume}>View Resume <FileText aria-hidden="true" /></a></Button>
-              <a className="quiet-link" href={socialLinks.github} rel="noopener noreferrer" target="_blank" aria-label="GitHub"><Code2 aria-hidden="true" /></a>
-              <a className="quiet-link" href={socialLinks.linkedin} rel="noopener noreferrer" target="_blank" aria-label="LinkedIn"><ExternalLink aria-hidden="true" /></a>
+              <Button asChild size="lg">
+                <a aria-label="Go to contact section" href="#contact">Let&apos;s Connect <ArrowUpRight aria-hidden="true" /></a>
+              </Button>
+              <Button asChild size="lg" variant="ghost"><a href={socialLinks.resume} rel="noopener noreferrer" target="_blank">View Resume <FileText aria-hidden="true" /></a></Button>
+              <a className="quiet-link" href={socialLinks.github} rel="noopener noreferrer" target="_blank" aria-label="Open GitHub profile" title="GitHub profile"><Code2 aria-hidden="true" /><span className="sr-only">GitHub</span></a>
+              <a className="quiet-link" href={socialLinks.linkedin} rel="noopener noreferrer" target="_blank" aria-label="Open LinkedIn profile" title="LinkedIn profile"><ExternalLink aria-hidden="true" /><span className="sr-only">LinkedIn</span></a>
             </div>
           </Reveal>
         </motion.div>
         <div className="hero-architecture">
-          <ArchitectureScene />
-          <div className="hero-annotation annotation-one">interface / api / data</div>
-          <div className="hero-annotation annotation-two">available now</div>
+          <HeroVisual />
         </div>
       </section>
 
@@ -298,15 +307,14 @@ export function Portfolio() {
           <span>01</span>
           <div>
             <p className="eyebrow">Selected Work</p>
-            <h2 id="work-title">Case studies with structure, systems, and restraint.</h2>
+            <h2 id="work-title">Projects I built while learning full stack development.</h2>
           </div>
-          <p>Verified projects are presented through abstract architectural visuals where real screenshots were not available.</p>
         </Reveal>
         <div className="project-list">
           {orderedProjects.map((project, index) => (
             <Reveal className="project-row" delay={index * 0.04} key={project.id}>
               <article id={`project-${project.id}`}>
-                <ProjectPlate project={project} index={index} />
+                <ProjectCarousel project={project} index={index} />
                 <div className="project-copy">
                   <span>{String(index + 1).padStart(2, "0")} / {project.category}</span>
                   <h3>{project.name}</h3>
@@ -321,44 +329,77 @@ export function Portfolio() {
                     {project.liveUrl ? (
                       <Button asChild><a href={project.liveUrl} rel="noopener noreferrer" target="_blank">Live link <ExternalLink aria-hidden="true" /></a></Button>
                     ) : null}
-                    <Button onClick={() => setSelectedProject(project)} type="button" variant="ghost">Open case study <ArrowUpRight aria-hidden="true" /></Button>
+                    <Button asChild variant="ghost">
+                      <a href={`/projects/${project.caseStudySlug}`}>
+                        Open case study <ArrowUpRight aria-hidden="true" />
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </article>
             </Reveal>
           ))}
         </div>
+        <FoundationalProjects />
       </section>
 
       <section className="expertise-section section-frame" id="expertise" aria-labelledby="expertise-title">
-        <Reveal className="section-heading">
-          <span>02</span>
-          <div>
-            <p className="eyebrow">Expertise</p>
-            <h2 id="expertise-title">A layered model of what I build.</h2>
-          </div>
-          <p>Capabilities are organized like an application architecture rather than a wall of skill pills.</p>
+        <Reveal className="expertise-heading">
+          <p className="eyebrow">Expertise</p>
+          <h2 id="expertise-title">Tools I use to build full stack web apps.</h2>
+          <p>Explore the technologies I have used in my projects and training.</p>
         </Reveal>
-        <div className="expertise-map">
-          {expertise.map(([title, text], index) => (
-            <Reveal className="expertise-row" delay={index * 0.04} key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </Reveal>
-          ))}
-        </div>
+        <TechStackConstellation />
       </section>
 
       <section className="about-journey-section section-frame" id="about" aria-labelledby="about-title">
-        <Reveal className="about-copy">
-          <p className="eyebrow">About and Journey</p>
-          <h2 id="about-title">From programming foundations to complete product systems.</h2>
-          <p>
-            Shrushti is a BCA 2025 graduate with CGPA 7.50. Her path moved from C++ and DSA into MERN and full-stack development, with projects spanning AI reports, authentication, storage, maps, commerce, and responsive frontend experiences.
-          </p>
+        <div className="about-editorial">
+          <Reveal className="about-copy">
+            <p className="eyebrow">About me</p>
+            <h2 id="about-title">I care about how a product feels and how well it works.</h2>
+            <div className="about-story">
+              <p>
+                I&apos;m Shrushti, a BCA graduate from Pune who enjoys building complete web applications. I like working on both the interface people use and the backend systems that make everything function.
+              </p>
+              <p>
+                I&apos;ve worked with React, APIs, authentication, databases and deployment through projects such as Strategy Hub, Zylora and CloudNest Drive. Building these projects has helped me understand user flows, solve technical problems and develop an idea into a working application.
+              </p>
+              <p>
+                I&apos;m currently looking for my first opportunity in software development. I want to contribute to real products, learn from an experienced team and continue improving my skills.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal className="build-process-visual" delay={0.08}>
+            <div className="process-orbit" aria-hidden="true" />
+            <div className="process-signal" aria-hidden="true" />
+            <div className="process-node-grid" aria-label="Build process from idea to product">
+              {buildProcess.map(([label, description], index) => (
+                <button className="process-node" key={label} style={{ "--node-index": index } as CSSProperties} type="button">
+                  <span>{label}</span>
+                  <small>{description}</small>
+                </button>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+        <Reveal className="about-strengths" delay={0.1}>
+          {aboutStrengths.map(([index, title, text]) => (
+            <article key={title}>
+              <span>{index}</span>
+              <strong>{title}</strong>
+              <p>{text}</p>
+            </article>
+          ))}
         </Reveal>
-        <div className="journey-timeline" id="journey">
+        <Reveal className="about-facts" delay={0.14}>
+          {aboutFacts.map(([label, value]) => (
+            <div key={label}>
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </div>
+          ))}
+        </Reveal>
+        <div className="journey-timeline" id="journey" aria-label="Journey timeline">
           {timeline.map((item, index) => (
             <Reveal className="journey-item" delay={index * 0.04} key={`${item.period}-${item.title}`}>
               <span>{item.period}</span>
@@ -377,21 +418,11 @@ export function Portfolio() {
           <span>03</span>
           <div>
             <p className="eyebrow">Certificates and Achievements</p>
-            <h2 id="archive-title">A concise archive of verified progress.</h2>
+            <h2 id="archive-title">Certificates and steady practice.</h2>
           </div>
-          <p>Credential files were not present in the repository, so no fake credential buttons are shown.</p>
         </Reveal>
         <div className="archive-list">
-          {certificates.filter((item) => item.issuer !== "LeetCode").map((certificate, index) => (
-            <Reveal className="archive-row" delay={index * 0.04} key={`${certificate.issuer}-${certificate.title}`}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{certificate.title}</h3>
-                <p>{certificate.issuer} / {certificate.focus}</p>
-              </div>
-              <small>{certificate.completed}</small>
-            </Reveal>
-          ))}
+          <CertificateGallery />
           <Reveal className="leetcode-archive">
             <Trophy aria-hidden="true" />
             <div>
@@ -405,10 +436,10 @@ export function Portfolio() {
       </section>
 
       <section className="contact-section section-frame" id="contact" aria-labelledby="contact-title">
-        <Reveal>
+        <Reveal className="contact-heading">
           <p className="eyebrow">Contact</p>
-          <h2 id="contact-title">Let&apos;s build something precise and useful.</h2>
-          <p>Available for full-time roles, software-development internships, and graduate programs. Based in India.</p>
+          <h2 id="contact-title">Open to software development roles.</h2>
+          <p>Based in Pune, India and available for internships, graduate opportunities and entry level roles.</p>
         </Reveal>
         <div className="contact-grid">
           <button className="email-copy" onClick={copyEmail} type="button">
@@ -416,25 +447,25 @@ export function Portfolio() {
             <span>{copied ? "Copied" : "Copy email"}</span>
             <strong>swarnakarshrushti@gmail.com</strong>
           </button>
-          <a className="email-main" href="mailto:swarnakarshrushti@gmail.com"><Mail aria-hidden="true" /> Email</a>
           {contactCards.filter((card) => !["Email", "Current Location"].includes(card.label)).map((card) => {
             const Icon = card.icon;
-            const external = card.href.startsWith("http");
+            const external = card.href.startsWith("http") || card.href === socialLinks.resume;
+            const className = card.label === "Resume" ? "contact-link contact-link-resume" : "contact-link";
             return (
-              <a className="contact-link" href={card.href} key={card.label} rel={external ? "noopener noreferrer" : undefined} target={external ? "_blank" : undefined}>
+              <a className={className} href={card.href} key={card.label} rel={external ? "noopener noreferrer" : undefined} target={external ? "_blank" : undefined}>
                 <Icon aria-hidden="true" />
                 <span>{card.label}</span>
                 <strong>{card.value}</strong>
               </a>
             );
           })}
-          <div className="contact-link static"><MapPin aria-hidden="true" /><span>Location</span><strong>India</strong></div>
+          <div className="contact-link contact-link-location static"><MapPin aria-hidden="true" /><span>Location</span><strong>Pune, India</strong></div>
         </div>
       </section>
 
       <footer className="footer">
         <span>SS</span>
-        <p>Shrushti Swarnakar / Full-Stack Developer / swarnakarshrushti@gmail.com</p>
+        <p>Shrushti Swarnakar / Full stack developer / swarnakarshrushti@gmail.com</p>
         <a href="#top">Back to top</a>
         <small>{currentYear}</small>
       </footer>

@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { FileText, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { socialLinks } from "@/lib/portfolio-data";
 
-const navItems = [
+export const navItems = [
   ["Selected Work", "#work"],
   ["Expertise", "#expertise"],
   ["About", "#about"],
@@ -25,39 +25,63 @@ export function Navbar({
   onNavigate: () => void;
 }) {
   const [activeSection, setActiveSection] = useState("#top");
-  const [scrolled, setScrolled] = useState(false);
+  const visibleSections = useRef(new Map<string, IntersectionObserverEntry>());
 
   useEffect(() => {
-    const sections = ["#top", ...navItems.map(([, href]) => href)].map((href) => document.querySelector(href));
-
+    const sections = visibleSections.current;
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setActiveSection(`#${visible.target.id}`);
+        for (const entry of entries) {
+          const href = `#${entry.target.id}`;
+          if (entry.isIntersecting) {
+            sections.set(href, entry);
+          } else {
+            sections.delete(href);
+          }
+        }
+
+        const navHeight = Number.parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue("--nav-height"),
+        ) || 72;
+        const readingLine = navHeight + window.innerHeight * 0.28;
+        const visible = [...sections.entries()]
+          .sort(([, first], [, second]) => {
+            const firstTop = first.boundingClientRect.top;
+            const secondTop = second.boundingClientRect.top;
+            const firstScore = firstTop <= readingLine
+              ? Math.abs(readingLine - firstTop) * 0.55
+              : Math.abs(firstTop - readingLine) + 120;
+            const secondScore = secondTop <= readingLine
+              ? Math.abs(readingLine - secondTop) * 0.55
+              : Math.abs(secondTop - readingLine) + 120;
+            return firstScore - secondScore;
+          })[0]?.[0];
+
+        if (visible) {
+          setActiveSection((current) => (current === visible ? current : visible));
+        }
       },
-      { rootMargin: "-22% 0px -62% 0px", threshold: [0.08, 0.18, 0.32] },
+      {
+        rootMargin: "-24% 0px -50% 0px",
+        threshold: [0, 0.08, 0.22, 0.45],
+      },
     );
 
-    sections.forEach((section) => {
+    for (const [, href] of navItems) {
+      const section = document.querySelector<HTMLElement>(href);
       if (section) observer.observe(section);
-    });
-
-    const handleScroll = () => setScrolled(window.scrollY > 32);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    }
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
+      sections.clear();
     };
   }, []);
 
   return (
     <motion.header
       animate={{ y: 0, opacity: 1 }}
-      className={`nav-wrap ${scrolled ? "is-scrolled" : ""}`}
+      className="nav-wrap"
       initial={{ y: -18, opacity: 0 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
@@ -68,13 +92,19 @@ export function Navbar({
         </a>
         <div className="nav-links">
           {navItems.map(([label, href]) => (
-            <a className={activeSection === href ? "active" : ""} href={href} key={href} onClick={onNavigate}>
+            <a
+              aria-current={activeSection === href ? "true" : undefined}
+              className={activeSection === href ? "active" : ""}
+              href={href}
+              key={href}
+              onClick={onNavigate}
+            >
               {label}
             </a>
           ))}
         </div>
         <Button asChild className="nav-resume" size="default" variant="ghost">
-          <a href={socialLinks.resume}>
+          <a href={socialLinks.resume} rel="noopener noreferrer" target="_blank">
             Resume <FileText aria-hidden="true" />
           </a>
         </Button>

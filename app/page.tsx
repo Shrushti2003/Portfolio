@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Portfolio } from "@/components/sections/Portfolio";
+import { siteUrl } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Full Stack Developer Portfolio",
   description:
-    "Selected full-stack, MERN, AI, cloud, commerce, and frontend projects by Shrushti Swarnakar, a 2025 BCA graduate open to software engineering roles.",
+    "Selected MERN, AI, cloud, commerce and frontend projects by Shrushti Swarnakar, a 2025 BCA graduate open to software engineering roles.",
 };
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
     "@type": "Person",
     name: "Shrushti Swarnakar",
     email: "swarnakarshrushti@gmail.com",
-    jobTitle: ["Full Stack Developer", "MERN Stack Developer", "Frontend Engineer"],
+    jobTitle: ["Full stack developer", "MERN Stack Developer", "Frontend developer"],
     alumniOf: "Bachelor of Computer Applications, 2025",
     sameAs: [
       "https://github.com/Shrushti2003",
@@ -30,7 +31,7 @@ export default function Home() {
       "AI Integrations",
       "Frontend Development",
     ],
-    url: "https://shrushti-swarnakar-portfolio.shrushtiswarnakar99.chatgpt.site",
+    url: siteUrl,
   };
 
   return (
