@@ -1,106 +1,310 @@
-# Shrushti Swarnakar Portfolio
+# Shrushti Swarnakar — Portfolio
 
-Personal portfolio for Shrushti Swarnakar, a BCA 2025 graduate from Pune, India. The site presents full stack and frontend projects, certificates, coding practice, contact links and a visual hero built around the current CGI developer artwork.
+A modern and responsive developer portfolio showcasing my full stack projects, technical skills, certificates, achievements, and development journey.
 
-## Tech Stack
+The portfolio features a clean dark interface, smooth animations, interactive project showcases, detailed case studies, and a custom CGI-inspired hero section.
 
-- Vinext with Next-style App Router files
-- Vite build pipeline
-- React 19 and TypeScript
-- Framer Motion for lightweight reveal and UI motion
-- Lucide React icons
-- CSS custom properties and plain CSS for layout and styling
-- Local Geist font files served from `public/fonts/`
-- Vinext/Sites worker entry through `worker/index.ts`
+## Live Portfolio
+
+[View Live Portfolio](https://portfolio-nine-rho-gcua117klc.vercel.app)
+
+![Portfolio Preview](./public/og.png)
+
+## About Me
+
+I’m Shrushti Swarnakar, a Full Stack Developer and BCA graduate from Pune, India. I enjoy building responsive web applications that combine thoughtful design with reliable functionality.
+
+My work includes AI-powered platforms, cloud storage applications, marketplace systems, authentication flows, REST APIs, and database-driven dashboards. I am currently looking for Software Engineer, Full Stack Developer, and Backend Developer opportunities.
 
 ## Features
 
-- Responsive Hero, Selected Work, Expertise, About, Journey, Certificates and Contact sections
-- Contained CGI developer scene with a single canvas effects layer
-- Project case-study routes for Strategy Hub, Zylora, CloudNest Drive, LumiBooks and Netflix Clone
-- Verified project screenshots and certificate previews served from `public/`
-- Accessible labels for icon-only actions and carousel controls
-- Metadata, robots and sitemap support
+- Clean, modern, and responsive user interface
+- Interactive CGI-inspired hero section
+- Smooth reveal animations and transitions
+- Selected projects with screenshots and live links
+- Dedicated case study pages for major projects
+- Interactive technology constellation
+- Project filtering based on development category
+- Certificates and achievements section
+- Downloadable resume
+- GitHub, LinkedIn, LeetCode, and email links
+- Responsive navigation for desktop and mobile devices
+- Accessible labels and keyboard-friendly controls
+- SEO metadata, sitemap, and robots configuration
+- Local font loading for improved performance
+- Vercel and Cloudflare Worker deployment support
 
-## Local Setup
+## Selected Projects
 
-Use Node.js 22.13 or newer.
+### Strategy Hub
 
-```bash
-npm install
-npm run dev
-```
+An AI-powered interview preparation platform that provides resume feedback, ATS guidance, interview questions, saved reports, and personalized learning roadmaps.
 
-Open the local URL printed by the Vinext development server.
+**Technologies:** Next.js, React, TypeScript, Node.js, Express.js, MongoDB, JWT, Gemini AI
 
-## Production Checks
+[Live Demo](https://strategy-hub-interview-app.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Strategy-Hub-Interview-App)
 
-```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
-npm run build:vercel
-npm run start
-```
+### Zylora
 
-`npm test` builds the Vinext Worker output and runs server-rendered route checks.
-Run `npm run build` before `npm run start`; the start script previews the generated Worker and static assets from `dist/`.
-Run `npm run build:vercel` before deploying to Vercel.
+A circular economy platform designed for buying, selling, donating, and discovering reusable items. It includes geolocation, role-based dashboards, messaging, and AI-assisted pricing.
 
-## Environment Variables
+**Technologies:** React, TypeScript, Node.js, Express.js, MongoDB, Firebase, Leaflet, Docker
 
-No private runtime secrets are required for the current portfolio.
+[Live Demo](https://zylora-frontend.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Zylora)
 
-Create `.env.local` only when you want to override the public site URL used for metadata. Use this same variable in Vercel:
+### CloudNest Drive
 
-```bash
-NEXT_PUBLIC_SITE_URL=https://your-domain.example
-```
+A cloud storage dashboard for uploading, organizing, previewing, sharing, and recovering files. It also includes account storage limits, subscription screens, and support flows.
 
-Use `.env.example` as the template. Do not commit real secret values.
+**Technologies:** React, Vite, Node.js, Express.js, MongoDB, Cloudinary, Stripe, JWT
+
+[Live Demo](https://cloudnest-liart.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Google-Drive-Clone)
+
+### LumiBooks
+
+A responsive online bookstore that allows users to explore books, browse categories, view book details, and access a dedicated reading interface.
+
+**Technologies:** Next.js, React, TypeScript, Node.js, MongoDB, Tailwind CSS
+
+[Live Demo](https://lumibooks.vercel.app) · [GitHub Repository](https://github.com/Shrushti2003/Online-Book-Store)
+
+### Netflix Clone
+
+A responsive streaming platform interface with authentication screens, movie and series browsing, content details, and person pages.
+
+**Technologies:** React, Vite, Node.js, Express.js, MongoDB, JWT
+
+[GitHub Repository](https://github.com/Shrushti2003/netflix-clone)
+
+## Technology Stack
+
+### Frontend
+
+- React
+- Next.js
+- TypeScript
+- JavaScript
+- HTML5
+- CSS3
+- Tailwind CSS
+- Vite
+
+### Backend
+
+- Node.js
+- Express.js
+- REST APIs
+- JWT Authentication
+
+### Database and Storage
+
+- MongoDB
+- Mongoose
+- Firebase
+- Cloudinary
+
+### Tools
+
+- Git
+- GitHub
+- Vercel
+- Cloudflare Workers
+- Wrangler
+- ESLint
+
+### Portfolio-Specific Technologies
+
+- React 19
+- Next.js 16
+- TypeScript
+- Vinext
+- Vite
+- Framer Motion
+- Lucide React
+- Radix UI
+- Local Geist fonts
 
 ## Project Structure
 
 ```text
-app/                     App routes, metadata, robots and sitemap
-components/animations/   Reusable motion helpers
-components/layout/       Navigation
-components/sections/     Portfolio sections and case-study pages
-components/ui/           Small reusable UI primitives
-lib/                     Portfolio data, site config and utilities
-public/certificates/     Certificate files and previews
-public/documents/        Resume and downloadable documents
-public/fonts/            Local Geist font files
-public/media/            Hero CGI artwork and generated media assets
-public/projects/         Project screenshots grouped by project
-tests/                   Server-rendered regression checks
-types/                   Shared TypeScript types
-worker/                  Cloudflare worker entry for Vinext
+app/
+├── projects/[slug]/       Dynamic project case-study routes
+├── globals.css            Global styles and responsive design
+├── layout.tsx             Root layout and metadata
+├── page.tsx               Main portfolio page
+├── robots.ts              Search engine crawling rules
+└── sitemap.ts             Generated sitemap
+
+components/
+├── animations/            Cursor and reveal animations
+├── layout/                Navigation components
+├── sections/              Portfolio sections and case studies
+└── ui/                    Reusable interface components
+
+lib/
+├── portfolio-data.ts      Projects, skills and portfolio content
+├── site-config.ts         Site metadata and public URL
+└── utils.ts               Shared utility functions
+
+public/
+├── certificates/          Certificate files and previews
+├── documents/             Downloadable resume
+├── fonts/                 Local Geist font files
+├── media/                 Hero artwork and media
+└── projects/              Project screenshots
+
+tests/                     Server-rendered route tests
+types/                     Shared TypeScript definitions
+worker/                    Cloudflare Worker entry
 ```
 
-## Deployment
+## Getting Started
 
-This repository keeps the current Vinext/Sites build and also includes a Vercel build path.
+### Prerequisites
 
-For the existing Vinext/Sites worker output:
+Install the following before running the project:
+
+- Node.js 22.13 or newer
+- npm
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Shrushti2003/your-portfolio-repository.git
+```
+
+2. Open the project directory:
+
+```bash
+cd your-portfolio-repository
+```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+5. Open the local URL displayed in the terminal.
+
+## Environment Variables
+
+The portfolio does not require private runtime secrets.
+
+To configure the public website URL, create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app
+```
+
+Use `.env.example` as the template.
+
+Do not commit `.env.local` or any file containing private credentials.
+
+## Available Commands
+
+```bash
+npm run dev
+```
+
+Starts the Vinext development server.
 
 ```bash
 npm run build
 ```
 
-For Vercel:
+Creates the Vinext and Cloudflare Worker production build.
 
-1. Import the GitHub repository into Vercel.
-2. Use the included `vercel.json`, which sets the build command to `npm run build:vercel`.
-3. Set `NEXT_PUBLIC_SITE_URL` to the final public domain.
-4. Deploy from the selected branch.
+```bash
+npm run build:vercel
+```
 
-Before any production deployment, set `NEXT_PUBLIC_SITE_URL` to the final public domain so canonical metadata, sitemap and structured data use the correct URL.
+Creates the production build for Vercel.
+
+```bash
+npm run start
+```
+
+Runs the generated Worker build locally.
+
+```bash
+npm run lint
+```
+
+Checks the project using ESLint.
+
+```bash
+npm run typecheck
+```
+
+Checks TypeScript types without generating output.
+
+```bash
+npm test
+```
+
+Builds the project and runs server-rendered route tests.
+
+## Deployment on Vercel
+
+1. Push the project to a GitHub repository.
+2. Import the repository into Vercel.
+3. Set the build command to:
+
+```bash
+npm run build:vercel
+```
+
+4. Add the following environment variable:
+
+```env
+NEXT_PUBLIC_SITE_URL=https://your-final-domain.vercel.app
+```
+
+5. Deploy the project.
+
+The included `vercel.json` configures the Vercel build process.
+
+## Performance and Accessibility
+
+The portfolio includes:
+
+- Responsive layouts for different screen sizes
+- Locally hosted fonts
+- Optimized WebP hero artwork
+- Lightweight interface animations
+- Reduced-motion support
+- Semantic page sections
+- Accessible labels for icon-only controls
+- Keyboard-friendly interactive elements
+- SEO-friendly metadata
+- Sitemap and robots configuration
+
+## Achievements
+
+- Solved 423+ problems on LeetCode
+- Built and deployed multiple AI-powered and full stack applications
+- Completed Full Stack Web Development training
+- Earned Data Structures completion and excellence certificates
 
 ## Contact
 
-- Email: swarnakarshrushti@gmail.com
-- GitHub: https://github.com/Shrushti2003
-- LinkedIn: https://www.linkedin.com/in/shrushti-swarnakar/
-- LeetCode: https://leetcode.com/u/Shrushti2003/
+I am open to Software Engineer, Full Stack Developer, and Backend Developer opportunities.
+
+- **Email:** [swarnakarshrushti@gmail.com](mailto:swarnakarshrushti@gmail.com)
+- **LinkedIn:** [Shrushti Swarnakar](https://www.linkedin.com/in/shrushti-swarnakar/)
+- **GitHub:** [Shrushti2003](https://github.com/Shrushti2003)
+- **LeetCode:** [Shrushti2003](https://leetcode.com/u/Shrushti2003/)
+- **Portfolio:** [View Website](https://portfolio-nine-rho-gcua117klc.vercel.app)
+
+## Author
+
+Designed and developed by **Shrushti Swarnakar**.
